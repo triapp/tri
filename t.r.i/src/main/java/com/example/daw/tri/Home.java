@@ -20,7 +20,7 @@ public class Home extends ActionBarActivity {
            txtonline.setText("online");
        }
        else txtonline.setText("offline");
-
+//nečum
     }
 
 
