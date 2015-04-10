@@ -6,19 +6,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+
 public class Home extends ActionBarActivity {
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        TextView txtonline = (TextView) findViewById(R.id.txt_online);
+       TextView txtonline = (TextView) findViewById(R.id.txt_online);
 
        Network internet = new Network(getApplicationContext());
-
-       if(internet.isOnline()){
-           txtonline.setText("Online");
-       } else txtonline.setText("Offline");
+       if (internet.isOnline()) {
+           txtonline.setText("online");
+       }
+       else txtonline.setText("offline");
 
     }
 
