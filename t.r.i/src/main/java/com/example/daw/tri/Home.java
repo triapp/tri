@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 
 public class Home extends ActionBarActivity {
 
@@ -13,6 +16,19 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+       DatabaseHandler database = new DatabaseHandler(this);
+       try {
+           database.createDataBase();
+       } catch (IOException ioe) {
+           throw new Error("Unable to create database");
+       }
+       try {
+           database.openDataBase();
+       }catch(SQLException sqle){
+       }
+
+
+
        TextView txtonline = (TextView) findViewById(R.id.txt_online);
 
        Network internet = new Network(getApplicationContext());
@@ -20,7 +36,6 @@ public class Home extends ActionBarActivity {
            txtonline.setText("online");
        }
        else txtonline.setText("offline");
-
     }
 
 
