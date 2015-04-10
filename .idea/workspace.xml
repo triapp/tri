@@ -25,6 +25,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="zmena">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Network.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TRIApp1.iws" />
@@ -61,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Home.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6504348" vertical-offset="34" max-vertical-offset="918">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1037">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,15 +76,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Network.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Network.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="646">
-              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.70434785" vertical-offset="190" max-vertical-offset="765">
+              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#245#246#0" expanded="true" />
-                <element signature="e#283#284#0" expanded="true" />
+                <element signature="e#430#431#0" expanded="true" />
+                <element signature="e#468#469#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -107,7 +110,6 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="DAw" />
         <option value="Daw" />
       </list>
     </option>
@@ -725,8 +727,8 @@
         <option value="$PROJECT_DIR$/settings.gradle" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Network.java" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java" />
       </list>
     </option>
   </component>
@@ -1179,11 +1181,7 @@
       <created>1428700220962</created>
       <updated>1428700220962</updated>
     </task>
-    <task id="LOCAL-00006" summary="zmena">
-      <created>1428702291702</created>
-      <updated>1428702291702</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1364,24 +1362,24 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Network.java">
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="646">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1037">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#245#246#0" expanded="true" />
-            <element signature="e#283#284#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Home.java">
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6504348" vertical-offset="34" max-vertical-offset="918">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.70434785" vertical-offset="190" max-vertical-offset="765">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#468#469#0" expanded="true" />
           </folding>
         </state>
       </provider>

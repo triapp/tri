@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\classes-8317706654caea4dc18e28cd206fba4cdf7397e4.jar" />
-    </item>
-    <item
-        jar="D:\Users\Daw\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-c6fe92fe963f8928428179e1b15cda296fa499a0.jar" />
-    </item>
-    <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-17284e1e55274f04a69541c7d9a77dcf3976e94b.jar" />
-    </item>
-    <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jar="C:\subversion\prosim\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\classes-4c089ec8fa1284b4d7fa3b3af3704ae2bf196734.jar" />
+        <dex dex="C:\subversion\prosim\tri\t.r.i\build\intermediates\pre-dexed\debug\classes-7373785592dfbff369134aa61137b5a6d24372e7.jar" />
+    </item>
+    <item
+        jar="C:\subversion\prosim\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="C:\subversion\prosim\tri\t.r.i\build\intermediates\pre-dexed\debug\classes-5a169d124e0c52fc3a53d58e64eaf1d5b671e828.jar" />
+    </item>
+    <item
+        jar="C:\subversion\prosim\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\subversion\prosim\tri\t.r.i\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-8922e100fd7ae93f6618e1a4e835b7621674e5ce.jar" />
+    </item>
+    <item
+        jar="C:\Users\EN\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\subversion\prosim\tri\t.r.i\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-268c3ea49bfec5154886a06a55c7a2b7ac7c4df2.jar" />
     </item>
 
 </items>
