@@ -27,8 +27,6 @@ public class Home extends ActionBarActivity {
        }catch(SQLException sqle){
        }
 
-
-
        TextView txtonline = (TextView) findViewById(R.id.txt_online);
 
        Network internet = new Network(getApplicationContext());

@@ -137,4 +137,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public void insertDay(int id, String date) {
+        myDataBase.rawQuery("INSERT INTO day (id,day) VALUES (" + id + ", '" + date + "')", null);
+    }
+
+    public void insertHall(int id, String name){
+        myDataBase.rawQuery("INSERT INTO hall (id,name) VALUES (" + id + ", '" + name + "')", null);
+    }
+
+    public void insertPresentation(int id, int id_section,String name, String author){
+        myDataBase.rawQuery("INSERT INTO presentation (id, id_section, name, author) VALUES (" + id + ", " + id_section + ", '" + name + "', '" + author + "')", null);
+    }
+
+    public void insertSection(int id,int id_hall,int id_day,String name,String chairman, String time_from, String time_to, String type){
+        myDataBase.rawQuery("INSERT INTO day (id,id_hall,id_day,name,chairman,time_from,time_to,type) VALUES (" + id + ", '" + id_hall + ", "+ id_day +",'" + name + "','" + chairman + "','"+time_from+"','"+time_to+"','" + type + "')", null);
+    }
 }
