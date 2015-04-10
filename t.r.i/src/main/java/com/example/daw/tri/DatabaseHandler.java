@@ -5,4 +5,5 @@ package com.example.daw.tri;
  */
 public class DatabaseHandler {
     int aloha;
+    int another;
 }
