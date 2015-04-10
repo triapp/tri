@@ -12,7 +12,7 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-       int pokus = 0;
+       int pokus = 1;
     }
 
 
