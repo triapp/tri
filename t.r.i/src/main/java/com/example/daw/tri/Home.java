@@ -1,5 +1,7 @@
 package com.example.daw.tri;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -18,20 +20,18 @@ public class Home extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
        TextView txtonline = (TextView) findViewById(R.id.txt_online);
+
+       ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+       NetworkInfo netInfo = cm.getActiveNetworkInfo();
+       if (netInfo != null && netInfo.isConnected()) {
            try {
                URL url = new URL("http://www.google.com");
                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
                urlc.setConnectTimeout(3000);
                urlc.connect();
                if (urlc.getResponseCode() == 200) {
-
                    txtonline.setText("Online");
                }
-               else{
-
-                   txtonline.setText("Offline");
-               }
-
            } catch (MalformedURLException e1) {
                // TODO Auto-generated catch block
                e1.printStackTrace();
@@ -39,6 +39,8 @@ public class Home extends ActionBarActivity {
                // TODO Auto-generated catch block
                e.printStackTrace();
            }
+       }
+       else  txtonline.setText("Offline");
 
 
 
