@@ -4,7 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Home extends ActionBarActivity {
 
@@ -12,7 +17,32 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-       int pokus = 1;
+       TextView txtonline = (TextView) findViewById(R.id.txt_online);
+           try {
+               URL url = new URL("http://www.google.com");
+               HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+               urlc.setConnectTimeout(3000);
+               urlc.connect();
+               if (urlc.getResponseCode() == 200) {
+
+                   txtonline.setText("Online");
+               }
+               else{
+
+                   txtonline.setText("Offline");
+               }
+
+           } catch (MalformedURLException e1) {
+               // TODO Auto-generated catch block
+               e1.printStackTrace();
+           } catch (IOException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+           }
+
+
+
+
     }
 
 
