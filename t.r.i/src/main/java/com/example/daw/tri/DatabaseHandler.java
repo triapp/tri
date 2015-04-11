@@ -1,6 +1,7 @@
 package com.example.daw.tri;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by EN on 11.4.2015.
@@ -140,6 +143,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertDay(int id, String date) {
         myDataBase.rawQuery("INSERT INTO day (id,day) VALUES (" + id + ", '" + date + "')", null);
+    }
+
+    public List<String> selectDay(){
+        Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
+        List<String> listOfDays = new ArrayList<String>();
+        see.moveToFirst();
+        while (see.isAfterLast() == false) {
+            Long id = see.getLong(0);
+            String date = see.getString(1);
+            String day = "ID of day: "+id+" is on: "+date;
+            listOfDays.add(day);
+            see.moveToNext();
+        }
+        see.close();
+        return listOfDays;
     }
 
     public void insertHall(int id, String name){
