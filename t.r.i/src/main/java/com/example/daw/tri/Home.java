@@ -1,10 +1,15 @@
 package com.example.daw.tri;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,6 +37,7 @@ public class Home extends ActionBarActivity {
        Network internet = new Network(getApplicationContext());
        if (internet.isOnline()) {
            txtonline.setText("online");
+           new downloadTableDay().execute();
        }
        else txtonline.setText("offline");
     }
@@ -58,4 +64,40 @@ public class Home extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private class downloadTableDay extends AsyncTask<String, String, JSONObject> {
+        private ProgressDialog pDialog;
+
+        String email;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(Home.this);
+            pDialog.setTitle("Komunikace se serverem");
+            pDialog.setMessage("Stahování dat");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... args) {
+            Communicator talkie = new Communicator();
+            JSONObject json = talkie.getTableDay();
+            return json;
+        }
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                if (json.getString("success") != null) {
+                    JSONObject json_day = json.getJSONObject("day");
+                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                    db.insertDay(json_day.getInt("id"),json_day.getString("date"));
+                    pDialog.dismiss();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }}
 }

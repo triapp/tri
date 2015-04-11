@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static String DB_PATH = "/data/data/com.example.en.trying/databases/";
+    private static String DB_PATH = "/data/data/com.example.daw.tri/databases/";
 
     private static String DB_NAME = "tri";
 
