@@ -1,5 +1,6 @@
 package com.example.daw.tri;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -141,8 +142,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+
+
     public void insertDay(int id, String date) {
-        myDataBase.rawQuery("INSERT INTO day (id,day) VALUES (" + id + ", '" + date + "')", null);
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("day", date);
+        myDataBase.insert("day", null, values);
+        myDataBase.close();
+
     }
 
     public List<String> selectDay(){

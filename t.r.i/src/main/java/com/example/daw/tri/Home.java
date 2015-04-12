@@ -40,7 +40,9 @@ public class Home extends ActionBarActivity {
            new downloadTableDay().execute();
        }
        else txtonline.setText("offline");
+       database.close();
     }
+
 
 
     @Override
@@ -89,12 +91,10 @@ public class Home extends ActionBarActivity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-                if (json.getString("success") != null) {
-                    JSONObject   json_day = json.getJSONObject("day");
-                    DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                    db.insertDay(json_day.getInt("id"),json_day.getString("date"));
-                    pDialog.dismiss();
-                }
+                DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                db.insertDay(json.getInt("id"),json.getString("day"));
+                pDialog.dismiss();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
