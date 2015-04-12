@@ -90,7 +90,7 @@ public class Home extends ActionBarActivity {
         protected void onPostExecute(JSONObject json) {
             try {
                 if (json.getString("success") != null) {
-                    JSONObject json_day = json.getJSONObject("day");
+                    JSONObject   json_day = json.getJSONObject("day");
                     DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                     db.insertDay(json_day.getInt("id"),json_day.getString("date"));
                     pDialog.dismiss();

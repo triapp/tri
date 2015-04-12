@@ -8,11 +8,12 @@ import java.util.List;
 
 public class Communicator {
     private JSONParser jsonParser;
-    private static String URL = "http://mlv.php5.cz/village/";
+    private static String URL = "http://vesely-pcpohotovost.cz/tri/";
 
     public Communicator(){
         jsonParser = new JSONParser();
     }
+
 
     public JSONObject getTableDay(){
         // Building Parameters
