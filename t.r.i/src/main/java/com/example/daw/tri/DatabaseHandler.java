@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public DatabaseHandler(Context context) {
 
         super(context, DB_NAME, null, 1);
+
         this.myContext = context;
     }
 
@@ -52,7 +54,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
-            this.getReadableDatabase();
+            this.getWritableDatabase();
 
             try {
 
@@ -119,7 +121,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         //Open the database
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
     }
 
@@ -145,11 +147,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     public void insertDay(int id, String date) {
+        Log.i("daw", date);
         ContentValues values = new ContentValues();
-        values.put("id", id);
-        values.put("day", date);
-        myDataBase.insert("day", null, values);
-        myDataBase.close();
+        try {
+            this.openDataBase();
+            values.put("id", id);
+            values.put("day", date);
+            myDataBase.insert("day", null, values);
+            myDataBase.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -157,7 +165,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
         List<String> listOfDays = new ArrayList<String>();
         see.moveToFirst();
-        while (see.isAfterLast() == false) {
+        while (!see.isAfterLast()) {
             Long id = see.getLong(0);
             String date = see.getString(1);
             String day = "ID of day: "+id+" is on: "+date;
