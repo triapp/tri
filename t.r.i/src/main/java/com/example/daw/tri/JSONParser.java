@@ -52,7 +52,7 @@ public class JSONParser {
             }
             is.close();
             String output = sb.toString();
-            output = output.substring(3);
+            output = output.substring(0);
             json = output;
             Log.e("JSON", json);
         } catch (Exception e) {
