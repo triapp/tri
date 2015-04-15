@@ -1,11 +1,14 @@
 package com.example.daw.tri;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -22,6 +25,7 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_home);
+
        final DatabaseHandler database = new DatabaseHandler(this);
        try {
            database.createDataBase();
@@ -41,6 +45,14 @@ public class Home extends ActionBarActivity {
            database.dropDay();
            new downloadTables().execute();
        } else txtonline.setText("offline");
+       Button nextActivity = (Button) findViewById(R.id.button);
+       nextActivity.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(Home.this, ProgramActivity.class);
+               startActivity(intent);
+           }
+       });
     }
 
 
@@ -83,13 +95,19 @@ public class Home extends ActionBarActivity {
         @Override
         protected JSONArray doInBackground(String... args) {
             Communicator talkie = new Communicator();
-            JSONArray json = talkie.getTables();
+            JSONArray json = talkie.getTableDay();
             return json;
         }
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                for (int i = 0; i < json.length(); i++) {
+                    JSONObject obj = json.getJSONObject(i);
+                    db.insertDay(obj.getInt("id"),obj.getString("day"));
+                }
+
+                /*  JSONParsing of all tables
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
                     JSONArray tableDay = obj.getJSONArray("day");
@@ -112,7 +130,7 @@ public class Home extends ActionBarActivity {
                         JSONObject CurrentSection = tableSection.getJSONObject(i1);
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
                     }
-                }
+                } */
                 pDialog.dismiss();
 
             } catch (JSONException e) {

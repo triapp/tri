@@ -117,11 +117,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void openDataBase() throws SQLException {
-
         //Open the database
         String myPath = DB_PATH + DB_NAME;
         myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-
     }
 
     @Override
@@ -164,7 +162,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> selectDay(){
+    public ArrayList<String> selectDay() throws SQLException {
+        openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
         ArrayList<String> listOfDays = new ArrayList<String>();
         see.moveToFirst();
@@ -176,6 +175,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             see.moveToNext();
         }
         see.close();
+        myDataBase.close();
         return listOfDays;
     }
 
