@@ -22,4 +22,11 @@ public class Communicator {
         JSONArray json = jsonParser.getJSONFromUrl(URL, params);
         return json;
     }
+
+    public JSONArray getTables(){
+        List params = new ArrayList();
+        params.add(new BasicNameValuePair("tag", "getAll"));
+        JSONArray json = jsonParser.getJSONFromUrl(URL, params);
+        return json;
+    }
 }

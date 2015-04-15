@@ -39,7 +39,7 @@ public class Home extends ActionBarActivity {
        if (internet.isOnline()) {
            txtonline.setText("online");
            database.dropDay();
-           new downloadTableDay().execute();
+           new downloadTables().execute();
        } else txtonline.setText("offline");
     }
 
@@ -66,7 +66,7 @@ public class Home extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class downloadTableDay extends AsyncTask<String, String, JSONArray> {
+    private class downloadTables extends AsyncTask<String, String, JSONArray> {
         private ProgressDialog pDialog;
 
         @Override
@@ -83,7 +83,7 @@ public class Home extends ActionBarActivity {
         @Override
         protected JSONArray doInBackground(String... args) {
             Communicator talkie = new Communicator();
-            JSONArray json = talkie.getTableDay();
+            JSONArray json = talkie.getTables();
             return json;
         }
         @Override
@@ -92,9 +92,26 @@ public class Home extends ActionBarActivity {
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
-                    int id = obj.getInt("id");
-                    String date = obj.getString("day");
-                    db.insertDay(id, date);
+                    JSONArray tableDay = obj.getJSONArray("day");
+                    for (int i1 = 0; i < tableDay.length(); i1++){
+                        JSONObject CurrentDay = tableDay.getJSONObject(i1);
+                        db.insertDay(CurrentDay.getInt("id"),CurrentDay.getString("day"));
+                    }
+                    JSONArray tableHall = obj.getJSONArray("hall");
+                    for (int i1 = 0; i < tableHall.length(); i1++){
+                        JSONObject CurrentHall = tableHall.getJSONObject(i1);
+                        db.insertHall(CurrentHall.getInt("id"),CurrentHall.getString("name"));
+                    }
+                    JSONArray tablePresentation = obj.getJSONArray("presentation");
+                    for (int i1 = 0; i < tablePresentation.length(); i1++){
+                        JSONObject CurrentPresentation = tablePresentation.getJSONObject(i1);
+                        db.insertHall(CurrentPresentation.getInt("id"),CurrentPresentation.getString("name"));
+                    }
+                    JSONArray tableSection = obj.getJSONArray("section");
+                    for (int i1 = 0; i < tableSection.length(); i1++){
+                        JSONObject CurrentSection = tableSection.getJSONObject(i1);
+                        db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
+                    }
                 }
                 pDialog.dismiss();
 

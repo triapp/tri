@@ -180,14 +180,50 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void insertHall(int id, String name){
-        myDataBase.rawQuery("INSERT INTO hall (id,name) VALUES (" + id + ", '" + name + "')", null);
+
+        ContentValues values = new ContentValues();
+        try {
+            this.openDataBase();
+            values.put("id", id);
+            values.put("name", name);
+            myDataBase.insert("hall", null, values);
+            myDataBase.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertPresentation(int id, int id_section,String name, String author){
-        myDataBase.rawQuery("INSERT INTO presentation (id, id_section, name, author) VALUES (" + id + ", " + id_section + ", '" + name + "', '" + author + "')", null);
+
+        ContentValues values = new ContentValues();
+        try {
+            this.openDataBase();
+            values.put("id", id);
+            values.put("id_section", id_section);
+            values.put("author", author);
+            myDataBase.insert("presentation", null, values);
+            myDataBase.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertSection(int id,int id_hall,int id_day,String name,String chairman, String time_from, String time_to, String type){
-        myDataBase.rawQuery("INSERT INTO day (id,id_hall,id_day,name,chairman,time_from,time_to,type) VALUES (" + id + ", '" + id_hall + ", "+ id_day +",'" + name + "','" + chairman + "','"+time_from+"','"+time_to+"','" + type + "')", null);
+        ContentValues values = new ContentValues();
+        try {
+            this.openDataBase();
+            values.put("id", id);
+            values.put("id_hall", id_hall);
+            values.put("id_day", id_day);
+            values.put("name", name);
+            values.put("chairman", chairman);
+            values.put("time_from", time_from);
+            values.put("time_to", time_to);
+            values.put("type", type);
+            myDataBase.insert("section", null, values);
+            myDataBase.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
