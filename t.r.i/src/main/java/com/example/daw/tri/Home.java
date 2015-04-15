@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,9 +19,9 @@ public class Home extends ActionBarActivity {
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_home);
-       final DatabaseHandler database = new DatabaseHandler(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+       DatabaseHandler database = new DatabaseHandler(this);
        try {
            database.createDataBase();
        } catch (IOException ioe) {
@@ -38,10 +37,12 @@ public class Home extends ActionBarActivity {
        Network internet = new Network(getApplicationContext());
        if (internet.isOnline()) {
            txtonline.setText("online");
-           database.dropDay();
            new downloadTableDay().execute();
-       } else txtonline.setText("offline");
+       }
+       else txtonline.setText("offline");
+      // database.close();
     }
+
 
 
     @Override
@@ -66,9 +67,10 @@ public class Home extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class downloadTableDay extends AsyncTask<String, String, JSONArray> {
+    private class downloadTableDay extends AsyncTask<String, String, JSONObject> {
         private ProgressDialog pDialog;
 
+        String email;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -81,21 +83,21 @@ public class Home extends ActionBarActivity {
         }
 
         @Override
-        protected JSONArray doInBackground(String... args) {
+        protected JSONObject doInBackground(String... args) {
             Communicator talkie = new Communicator();
-            JSONArray json = talkie.getTableDay();
+            JSONObject json = talkie.getTableDay();
             return json;
         }
         @Override
-        protected void onPostExecute(JSONArray json) {
+        protected void onPostExecute(JSONObject json) {
             try {
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                for (int i = 0 ; i < json.length(); i++) {
-                    JSONObject obj = json.getJSONObject(i);
-                    int id = obj.getInt("id");
-                    String date = obj.getString("day");
-                    db.insertDay(id, date);
-                }
+                //db.openDataBase();
+                int jsonid = json.getInt("id");
+                String jsonstr = json.getString("day");
+                db.insertDay(jsonid,jsonstr);
+
+
                 pDialog.dismiss();
 
             } catch (JSONException e) {

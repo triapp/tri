@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by EN on 11.4.2015.
@@ -144,10 +145,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public void dropDay(){
-        myDataBase.execSQL("delete from day");
-    }
-
 
     public void insertDay(int id, String date) {
         Log.i("daw", date);
@@ -164,9 +161,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> selectDay(){
+    public List<String> selectDay(){
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
-        ArrayList<String> listOfDays = new ArrayList<String>();
+        List<String> listOfDays = new ArrayList<String>();
         see.moveToFirst();
         while (!see.isAfterLast()) {
             Long id = see.getLong(0);
