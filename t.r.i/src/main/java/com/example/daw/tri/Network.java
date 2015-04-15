@@ -10,7 +10,6 @@ public class Network  {
 
     Context context;
 
-    // Konstruktor
     public Network(Context context) {
         this.context = context;
     }
