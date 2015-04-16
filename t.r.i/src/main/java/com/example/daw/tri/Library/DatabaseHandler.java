@@ -188,7 +188,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public ArrayList<Section> selectSectionByDay(Long id) throws SQLException, ParseException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT * FROM section",null);
+        Cursor see = myDataBase.rawQuery("SELECT * FROM section WHERE id_day="+id,null);
         ArrayList<Section> listOfSections = new ArrayList<Section>();
         Section tmp;
         see.moveToFirst();
@@ -217,7 +217,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void insertPresentation(int id, int id_section,String name, String author){
-
         ContentValues values = new ContentValues();
         try {
             this.openDataBase();
@@ -233,7 +232,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertSection(int id,int id_hall,int id_day,String name,String chairman, String time_from, String time_to, String type){
         ContentValues values = new ContentValues();
-        Log.i("DB test", Integer.toString(id));
         try {
             this.openDataBase();
             values.put("id", id);

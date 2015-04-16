@@ -24,20 +24,10 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.daw.tri" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="9:01 ctvrtek">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Section.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_presentations.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/menu/menu_presentations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/Communicator.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/Communicator.java" />
+    <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="17:50 ctvrtek">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_day.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_day.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/assets/tri" afterPath="$PROJECT_DIR$/t.r.i/src/main/assets/tri" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TRIApp1.iws" />
@@ -61,11 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Home.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Home.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.072961375" vertical-offset="1819" max-vertical-offset="2652">
-              <caret line="133" column="26" selection-start-line="133" selection-start-column="26" selection-end-line="133" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2453" max-vertical-offset="2873">
+              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding>
                 <element signature="e#1532#1768#0" expanded="true" />
                 <element signature="e#1757#1758#0" expanded="true" />
@@ -105,11 +95,11 @@
       <file leaf-file-name="DayActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1275">
-              <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="974" max-vertical-offset="1275">
+              <caret line="84" column="1" selection-start-line="84" selection-start-column="1" selection-end-line="84" selection-end-column="1" />
               <folding>
-                <element signature="e#1902#2394#0" expanded="true" />
-                <element signature="e#2383#2384#0" expanded="true" />
+                <element signature="e#1830#2322#0" expanded="true" />
+                <element signature="e#2311#2312#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,20 +121,20 @@
       <file leaf-file-name="JSONParser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1020">
+            <state vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1020">
               <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseHandler.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3097" max-vertical-offset="4114">
-              <caret line="208" column="32" selection-start-line="208" selection-start-column="32" selection-end-line="208" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.37804878" vertical-offset="3596" max-vertical-offset="4080">
+              <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
               <folding>
-                <element signature="e#5475#5484#0" expanded="true" />
+                <element signature="e#5492#5501#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,8 +143,8 @@
       <file leaf-file-name="tri" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/assets/tri">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1598">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1955">
+              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -163,8 +153,8 @@
       <file leaf-file-name="PresentationsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="196" max-vertical-offset="697">
+              <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -1238,8 +1228,8 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Section.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
       </list>
     </option>
   </component>
@@ -1859,7 +1849,11 @@
       <created>1429167764730</created>
       <updated>1429167764784</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="17:50 ctvrtek">
+      <created>1429199495913</created>
+      <updated>1429199495917</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1942,7 +1936,8 @@
     <MESSAGE value="13:06 streda" />
     <MESSAGE value="14:32 streda" />
     <MESSAGE value="9:01 ctvrtek" />
-    <option name="LAST_COMMIT_MESSAGE" value="9:01 ctvrtek" />
+    <MESSAGE value="17:50 ctvrtek" />
+    <option name="LAST_COMMIT_MESSAGE" value="17:50 ctvrtek" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1976,7 +1971,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2193" max-vertical-offset="2975">
           <caret line="149" column="32" selection-start-line="149" selection-start-column="32" selection-end-line="149" selection-end-column="32" />
           <folding>
-            <element signature="e#5475#5484#0" expanded="true" />
+            <element signature="e#5492#5501#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2036,7 +2031,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="2108" max-vertical-offset="3060">
           <caret line="124" column="13" selection-start-line="124" selection-start-column="13" selection-end-line="124" selection-end-column="13" />
           <folding>
-            <element signature="e#5475#5484#0" expanded="true" />
+            <element signature="e#5492#5501#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2295,14 +2290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="621" max-vertical-offset="1020">
-          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Day.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="578">
@@ -2343,17 +2330,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/assets/tri">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1598">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1955">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1020">
+          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="974" max-vertical-offset="1275">
+          <caret line="84" column="1" selection-start-line="84" selection-start-column="1" selection-end-line="84" selection-end-column="1" />
+          <folding>
+            <element signature="e#1830#2322#0" expanded="true" />
+            <element signature="e#2311#2312#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2365,36 +2363,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="1275">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="196" max-vertical-offset="697">
+          <caret line="29" column="15" selection-start-line="29" selection-start-column="15" selection-end-line="29" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2453" max-vertical-offset="2873">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
           <folding>
-            <element signature="e#1902#2394#0" expanded="true" />
-            <element signature="e#2383#2384#0" expanded="true" />
+            <element signature="e#1532#1768#0" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="true" />
+            <element signature="e#1806#1954#0" expanded="true" />
+            <element signature="e#1943#1944#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3097" max-vertical-offset="4114">
-          <caret line="208" column="32" selection-start-line="208" selection-start-column="32" selection-end-line="208" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.37804878" vertical-offset="3596" max-vertical-offset="4080">
+          <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
           <folding>
-            <element signature="e#5475#5484#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.072961375" vertical-offset="1819" max-vertical-offset="2652">
-          <caret line="133" column="26" selection-start-line="133" selection-start-column="26" selection-end-line="133" selection-end-column="26" />
-          <folding>
-            <element signature="e#1532#1768#0" expanded="true" />
-            <element signature="e#1757#1758#0" expanded="true" />
-            <element signature="e#1806#1954#0" expanded="true" />
-            <element signature="e#1943#1944#0" expanded="true" />
+            <element signature="e#5492#5501#0" expanded="true" />
           </folding>
         </state>
       </provider>

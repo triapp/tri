@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -148,22 +147,35 @@ public class Home extends ActionBarActivity {
                     for (int i1 = 0; i < amount; i1++) {
                         JSONObject CurrentDay = tableDay.getJSONObject(i1);
                         db.insertDay(CurrentDay.getInt("id"),CurrentDay.getString("day"));
+                        if  (i1 == amount-1){
+                            break;
+                        }
                     }
                     JSONArray tableHall = obj.getJSONArray("hall");
-                    for (int i1 = 0; i < tableHall.length(); i1++){
+                    amount = tableHall.length();
+                    for (int i1 = 0; i < amount; i1++){
                         JSONObject CurrentHall = tableHall.getJSONObject(i1);
                         db.insertHall(CurrentHall.getInt("id"),CurrentHall.getString("name"));
+                        if  (i1 == amount-1){
+                            break;
+                        }
                     }
                     JSONArray tablePresentation = obj.getJSONArray("presentation");
-                    for (int i1 = 0; i < tablePresentation.length(); i1++){
+                    amount = tablePresentation.length()-1;
+                    for (int i1 = 0; i < amount; i1++){
                         JSONObject CurrentPresentation = tablePresentation.getJSONObject(i1);
                         db.insertHall(CurrentPresentation.getInt("id"),CurrentPresentation.getString("name"));
+                        if  (i1 == amount-1){
+                            break;
+                        }
                     }
                     JSONArray tableSection = obj.getJSONArray("section");
                     for (int i1 = 0; i < tableSection.length(); i1++){
                         JSONObject CurrentSection = tableSection.getJSONObject(i1);
-                        Log.i("JSON/Section", CurrentSection.toString());
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
+                        if  (i1 == tableSection.length()-1){
+                            break;
+                        }
                     }
                 }
 
