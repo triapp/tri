@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.daw.tri.Objects.Day;
+import com.example.daw.tri.Objects.Section;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -145,8 +146,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public void dropDay(){
+    public void dropAll(){
         myDataBase.execSQL("delete from day");
+        myDataBase.execSQL("delete from section");
+        myDataBase.execSQL("delete from presentation");
+        myDataBase.execSQL("delete from hall");
+
     }
 
 
@@ -181,9 +186,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfDays;
     }
 
-    public void insertHall(int id, String name){
+    public ArrayList<Section> selectSectionByDay(Long id) throws SQLException, ParseException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT * FROM section",null);
+        ArrayList<Section> listOfSections = new ArrayList<Section>();
+        Section tmp;
+        see.moveToFirst();
+        while (!see.isAfterLast()) {
+            tmp = new Section(see.getLong(0), see.getLong(1),see.getLong(2),see.getString(3));
+            listOfSections.add(tmp);
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return listOfSections;
+    }
 
+    public void insertHall(int id, String name){
         ContentValues values = new ContentValues();
+        Log.i("hall test", name);
         try {
             this.openDataBase();
             values.put("id", id);
@@ -212,6 +233,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertSection(int id,int id_hall,int id_day,String name,String chairman, String time_from, String time_to, String type){
         ContentValues values = new ContentValues();
+        Log.i("DB test", Integer.toString(id));
         try {
             this.openDataBase();
             values.put("id", id);

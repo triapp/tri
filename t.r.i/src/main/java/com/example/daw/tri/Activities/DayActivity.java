@@ -1,12 +1,22 @@
 package com.example.daw.tri.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Objects.Section;
 import com.example.daw.tri.R;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 
 public class DayActivity extends ActionBarActivity {
@@ -15,10 +25,39 @@ public class DayActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
+        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+        ArrayList<Section> allSections = null;
         Bundle b = getIntent().getExtras();
-        Long id = b.getLong("id");
-        TextView toBeSure = (TextView) findViewById(R.id.textView3);
-        toBeSure.setText("Search sections by ID of day: "+ id);
+        Long id = b.getLong("dayId");
+        try {
+            allSections = database.selectSectionByDay(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        final ListView sectionView = (ListView) findViewById(R.id.listView1);
+        final String[] sectionAdapter = new String[allSections.size()];
+        final Long[] sectionsID = new Long[allSections.size()];
+        int i = 0;
+        for (Section section : allSections) {
+            sectionsID[i] = section.getId();
+            sectionAdapter[i] = section.toString();
+            i++;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, sectionAdapter);
+        sectionView.setAdapter(adapter);
+        sectionView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemPosition = position;
+                Intent intent = new Intent(DayActivity.this, PresentationsActivity.class);
+                Bundle b = new Bundle();
+                b.putLong("id", sectionsID[itemPosition]);
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
     }
 
 

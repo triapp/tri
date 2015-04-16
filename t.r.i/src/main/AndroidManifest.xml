@@ -29,6 +29,10 @@
             android:name=".Activities.DayActivity"
             android:label="@string/title_activity_day" >
         </activity>
+        <activity
+            android:name=".Activities.PresentationsActivity"
+            android:label="@string/title_activity_presentations" >
+        </activity>
     </application>
 
 </manifest>

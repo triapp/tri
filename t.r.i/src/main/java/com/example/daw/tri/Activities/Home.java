@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +69,7 @@ public class Home extends ActionBarActivity {
     public void tryUpdate(){
         Network internet = new Network(getApplicationContext());
         if (internet.isOnline()) {
-            database.dropDay();
+            database.dropAll();
             new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -123,7 +124,7 @@ public class Home extends ActionBarActivity {
         protected JSONArray doInBackground(String... args) {
             status.setText("Getting data...");
             Communicator talkie = new Communicator();
-            JSONArray json = talkie.getTableDay();
+            JSONArray json = talkie.getTables();
             return json;
         }
         @Override
@@ -131,18 +132,20 @@ public class Home extends ActionBarActivity {
             try {
                 status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                /* Old parsing
                 for (int i = 0; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
                     db.insertDay(obj.getInt("id"),obj.getString("day"));
                 }
+                */
                 Intent intent = new Intent(Home.this, ProgramActivity.class);
                 startActivity(intent);
                 finish();
-                /*  JSONParsing of all tables
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
                     JSONArray tableDay = obj.getJSONArray("day");
-                    for (int i1 = 0; i < tableDay.length(); i1++){
+                    int amount = tableDay.length();
+                    for (int i1 = 0; i < amount; i1++) {
                         JSONObject CurrentDay = tableDay.getJSONObject(i1);
                         db.insertDay(CurrentDay.getInt("id"),CurrentDay.getString("day"));
                     }
@@ -159,9 +162,10 @@ public class Home extends ActionBarActivity {
                     JSONArray tableSection = obj.getJSONArray("section");
                     for (int i1 = 0; i < tableSection.length(); i1++){
                         JSONObject CurrentSection = tableSection.getJSONObject(i1);
+                        Log.i("JSON/Section", CurrentSection.toString());
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
                     }
-                } */
+                }
 
             } catch (JSONException e) {
                e.printStackTrace();

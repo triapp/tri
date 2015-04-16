@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Communicator {
     private JSONParser jsonParser;
-    private static String URL = "http://www.vesely-pcpohotovost.cz/tri/pokus.php";
+    private static String URL = "http://www.vesely-pcpohotovost.cz/tri/justTry.php";
 
     public Communicator(){
         jsonParser = new JSONParser();

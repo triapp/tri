@@ -27,7 +27,6 @@ public class ProgramActivity extends ActionBarActivity {
         setContentView(R.layout.activity_program);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         ArrayList<Day> allDays = null;
-        //database.insertDay(10,"bam");
         try {
             allDays = database.selectDay();
         } catch (SQLException e) {
@@ -52,7 +51,7 @@ public class ProgramActivity extends ActionBarActivity {
                 int itemPosition = position;
                 Intent intent = new Intent(ProgramActivity.this, DayActivity.class);
                 Bundle b = new Bundle();
-                b.putLong("id",daysID[itemPosition]);
+                b.putLong("dayId",daysID[itemPosition]);
                 intent.putExtras(b);
                 startActivity(intent);
             }
