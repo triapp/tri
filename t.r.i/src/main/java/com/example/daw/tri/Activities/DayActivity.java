@@ -1,10 +1,12 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.daw.tri.R;
 
 
 public class DayActivity extends ActionBarActivity {
@@ -14,9 +16,9 @@ public class DayActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
         Bundle b = getIntent().getExtras();
-        String clickedOn = b.getString("dayClicked");
+        Long id = b.getLong("id");
         TextView toBeSure = (TextView) findViewById(R.id.textView3);
-        toBeSure.setText(clickedOn);
+        toBeSure.setText("Search sections by ID of day: "+ id);
     }
 
 

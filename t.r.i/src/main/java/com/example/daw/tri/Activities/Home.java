@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.daw.tri.Library.Communicator;
+import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Library.Network;
+import com.example.daw.tri.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,13 +25,18 @@ import java.sql.SQLException;
 
 
 public class Home extends ActionBarActivity {
-
-   @Override
+    Button nextActivity;
+    Button update;
+    DatabaseHandler database;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_home);
-
-       final DatabaseHandler database = new DatabaseHandler(this);
+       nextActivity = (Button) findViewById(R.id.button);
+       update = (Button) findViewById(R.id.button1);
+       nextActivity.setVisibility(View.GONE);
+       update.setVisibility(View.GONE);
+       database = new DatabaseHandler(this);
        try {
            database.createDataBase();
        } catch (IOException ioe) {
@@ -36,23 +46,43 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
+        tryUpdate();
+        nextActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                startActivity(intent);
+            }
+        });
 
-       TextView txtonline = (TextView) findViewById(R.id.txt_online);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tryUpdate();
+            }
+        });
 
-       Network internet = new Network(getApplicationContext());
-       if (internet.isOnline()) {
-           txtonline.setText("online");
-           database.dropDay();
-           new downloadTables().execute();
-       } else txtonline.setText("offline");
-       Button nextActivity = (Button) findViewById(R.id.button);
-       nextActivity.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Intent intent = new Intent(Home.this, ProgramActivity.class);
-               startActivity(intent);
-           }
-       });
+
+    }
+
+    public void tryUpdate(){
+        Network internet = new Network(getApplicationContext());
+        if (internet.isOnline()) {
+            database.dropDay();
+            new downloadTables().execute();
+        } else {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            nextActivity.setVisibility(View.VISIBLE);
+            update.setVisibility(View.VISIBLE);
+        }
+        nextActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -80,20 +110,18 @@ public class Home extends ActionBarActivity {
 
     private class downloadTables extends AsyncTask<String, String, JSONArray> {
         private ProgressDialog pDialog;
+        private TextView status;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Home.this);
-            pDialog.setTitle("Komunikace se serverem");
-            pDialog.setMessage("Stahování dat");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+            status =(TextView) findViewById(R.id.textView);
+            status.setText("Contacting server...");
         }
 
         @Override
         protected JSONArray doInBackground(String... args) {
+            status.setText("Getting data...");
             Communicator talkie = new Communicator();
             JSONArray json = talkie.getTableDay();
             return json;
@@ -101,12 +129,15 @@ public class Home extends ActionBarActivity {
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
+                status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                 for (int i = 0; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
                     db.insertDay(obj.getInt("id"),obj.getString("day"));
                 }
-
+                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                startActivity(intent);
+                finish();
                 /*  JSONParsing of all tables
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
@@ -131,7 +162,6 @@ public class Home extends ActionBarActivity {
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
                     }
                 } */
-                pDialog.dismiss();
 
             } catch (JSONException e) {
                e.printStackTrace();

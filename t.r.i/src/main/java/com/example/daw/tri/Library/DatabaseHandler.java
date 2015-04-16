@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Library;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,11 +8,14 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.daw.tri.Objects.Day;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -162,16 +165,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> selectDay() throws SQLException {
+    public ArrayList<Day> selectDay() throws SQLException, ParseException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
-        ArrayList<String> listOfDays = new ArrayList<String>();
+        ArrayList<Day> listOfDays = new ArrayList<Day>();
+        Day tmp;
         see.moveToFirst();
         while (!see.isAfterLast()) {
-            Long id = see.getLong(0);
-            String date = see.getString(1);
-            String day = "ID of day: "+id+" is on: "+date;
-            listOfDays.add(day);
+            tmp = new Day(see.getLong(0), see.getString(1));
+            listOfDays.add(tmp);
             see.moveToNext();
         }
         see.close();

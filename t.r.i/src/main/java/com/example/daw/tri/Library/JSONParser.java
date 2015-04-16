@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Library;
 
 
 import android.util.Log;

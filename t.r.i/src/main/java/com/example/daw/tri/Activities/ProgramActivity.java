@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Objects.Day;
+import com.example.daw.tri.R;
+
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 
@@ -21,18 +26,22 @@ public class ProgramActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        ArrayList<String> allDays = null;
+        ArrayList<Day> allDays = null;
         //database.insertDay(10,"bam");
         try {
             allDays = database.selectDay();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         final ListView dayView = (ListView) findViewById(R.id.listView);
         final String[] daysAdapter = new String[allDays.size()];
+        final Long[] daysID = new Long[allDays.size()];
         int i = 0;
-        for (String day : allDays) {
-            daysAdapter[i] = day;
+        for (Day day : allDays) {
+            daysID[i] = day.getId();
+            daysAdapter[i] = day.toString();
             i++;
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, daysAdapter);
@@ -41,10 +50,9 @@ public class ProgramActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 int itemPosition = position;
-                String clicked = daysAdapter[position];
                 Intent intent = new Intent(ProgramActivity.this, DayActivity.class);
                 Bundle b = new Bundle();
-                b.putString("dayClicked", clicked);
+                b.putLong("id",daysID[itemPosition]);
                 intent.putExtras(b);
                 startActivity(intent);
             }

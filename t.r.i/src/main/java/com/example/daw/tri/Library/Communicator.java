@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Library;
 
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
