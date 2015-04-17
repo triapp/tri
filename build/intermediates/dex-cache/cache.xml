@@ -2,39 +2,32 @@
 <items version="2" >
 
     <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\libs\android-async-http-1.4.4.jar"
+        jar="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="3bae85a076241828810bf8fbcc12e5891d5fc34c">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\android-async-http-1.4.4-51badd68953ebeb5444f023c5cf9e352a2e65329.jar" />
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\pre-dexed\debug\classes-b5ac601219e5a7eeb71444269584e6489e691bde.jar" />
     </item>
     <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\libs\gson-2.2.4-javadoc.jar"
+        jar="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="be47c2ee6e9ab0668874e4c6c4933c0637f473d8">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\gson-2.2.4-javadoc-ab49f6a510b2b9eb56c20142d9d202451c3b5112.jar" />
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\pre-dexed\debug\classes-a3ca2a1894533583b011eafa5e3683df9912df9d.jar" />
     </item>
     <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\libs\android-async-http-1.4.6.jar"
+        jar="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\android-async-http-1.4.6-997da6ef44424c887efb459fdd0cf24c588ab1e3.jar" />
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-2771a1efd7b2aaf5461cdffe490cd298c52e4087.jar" />
     </item>
     <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\libs\gson-2.2.4.jar"
+        jar="E:\Users\David\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="973e832af433b44c3ed11c426f2f390b29f3f3f8">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\gson-2.2.4-80ed83b2241a4409c18263825da6a7962128d385.jar" />
-    </item>
-    <item
-        jar="D:\Android\TRI\TRIApp1\t.r.i\libs\gson-2.2.4-sources.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="10ab84ba225b583b10713f57c04270c918ef162b">
-        <dex dex="D:\Android\TRI\TRIApp1\t.r.i\build\intermediates\pre-dexed\debug\gson-2.2.4-sources-71d457f913294782100dceb69ff4dfce6dfb35a3.jar" />
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\David\AndroidStudioProjects\tri\t.r.i\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-4f35d1146452581148db4ae13bbd04b56d7fa6e5.jar" />
     </item>
 
 </items>

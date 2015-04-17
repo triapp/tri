@@ -1,4 +1,4 @@
-package com.example.daw.tri;
+package com.example.daw.tri.Library;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -10,7 +10,6 @@ public class Network  {
 
     Context context;
 
-    // Konstruktor
     public Network(Context context) {
         this.context = context;
     }
@@ -27,6 +26,4 @@ public class Network  {
             return false;
         }
     }
-
-
 }
