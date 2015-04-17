@@ -65,7 +65,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 copyDataBase();
 
             } catch (IOException e) {
-
                 throw new Error("Error copying database");
 
             }
@@ -217,6 +216,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.close();
         myDataBase.close();
         return listOfPresentations;
+    }
+
+    public void insertPersonal(Long idSection, Long idDay,String time_from, String time_to) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT day FROM day WHERE id="+idDay,null);
+        see.moveToFirst();
+        time_to = see.getString(0) +" " + time_to;
+        time_from = see.getString(0) +" " + time_from;
+        ContentValues values = new ContentValues();
+        values.put("id", idSection);
+        values.put("time_to", time_to);
+        values.put("time_from", time_from);
+        myDataBase.insert("personal", null, values);
+        myDataBase.close();
     }
 
     public void insertHall(int id, String name){

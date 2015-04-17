@@ -26,6 +26,4 @@ public class Network  {
             return false;
         }
     }
-
-
 }

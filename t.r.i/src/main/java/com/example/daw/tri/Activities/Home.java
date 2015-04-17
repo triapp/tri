@@ -25,6 +25,7 @@ import java.sql.SQLException;
 
 
 public class Home extends ActionBarActivity {
+    TextView networkError;
     Button nextActivity;
     Button update;
     DatabaseHandler database;
@@ -32,8 +33,10 @@ public class Home extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_home);
+       networkError = (TextView) findViewById(R.id.textView);
        nextActivity = (Button) findViewById(R.id.button);
        update = (Button) findViewById(R.id.button1);
+       networkError.setVisibility(View.GONE);
        nextActivity.setVisibility(View.GONE);
        update.setVisibility(View.GONE);
        database = new DatabaseHandler(this);
@@ -66,12 +69,16 @@ public class Home extends ActionBarActivity {
     }
 
     public void tryUpdate(){
+        networkError.setVisibility(View.GONE);
+        nextActivity.setVisibility(View.GONE);
+        update.setVisibility(View.GONE);
         Network internet = new Network(getApplicationContext());
         if (internet.isOnline()) {
-            database.dropAll();
-            new downloadTables().execute();
+           database.dropAll();
+           new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
         }
@@ -131,15 +138,6 @@ public class Home extends ActionBarActivity {
             try {
                 status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                /* Old parsing
-                for (int i = 0; i < json.length(); i++) {
-                    JSONObject obj = json.getJSONObject(i);
-                    db.insertDay(obj.getInt("id"),obj.getString("day"));
-                }
-                */
-                Intent intent = new Intent(Home.this, ProgramActivity.class);
-                startActivity(intent);
-                finish();
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
 
@@ -179,6 +177,10 @@ public class Home extends ActionBarActivity {
                         done++;
                     } while(done < amount);
                 }
+
+                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                startActivity(intent);
+                finish();
 
             } catch (JSONException e) {
                e.printStackTrace();
