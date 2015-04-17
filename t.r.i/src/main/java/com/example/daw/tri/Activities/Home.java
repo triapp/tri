@@ -142,41 +142,42 @@ public class Home extends ActionBarActivity {
                 finish();
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
+
                     JSONArray tableDay = obj.getJSONArray("day");
                     int amount = tableDay.length();
-                    for (int i1 = 0; i < amount; i1++) {
-                        JSONObject CurrentDay = tableDay.getJSONObject(i1);
+                    int done  = 0;
+                    do{
+                        JSONObject CurrentDay = tableDay.getJSONObject(done);
                         db.insertDay(CurrentDay.getInt("id"),CurrentDay.getString("day"));
-                        if  (i1 == amount-1){
-                            break;
-                        }
-                    }
+                        done++;
+                    } while(done < amount);
+
                     JSONArray tableHall = obj.getJSONArray("hall");
                     amount = tableHall.length();
-                    for (int i1 = 0; i < amount; i1++){
-                        JSONObject CurrentHall = tableHall.getJSONObject(i1);
+                    done = 0;
+                    do{
+                        JSONObject CurrentHall = tableHall.getJSONObject(done);
                         db.insertHall(CurrentHall.getInt("id"),CurrentHall.getString("name"));
-                        if  (i1 == amount-1){
-                            break;
-                        }
-                    }
+                        done++;
+                    } while(done < amount);
+
                     JSONArray tablePresentation = obj.getJSONArray("presentation");
-                    amount = tablePresentation.length()-1;
-                    for (int i1 = 0; i < amount; i1++){
-                        JSONObject CurrentPresentation = tablePresentation.getJSONObject(i1);
-                        db.insertHall(CurrentPresentation.getInt("id"),CurrentPresentation.getString("name"));
-                        if  (i1 == amount-1){
-                            break;
-                        }
-                    }
+                    amount = tablePresentation.length();
+                    done = 0;
+                    do{
+                        JSONObject CurrentPresentation = tablePresentation.getJSONObject(done);
+                        db.insertPresentation(CurrentPresentation.getInt("id"), CurrentPresentation.getInt("id_section"), CurrentPresentation.getString("name"), CurrentPresentation.getString("author"));
+                        done++;
+                    } while(done < amount);
+
                     JSONArray tableSection = obj.getJSONArray("section");
-                    for (int i1 = 0; i < tableSection.length(); i1++){
-                        JSONObject CurrentSection = tableSection.getJSONObject(i1);
+                    amount = tableSection.length();
+                    done = 0;
+                    do{
+                        JSONObject CurrentSection = tableSection.getJSONObject(done);
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
-                        if  (i1 == tableSection.length()-1){
-                            break;
-                        }
-                    }
+                        done++;
+                    } while(done < amount);
                 }
 
             } catch (JSONException e) {

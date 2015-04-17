@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.daw.tri.Objects.Day;
+import com.example.daw.tri.Objects.Presentation;
 import com.example.daw.tri.Objects.Section;
 
 import java.io.FileOutputStream;
@@ -202,6 +203,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfSections;
     }
 
+    public ArrayList<Presentation> selectPresentationById(Long id) throws SQLException, ParseException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT * FROM presentation WHERE id_section="+id,null);
+        ArrayList<Presentation> listOfPresentations = new ArrayList<>();
+        Presentation tmp;
+        see.moveToFirst();
+        while (!see.isAfterLast()) {
+            tmp = new Presentation(see.getLong(0), see.getString(2),see.getString(3));
+            listOfPresentations.add(tmp);
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return listOfPresentations;
+    }
+
     public void insertHall(int id, String name){
         ContentValues values = new ContentValues();
         Log.i("hall test", name);
@@ -222,6 +239,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             this.openDataBase();
             values.put("id", id);
             values.put("id_section", id_section);
+            values.put("name", name);
             values.put("author", author);
             myDataBase.insert("presentation", null, values);
             myDataBase.close();

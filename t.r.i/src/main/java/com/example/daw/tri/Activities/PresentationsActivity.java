@@ -4,8 +4,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Objects.Presentation;
 import com.example.daw.tri.R;
+
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 public class PresentationsActivity extends ActionBarActivity {
 
@@ -13,6 +21,29 @@ public class PresentationsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentations);
+        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+        ArrayList<Presentation> allPresentations = null;
+        Bundle b = getIntent().getExtras();
+        Long id = b.getLong("id");
+        try {
+            allPresentations = database.selectPresentationById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        final ListView presentationView = (ListView) findViewById(R.id.listView2);
+        final String[] presentationAdapter = new String[allPresentations.size()];
+        final Long[] presentationID = new Long[allPresentations.size()];
+        int i = 0;
+        for (Presentation presentation : allPresentations) {
+            presentationID[i] = presentation.getId();
+            presentationAdapter[i] = presentation.toString();
+            i++;
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, presentationAdapter);
+        presentationView.setAdapter(adapter);
     }
 
 
