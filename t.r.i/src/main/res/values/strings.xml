@@ -6,4 +6,6 @@
     <string name="title_activity_program">ProgramActivity</string>
     <string name="title_activity_day">DayActivity</string>
     <string name="title_activity_presentations">PresentationsActivity</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_navigation">Navigation</string>
 </resources>

@@ -33,6 +33,11 @@
             android:name=".Activities.PresentationsActivity"
             android:label="@string/title_activity_presentations" >
         </activity>
+        <activity
+            android:name=".Activities.Navigation"
+            android:label="@string/title_activity_navigation" >
+        </activity>
+
     </application>
 
 </manifest>

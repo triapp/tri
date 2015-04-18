@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.daw.tri.Library.Communicator;
 import com.example.daw.tri.Library.DatabaseHandler;
-import com.example.daw.tri.Library.Network;
 import com.example.daw.tri.R;
 
 import org.json.JSONArray;
@@ -53,7 +52,7 @@ public class Home extends ActionBarActivity {
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                Intent intent = new Intent(Home.this, Navigation.class);
                 startActivity(intent);
             }
         });
@@ -64,20 +63,32 @@ public class Home extends ActionBarActivity {
                 tryUpdate();
             }
         });
+        //CONECTION
+
+
+
+
+
 
 
     }
-
+    public boolean isOnline(){
+        return true;
+    }
     public void tryUpdate(){
+        findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         networkError.setVisibility(View.GONE);
         nextActivity.setVisibility(View.GONE);
         update.setVisibility(View.GONE);
-        Network internet = new Network(getApplicationContext());
-        if (internet.isOnline()) {
+
+       if (isOnline()==true) {
            database.dropAll();
            new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            TextView message = (TextView) findViewById(R.id.message);
+            message.setText("You are not connected to the Internet network");
+
             networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
@@ -85,7 +96,7 @@ public class Home extends ActionBarActivity {
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                Intent intent = new Intent(Home.this, Navigation.class);
                 startActivity(intent);
             }
         });
@@ -178,7 +189,7 @@ public class Home extends ActionBarActivity {
                     } while(done < amount);
                 }
 
-                Intent intent = new Intent(Home.this, ProgramActivity.class);
+                Intent intent = new Intent(Home.this, Navigation.class);
                 startActivity(intent);
                 finish();
 
@@ -187,4 +198,34 @@ public class Home extends ActionBarActivity {
             }
 
         }}
+   // boolean network = false;
+    //Check connection
+
+/*
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL("http://www.google.com");
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(3000);
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {
+                    return true;
+                }
+            } catch (MalformedURLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return false;
+*/
+    boolean network;
+
+
+
 }
+
