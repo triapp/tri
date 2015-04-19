@@ -28,7 +28,7 @@ public class Navigation extends ActionBarActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(1);
+                finish();
             }
         });
 

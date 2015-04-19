@@ -21,6 +21,5 @@ public class Personal {
         SimpleDateFormat time_from = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         this.timeTo = time_to.parse(timeTo);
         this.timeFrom = time_from.parse(timeFrom);
-
     }
 }

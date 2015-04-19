@@ -41,12 +41,6 @@ public class Home extends ActionBarActivity {
        networkError = (TextView) findViewById(R.id.textView);
        nextActivity = (Button) findViewById(R.id.button);
        update = (Button) findViewById(R.id.button1);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new NetCheck().execute();
-            }
-        });
        networkError.setVisibility(View.GONE);
        nextActivity.setVisibility(View.GONE);
        update.setVisibility(View.GONE);
@@ -65,29 +59,8 @@ public class Home extends ActionBarActivity {
         new NetCheck().execute();
     }
 
-
-
-
-
-
-
-
     public void isOnline(){
         tryUpdate();
-        nextActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Navigation.class);
-                startActivity(intent);
-            }
-        });
-
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tryUpdate();
-            }
-        });
     }
     public void tryUpdate(){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -99,22 +72,30 @@ public class Home extends ActionBarActivity {
            database.dropAll();
            new downloadTables().execute();
         } else {
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            TextView message = (TextView) findViewById(R.id.message);
-            message.setText("You are not connected to the Internet network");
+           findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+           TextView message = (TextView) findViewById(R.id.message);
+           message.setText("You are not connected to the Internet network");
 
-            networkError.setVisibility(View.VISIBLE);
-            nextActivity.setVisibility(View.VISIBLE);
-            update.setVisibility(View.VISIBLE);
+           networkError.setVisibility(View.VISIBLE);
+           nextActivity.setVisibility(View.VISIBLE);
+           update.setVisibility(View.VISIBLE);
+           update.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   new NetCheck().execute();
+               }
+           });
+
+           nextActivity.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(Home.this, Navigation.class);
+                   startActivity(intent);
+                   finish();
+               }
+           });
+
         }
-        nextActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Navigation.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 
@@ -212,31 +193,6 @@ public class Home extends ActionBarActivity {
             }
 
         }}
-   // boolean network = false;
-    //Check connection
-
-/*
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            try {
-                URL url = new URL("http://www.google.com");
-                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                urlc.setConnectTimeout(3000);
-                urlc.connect();
-                if (urlc.getResponseCode() == 200) {
-                    return true;
-                }
-            } catch (MalformedURLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return false;
-*/
     boolean network;
 
 
