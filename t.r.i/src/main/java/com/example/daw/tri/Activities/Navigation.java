@@ -17,6 +17,7 @@ public class Navigation extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         final Button program = (Button) findViewById(R.id.button2);
+        final Button exit = (Button) findViewById(R.id.button3);
         program.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -24,6 +25,13 @@ public class Navigation extends ActionBarActivity {
                 startActivity(openProgram);
             }
         });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(1);
+            }
+        });
+
     }
 
 

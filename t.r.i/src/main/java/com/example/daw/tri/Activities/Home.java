@@ -1,7 +1,10 @@
 package com.example.daw.tri.Activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 
 
@@ -35,6 +41,12 @@ public class Home extends ActionBarActivity {
        networkError = (TextView) findViewById(R.id.textView);
        nextActivity = (Button) findViewById(R.id.button);
        update = (Button) findViewById(R.id.button1);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NetCheck().execute();
+            }
+        });
        networkError.setVisibility(View.GONE);
        nextActivity.setVisibility(View.GONE);
        update.setVisibility(View.GONE);
@@ -48,6 +60,19 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
+
+        //CONECTION
+        new NetCheck().execute();
+    }
+
+
+
+
+
+
+
+
+    public void isOnline(){
         tryUpdate();
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,17 +88,6 @@ public class Home extends ActionBarActivity {
                 tryUpdate();
             }
         });
-        //CONECTION
-
-
-
-
-
-
-
-    }
-    public boolean isOnline(){
-        return true;
     }
     public void tryUpdate(){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -81,7 +95,7 @@ public class Home extends ActionBarActivity {
         nextActivity.setVisibility(View.GONE);
         update.setVisibility(View.GONE);
 
-       if (isOnline()==true) {
+       if (network==true) {
            database.dropAll();
            new downloadTables().execute();
         } else {
@@ -227,5 +241,70 @@ public class Home extends ActionBarActivity {
 
 
 
+
+
+/**
+ * Async Task to check whether internet connection is working.
+ **/
+
+private class NetCheck extends AsyncTask<String,String,Boolean>
+{
+    private ProgressDialog nDialog;
+
+    @Override
+    protected void onPreExecute(){
+        super.onPreExecute();
+        nDialog = new ProgressDialog(Home.this);
+        nDialog.setTitle("Checking Internet connection");
+        nDialog.setMessage("Checking...");
+        nDialog.setIndeterminate(false);
+        nDialog.setCancelable(false);
+        nDialog.show();
+    }
+    /**
+     * Gets current device state and checks for working internet connection by trying Google.
+     **/
+    @Override
+    protected Boolean doInBackground(String... args){
+
+
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL("http://www.tri.cz");
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(1000);
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {
+                    return true;
+                }
+            } catch (MalformedURLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return false;
+
+    }
+    @Override
+    protected void onPostExecute(Boolean th){
+
+        if(th == true){
+            nDialog.dismiss();
+            network = true;
+            isOnline();
+        }
+        else{
+            nDialog.dismiss();
+            network = false;
+            isOnline();
+        }
+    }
 }
 
+}
