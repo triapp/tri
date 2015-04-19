@@ -218,18 +218,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfPresentations;
     }
 
-    public void insertPersonal(Long idSection, Long idDay,String time_from, String time_to) throws SQLException {
+    public void insertPersonal(Long idSection) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT day FROM day WHERE id="+idDay,null);
-        see.moveToFirst();
-        time_to = see.getString(0) +" " + time_to;
-        time_from = see.getString(0) +" " + time_from;
-        ContentValues values = new ContentValues();
-        values.put("id", idSection);
-        values.put("time_to", time_to);
-        values.put("time_from", time_from);
-        myDataBase.insert("personal", null, values);
-        myDataBase.close();
+        Cursor see;
+        int existCheck = myDataBase.rawQuery("SELECT id FROM section WHERE id="+idSection,null).getCount();
+        if (existCheck > 0){
+            int idDay = myDataBase.rawQuery("SELECT id_day FROM section WHERE id="+idSection,null).getInt(0);
+            String date = myDataBase.rawQuery("SELECT day FROM day WHERE id="+idDay,null).getString(0);
+            see = myDataBase.rawQuery("SELECT time_from,time_to FROM section",null);
+            see.moveToFirst();
+            String time_to = date +" " + see.getString(1);
+            String time_from = date +" " + see.getString(0);
+            ContentValues values = new ContentValues();
+            values.put("id", idSection);
+            values.put("time_to", time_to);
+            values.put("time_from", time_from);
+            myDataBase.insert("personal", null, values);
+            myDataBase.close();
+        }
     }
 
     public void insertHall(int id, String name){

@@ -29,4 +29,5 @@ public class Communicator {
         JSONArray json = jsonParser.getJSONFromUrl(URL, params);
         return json;
     }
+
 }
