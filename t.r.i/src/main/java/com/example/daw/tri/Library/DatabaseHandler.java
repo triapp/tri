@@ -19,6 +19,8 @@ import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by EN on 11.4.2015.
@@ -145,15 +147,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public void addColumn() throws SQLException {
+        openDataBase();
+        myDataBase.rawQuery("ALTER TABLE personal ADD COLUMN time_to TEXT",null);
+        myDataBase.rawQuery("ALTER TABLE personal ADD COLUMN time_from TEXT",null);
+        myDataBase.close();
+    }
+
 
     public void dropAll(){
         myDataBase.execSQL("delete from day");
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
-
     }
-
 
     public void insertDay(int id, String date) {
         Log.i("daw", date);
@@ -220,22 +227,103 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertPersonal(Long idSection) throws SQLException {
         openDataBase();
-        Cursor see;
-        int existCheck = myDataBase.rawQuery("SELECT id FROM section WHERE id="+idSection,null).getCount();
+        ContentValues values = new ContentValues();
+        values.put("id", idSection);
+        myDataBase.insert("personal", null, values);
+        myDataBase.close();
+
+        /*
+        FCKING SHIT - DOESNT WORK (BEFORE NEW TABLES)
+
+        Cursor see, pointer;
+        see = myDataBase.rawQuery("SELECT id FROM section WHERE id="+idSection,null);
+        see.moveToFirst();
+        int existCheck = see.getCount();
         if (existCheck > 0){
-            int idDay = myDataBase.rawQuery("SELECT id_day FROM section WHERE id="+idSection,null).getInt(0);
-            String date = myDataBase.rawQuery("SELECT day FROM day WHERE id="+idDay,null).getString(0);
-            see = myDataBase.rawQuery("SELECT time_from,time_to FROM section",null);
-            see.moveToFirst();
-            String time_to = date +" " + see.getString(1);
-            String time_from = date +" " + see.getString(0);
+            pointer = myDataBase.rawQuery("SELECT id_day FROM section WHERE id="+idSection,null);
+            pointer.moveToFirst();
+            int idDay = pointer.getInt(0);
+            pointer = myDataBase.rawQuery("SELECT day FROM day WHERE id=" + idDay, null);
+            pointer.moveToFirst();
+            String date = pointer.getString(0);
+            pointer = myDataBase.rawQuery("SELECT time_from,time_to FROM section",null);
+            pointer.moveToFirst();
+            String time_to = date +" " + pointer.getString(1);
+            String time_from = date +" " + pointer.getString(0);
             ContentValues values = new ContentValues();
             values.put("id", idSection);
             values.put("time_to", time_to);
             values.put("time_from", time_from);
             myDataBase.insert("personal", null, values);
-            myDataBase.close();
         }
+        */
+    }
+
+    public ArrayList<String> getPersonalList() throws SQLException {
+        ArrayList<String> result = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal",null);
+        see.moveToFirst();
+        while (!see.isAfterLast()){
+            result.add("ID: "+see.getLong(0));
+            see.moveToNext();
+        }
+        myDataBase.close();
+        return result;
+    }
+
+    public boolean isInPersonal(Long idSection) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal WHERE id="+idSection,null);
+        see.moveToFirst();
+        int exist = see.getCount();
+        if (exist > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<String> getSectionList(Long day) throws SQLException {
+        openDataBase();
+        List<String> result = new ArrayList<>();
+        Cursor see = myDataBase.rawQuery("SELECT name FROM section WHERE id_day="+day,null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            result.add(see.getString(0));
+            see.moveToNext();
+        }
+        close();
+        return result;
+    }
+
+    public HashMap<String,List<String>> getSectionPresentationMap(Long day) throws SQLException {
+        openDataBase();
+        HashMap<String,List<String>> result = new HashMap<>();
+        Cursor pointer;
+        Cursor see  = myDataBase.rawQuery("SELECT id,name FROM section WHERE id_day="+day,null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            List<String> presentations = new ArrayList<>();
+            pointer = myDataBase.rawQuery("SELECT name FROM presentation WHERE id_section="+see.getLong(0),null);
+            pointer.moveToFirst();
+            while (!pointer.isAfterLast()){
+                presentations.add(pointer.getString(0));
+                pointer.moveToNext();
+            }
+            result.put(see.getString(1),presentations);
+            see.moveToNext();
+        }
+        close();
+        return result;
+    }
+
+    public Long getNthSection(int position) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM section LIMIT "+position+",1",null);
+        see.moveToFirst();
+        close();
+        return see.getLong(0);
     }
 
     public void insertHall(int id, String name){

@@ -1,5 +1,7 @@
 package com.example.daw.tri.Activities;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -16,15 +18,17 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class PresentationsActivity extends ActionBarActivity {
+    Long id;
+    DatabaseHandler database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentations);
-        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+        database = new DatabaseHandler(getApplicationContext());
         ArrayList<Presentation> allPresentations = null;
         Bundle b = getIntent().getExtras();
-        Long id = b.getLong("id");
+        id = b.getLong("id");
         try {
             allPresentations = database.selectPresentationById(id);
         } catch (SQLException e) {
@@ -44,6 +48,17 @@ public class PresentationsActivity extends ActionBarActivity {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, presentationAdapter);
         presentationView.setAdapter(adapter);
+        int mNotificationId = 001;
+
+        Intent intent = new Intent (this,Home.class);
+        PendingIntent resultPendingIntent =
+                PendingIntent.getActivity(
+                        getApplicationContext(),
+                        0,
+                        intent,
+                        PendingIntent.FLAG_CANCEL_CURRENT
+                );
+
     }
 
 

@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
+
+import java.sql.SQLException;
 
 public class Navigation extends ActionBarActivity {
 
@@ -16,6 +19,7 @@ public class Navigation extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         final Button program = (Button) findViewById(R.id.button2);
         final Button exit = (Button) findViewById(R.id.button3);
         program.setOnClickListener(new View.OnClickListener() {
@@ -25,10 +29,23 @@ public class Navigation extends ActionBarActivity {
                 startActivity(openProgram);
             }
         });
+
+        Button personal =(Button) findViewById(R.id.button5);
+        personal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Personal.class);
+                startActivity(intent);
+            }
+        });
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(1);
+                try {
+                    database.addColumn();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

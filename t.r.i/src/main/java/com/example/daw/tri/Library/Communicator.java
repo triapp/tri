@@ -14,20 +14,10 @@ public class Communicator {
         jsonParser = new JSONParser();
     }
 
-
-    public JSONArray getTableDay(){
-        // Building Parameters
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("tag", "getDay"));
-        JSONArray json = jsonParser.getJSONFromUrl(URL, params);
-        return json;
-    }
-
     public JSONArray getTables(){
         List params = new ArrayList();
         params.add(new BasicNameValuePair("tag", "getAll"));
         JSONArray json = jsonParser.getJSONFromUrl(URL, params);
         return json;
     }
-
 }

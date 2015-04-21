@@ -37,7 +37,10 @@
             android:name=".Activities.Navigation"
             android:label="@string/title_activity_navigation" >
         </activity>
-
+        <activity
+            android:name=".Activities.Personal"
+            android:label="@string/title_activity_personal" >
+        </activity>
     </application>
 
 </manifest>
