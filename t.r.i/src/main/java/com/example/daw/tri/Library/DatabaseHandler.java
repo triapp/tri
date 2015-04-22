@@ -18,7 +18,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -227,8 +229,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertPersonal(Long idSection) throws SQLException, ParseException {
         openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
+        see.moveToFirst();
         ContentValues values = new ContentValues();
         values.put("id", idSection);
+        String time_to = see.getString(0)+" "+ see.getString(1);
+        String time_from = see.getString(0)+" "+ see.getString(2);
+        values.put("time_to",time_to);
+        values.put("time_from",time_from);
         myDataBase.insert("personal", null, values);
         myDataBase.close();
 
@@ -238,7 +246,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<String> result = new ArrayList<>();
         openDataBase();
         Cursor see,pointer;
-        see = myDataBase.rawQuery("SELECT id FROM personal", null);
+        see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from", null);
         see.moveToFirst();
         while (!see.isAfterLast()){
             pointer = myDataBase.rawQuery("SELECT name FROM section WHERE id="+see.getLong(0),null);
@@ -268,6 +276,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
     }
 
+    public void renewPersonal() throws SQLException, ParseException {
+        List<Long> idArray = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            idArray.add(see.getLong(0));
+            removeFromPersonal(see.getLong(0));
+            see.moveToNext();
+        }
+        for(Long id : idArray){
+            insertPersonal(id);
+        }
+    }
+
+    public void checkPersonalForCollisions() throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT * FROM personal",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+
+        }
+    }
+
     public List<String> getSectionList(Long day) throws SQLException {
         openDataBase();
         List<String> result = new ArrayList<>();
@@ -292,7 +324,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             pointer = myDataBase.rawQuery("SELECT name FROM presentation WHERE id_section="+see.getLong(0),null);
             pointer.moveToFirst();
             while (!pointer.isAfterLast()){
-                presentations.add(pointer.getString(0));
+                presentations.add(pointer.getPosition()+1+". "+pointer.getString(0));
                 pointer.moveToNext();
             }
             result.put(see.getString(1),presentations);
@@ -302,12 +334,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    public HashMap<String,List<String>> getPersonalPresentationMap() throws SQLException {
+    public HashMap<String,List<String>> getPersonalPresentationMap() throws SQLException, ParseException {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor pointer;
-        Cursor see  = myDataBase.rawQuery("SELECT personal.id,section.name FROM section, personal WHERE personal.id=section.id",null);
+        Cursor see  = myDataBase.rawQuery("SELECT personal.id,section.name, personal.time_from,personal.time_to FROM section, personal WHERE personal.id=section.id",null);
         see.moveToFirst();
+        while(!see.isAfterLast()){
+            List<String> presentations = new ArrayList<>();
+            SimpleDateFormat daysHours = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Date time_from = daysHours.parse(see.getString(2));
+            Date time_to = daysHours.parse(see.getString(3));
+            daysHours = new SimpleDateFormat("hh:mm dd.MM.");
+            presentations.add("Begin: "+ daysHours.format(time_from));
+            presentations.add("End: "+ daysHours.format(time_to));
+        /* Display all of the presentations by section
         while(!see.isAfterLast()){
             List<String> presentations = new ArrayList<>();
             pointer = myDataBase.rawQuery("SELECT name FROM presentation WHERE id_section="+see.getLong(0),null);
@@ -315,7 +356,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             while (!pointer.isAfterLast()){
                 presentations.add(pointer.getString(0));
                 pointer.moveToNext();
-            }
+            }*/
             result.put(see.getString(1),presentations);
             see.moveToNext();
         }
