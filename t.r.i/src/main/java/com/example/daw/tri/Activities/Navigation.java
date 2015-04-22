@@ -11,8 +11,6 @@ import android.widget.Button;
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
 
-import java.sql.SQLException;
-
 public class Navigation extends ActionBarActivity {
 
     @Override
@@ -41,11 +39,7 @@ public class Navigation extends ActionBarActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    database.addColumn();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                finish();
             }
         });
 

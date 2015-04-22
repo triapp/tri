@@ -4,7 +4,9 @@ package com.example.daw.tri.Library;
  * Created by EN on 20.4.2015.
  */
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.daw.tri.Activities.Personal;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,16 +28,17 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private DatabaseHandler database;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
+    private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
+    private int kindOfAdapter;
 
     public ExpandableAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData) {
+                                 HashMap<String, List<String>> listChildData, int kindOfAdapter) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this.database = new DatabaseHandler(context);
+        this.kindOfAdapter = kindOfAdapter;
     }
 
     @Override
@@ -103,23 +108,43 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
-        Button addToPersonal = (Button) convertView.findViewById(R.id.button4);
-        addToPersonal.setOnClickListener(new View.OnClickListener() {
+        Button headerButton = (Button) convertView.findViewById(R.id.button4);
+        if (kindOfAdapter == 0){
+        headerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     Long id = database.getNthSection(groupPosition);
-                    if  (database.isInPersonal(id)){
-                        Toast.makeText(_context,"This section is already in your personal program.",Toast.LENGTH_SHORT).show();
+                    if (database.isInPersonal(id)) {
+                        Toast.makeText(_context, "This section is already in your personal program.", Toast.LENGTH_SHORT).show();
                     } else {
                         database.insertPersonal(id);
-                        Toast.makeText(_context,"Section was added to your personal program.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(_context, "Section was added to your personal program.", Toast.LENGTH_LONG).show();
                     }
                 } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
         });
+        } else {
+            headerButton.setText("-");
+            headerButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        Long id = database.getNthSectionFromPersonal(groupPosition);
+                        database.removeFromPersonal(id);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(_context, Personal.class);
+                    _context.startActivity(intent);
+                    ((Activity)_context).finish();
+                }
+            });
+        }
         return convertView;
     }
 

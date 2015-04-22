@@ -8,12 +8,9 @@ import android.widget.ExpandableListView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.Library.ExpandableAdapter;
-import com.example.daw.tri.Objects.Section;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.ArrayList;
 
 
 public class DayActivity extends ActionBarActivity {
@@ -26,20 +23,11 @@ public class DayActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        ArrayList<Section> allSections = null;
         Bundle b = getIntent().getExtras();
         Long id = b.getLong("dayId");
-        try {
-            allSections = database.selectSectionByDay(id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         expandView = (ExpandableListView) findViewById(R.id.expandableListView);
         try {
-            expandAdapter = new ExpandableAdapter(this,database.getSectionList(id),database.getSectionPresentationMap(id));
+            expandAdapter = new ExpandableAdapter(this,database.getSectionList(id),database.getSectionPresentationMap(id),0);
         } catch (SQLException e) {
             e.printStackTrace();
         }

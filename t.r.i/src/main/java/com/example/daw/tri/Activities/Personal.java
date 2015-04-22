@@ -4,37 +4,34 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Library.ExpandableAdapter;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
 
 public class Personal extends ActionBarActivity {
+
+    ExpandableListView expandView;
+    ExpandableAdapter expandAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        ArrayList<String> personalList = null;
+        expandView = (ExpandableListView) findViewById(R.id.expandableListView2);
         try {
-            personalList = database.getPersonalList();
+            expandAdapter = new ExpandableAdapter(this,database.getPersonalList(),database.getPersonalPresentationMap(),1);
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        ListView personalView = (ListView) findViewById(R.id.listView3);
-        String[] personalAdapter = new String[personalList.size()];
-        int i = 0;
-        for (String personalShit : personalList) {
-            personalAdapter[i] = personalShit;
-            i++;
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, personalAdapter);
-        personalView.setAdapter(adapter);
+        expandView.setAdapter(expandAdapter);
 
     }
 

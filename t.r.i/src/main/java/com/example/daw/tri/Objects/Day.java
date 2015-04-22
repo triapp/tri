@@ -22,7 +22,8 @@ public class Day {
     }
 
     @Override
-    public String toString() {
-        return "Show sections on "+day;
+    public String toString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd EEE MMM yyyy");
+        return "Show sections on "+dateFormat.format(day);
     }
 }

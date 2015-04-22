@@ -160,6 +160,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
+        myDataBase.execSQL("delete from personal");
     }
 
     public void insertDay(int id, String date) {
@@ -225,47 +226,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfPresentations;
     }
 
-    public void insertPersonal(Long idSection) throws SQLException {
+    public void insertPersonal(Long idSection) throws SQLException, ParseException {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put("id", idSection);
         myDataBase.insert("personal", null, values);
         myDataBase.close();
 
-        /*
-        FCKING SHIT - DOESNT WORK (BEFORE NEW TABLES)
-
-        Cursor see, pointer;
-        see = myDataBase.rawQuery("SELECT id FROM section WHERE id="+idSection,null);
-        see.moveToFirst();
-        int existCheck = see.getCount();
-        if (existCheck > 0){
-            pointer = myDataBase.rawQuery("SELECT id_day FROM section WHERE id="+idSection,null);
-            pointer.moveToFirst();
-            int idDay = pointer.getInt(0);
-            pointer = myDataBase.rawQuery("SELECT day FROM day WHERE id=" + idDay, null);
-            pointer.moveToFirst();
-            String date = pointer.getString(0);
-            pointer = myDataBase.rawQuery("SELECT time_from,time_to FROM section",null);
-            pointer.moveToFirst();
-            String time_to = date +" " + pointer.getString(1);
-            String time_from = date +" " + pointer.getString(0);
-            ContentValues values = new ContentValues();
-            values.put("id", idSection);
-            values.put("time_to", time_to);
-            values.put("time_from", time_from);
-            myDataBase.insert("personal", null, values);
-        }
-        */
     }
 
-    public ArrayList<String> getPersonalList() throws SQLException {
-        ArrayList<String> result = new ArrayList<>();
+    public List<String> getPersonalList() throws SQLException, ParseException {
+        List<String> result = new ArrayList<>();
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM personal",null);
+        Cursor see,pointer;
+        see = myDataBase.rawQuery("SELECT id FROM personal", null);
         see.moveToFirst();
         while (!see.isAfterLast()){
-            result.add("ID: "+see.getLong(0));
+            pointer = myDataBase.rawQuery("SELECT name FROM section WHERE id="+see.getLong(0),null);
+            pointer.moveToFirst();
+            result.add(pointer.getString(0));
             see.moveToNext();
         }
         myDataBase.close();
@@ -282,6 +261,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+
+    public void removeFromPersonal(Long id) throws SQLException {
+        openDataBase();
+        myDataBase.execSQL("DELETE FROM personal WHERE id=" + id);
+        myDataBase.close();
     }
 
     public List<String> getSectionList(Long day) throws SQLException {
@@ -318,9 +303,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public HashMap<String,List<String>> getPersonalPresentationMap() throws SQLException {
+        openDataBase();
+        HashMap<String,List<String>> result = new HashMap<>();
+        Cursor pointer;
+        Cursor see  = myDataBase.rawQuery("SELECT personal.id,section.name FROM section, personal WHERE personal.id=section.id",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            List<String> presentations = new ArrayList<>();
+            pointer = myDataBase.rawQuery("SELECT name FROM presentation WHERE id_section="+see.getLong(0),null);
+            pointer.moveToFirst();
+            while (!pointer.isAfterLast()){
+                presentations.add(pointer.getString(0));
+                pointer.moveToNext();
+            }
+            result.put(see.getString(1),presentations);
+            see.moveToNext();
+        }
+        myDataBase.close();
+        return result;
+    }
+
     public Long getNthSection(int position) throws SQLException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT id FROM section LIMIT "+position+",1",null);
+        see.moveToFirst();
+        close();
+        return see.getLong(0);
+    }
+
+    public Long getNthSectionFromPersonal(int position) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal LIMIT "+position+",1",null);
         see.moveToFirst();
         close();
         return see.getLong(0);
