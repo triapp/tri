@@ -36,31 +36,58 @@ public class Home extends ActionBarActivity {
     DatabaseHandler database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        networkError = (TextView) findViewById(R.id.textView);
-        nextActivity = (Button) findViewById(R.id.button);
-        update = (Button) findViewById(R.id.button1);
-        networkError.setVisibility(View.GONE);
-        nextActivity.setVisibility(View.GONE);
-        update.setVisibility(View.GONE);
-        database = new DatabaseHandler(this);
-        try {
-            database.createDataBase();
-        } catch (IOException ioe) {
-            throw new Error("Unable to create database");
-        }
-        try {
-            database.openDataBase();
-        }catch(SQLException sqle){
-        }
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_home);
+       networkError = (TextView) findViewById(R.id.textView);
+       nextActivity = (Button) findViewById(R.id.button);
+       update = (Button) findViewById(R.id.button1);
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new NetCheck().execute();
+            }
+        });
+       networkError.setVisibility(View.GONE);
+       nextActivity.setVisibility(View.GONE);
+       update.setVisibility(View.GONE);
+       database = new DatabaseHandler(this);
+       try {
+           database.createDataBase();
+       } catch (IOException ioe) {
+           throw new Error("Unable to create database");
+       }
+       try {
+           database.openDataBase();
+       }catch(SQLException sqle){
+       }
 
         //CONECTION
         new NetCheck().execute();
     }
 
+
+
+
+
+
+
+
     public void isOnline(){
         tryUpdate();
+        nextActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, Navigation.class);
+                startActivity(intent);
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tryUpdate();
+            }
+        });
     }
     public void tryUpdate(){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
@@ -68,9 +95,9 @@ public class Home extends ActionBarActivity {
         nextActivity.setVisibility(View.GONE);
         update.setVisibility(View.GONE);
 
-        if (network==true) {
-            database.dropAll();
-            new downloadTables().execute();
+       if (network==true) {
+           database.dropAll();
+           new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             TextView message = (TextView) findViewById(R.id.message);
@@ -79,23 +106,15 @@ public class Home extends ActionBarActivity {
             networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
-            update.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new NetCheck().execute();
-                }
-            });
-
-            nextActivity.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Home.this, Navigation.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
         }
+        nextActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, Navigation.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -189,78 +208,103 @@ public class Home extends ActionBarActivity {
                 finish();
 
             } catch (JSONException e) {
-                e.printStackTrace();
+               e.printStackTrace();
             }
 
         }}
+   // boolean network = false;
+    //Check connection
+
+/*
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL("http://www.google.com");
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(3000);
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {
+                    return true;
+                }
+            } catch (MalformedURLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return false;
+*/
     boolean network;
 
 
 
 
 
+/**
+ * Async Task to check whether internet connection is working.
+ **/
+
+private class NetCheck extends AsyncTask<String,String,Boolean>
+{
+    private ProgressDialog nDialog;
+
+    @Override
+    protected void onPreExecute(){
+        super.onPreExecute();
+        nDialog = new ProgressDialog(Home.this);
+        nDialog.setTitle("Checking Internet connection");
+        nDialog.setMessage("Checking...");
+        nDialog.setIndeterminate(false);
+        nDialog.setCancelable(false);
+        nDialog.show();
+    }
     /**
-     * Async Task to check whether internet connection is working.
+     * Gets current device state and checks for working internet connection by trying Google.
      **/
-
-    private class NetCheck extends AsyncTask<String,String,Boolean>
-    {
-        private ProgressDialog nDialog;
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            nDialog = new ProgressDialog(Home.this);
-            nDialog.setTitle("Checking Internet connection");
-            nDialog.setMessage("Checking...");
-            nDialog.setIndeterminate(false);
-            nDialog.setCancelable(false);
-            nDialog.show();
-        }
-        /**
-         * Gets current device state and checks for working internet connection by trying Google.
-         **/
-        @Override
-        protected Boolean doInBackground(String... args){
+    @Override
+    protected Boolean doInBackground(String... args){
 
 
 
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()) {
-                try {
-                    URL url = new URL("http://www.tri.cz");
-                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                    urlc.setConnectTimeout(1000);
-                    urlc.connect();
-                    if (urlc.getResponseCode() == 200) {
-                        return true;
-                    }
-                } catch (MalformedURLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL("http://www.tri.cz");
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(1000);
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {
+                    return true;
                 }
+            } catch (MalformedURLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-            return false;
-
         }
-        @Override
-        protected void onPostExecute(Boolean th){
+        return false;
 
-            if(th == true){
-                nDialog.dismiss();
-                network = true;
-                isOnline();
-            }
-            else{
-                nDialog.dismiss();
-                network = false;
-                isOnline();
-            }
+    }
+    @Override
+    protected void onPostExecute(Boolean th){
+
+        if(th == true){
+            nDialog.dismiss();
+            network = true;
+            isOnline();
+        }
+        else{
+            nDialog.dismiss();
+            network = false;
+            isOnline();
         }
     }
+}
 
 }
