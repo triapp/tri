@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 if (database.isPresentationInPersonal(presentation)){
                     checkBox.setChecked(true);
                 }
-                Log.i("Section+presentation: ",Long.toString(section) +", "+ Long.toString(presentation));
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -126,6 +124,20 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
+        TextView time = (TextView) convertView.findViewById(R.id.time);
+
+        try {
+            Long section = database.getNthSection(groupPosition);
+            if (kindOfAdapter == 0) {
+                time.setText(database.getSectionTime(section));
+            } else {
+                time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if (kindOfAdapter == 0){
         headerButton.setOnClickListener(new View.OnClickListener() {
             @Override
