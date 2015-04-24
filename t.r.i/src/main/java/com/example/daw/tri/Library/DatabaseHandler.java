@@ -162,6 +162,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
+        myDataBase.execSQL("delete from personal_presentation");
     }
 
     public void insertDay(int id, String date) {
@@ -227,7 +228,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfPresentations;
     }
 
-    public void insertPersonal(Long idSection) throws SQLException, ParseException {
+    public void insertPersonalSection(Long idSection) throws SQLException, ParseException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
         see.moveToFirst();
@@ -258,19 +259,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    public boolean isInPersonal(Long idSection) throws SQLException {
+    public boolean isSectionInPersonal(Long idSection) throws SQLException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT id FROM personal WHERE id="+idSection,null);
         see.moveToFirst();
-        int exist = see.getCount();
-        if (exist > 0){
-            return true;
-        } else {
-            return false;
-        }
+        return see.getCount() > 0;
     }
 
-    public void removeFromPersonal(Long id) throws SQLException {
+    public void removeSectionFromPersonal(Long id) throws SQLException {
         openDataBase();
         myDataBase.execSQL("DELETE FROM personal WHERE id=" + id);
         myDataBase.close();
@@ -283,21 +279,87 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.moveToFirst();
         while(!see.isAfterLast()){
             idArray.add(see.getLong(0));
-            removeFromPersonal(see.getLong(0));
+            removeSectionFromPersonal(see.getLong(0));
             see.moveToNext();
         }
         for(Long id : idArray){
-            insertPersonal(id);
+            insertPersonalSection(id);
         }
     }
 
-    public void checkPersonalForCollisions() throws SQLException {
+    public String checkPersonalForCollisions() throws SQLException, ParseException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT * FROM personal",null);
+        String result = "";
+        Long section1, section2;
+        String section1Name,section2Name;
+        Cursor see = myDataBase.rawQuery("SELECT personal.id, section.name FROM personal,section WHERE section.id = personal.id ORDER BY personal.time_to",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
-
+            section1Name = see.getString(1);
+            section1 = see.getLong(0);
+            see.moveToNext();
+            if(!see.isAfterLast()){
+                section2Name = see.getString(1);
+                section2 = see.getLong(0);
+                if(isSectionCollision(section1,section2)){
+                    result +="There is a program collision between "+section1Name+" and "+section2Name+"!\n";
+                }
+            }
         }
+        myDataBase.close();
+        return result;
+    }
+
+    public void insertPersonalPresentation(Long idPresentaiton) throws SQLException {
+        openDataBase();
+        ContentValues values = new ContentValues();
+        values.put("id", idPresentaiton);
+        myDataBase.insert("personal_presentation",null,values);
+        myDataBase.close();
+    }
+
+    public void removePresentationFromPersonal(Long idPresentation) throws SQLException {
+        openDataBase();
+        myDataBase.execSQL("DELETE FROM personal_presentation WHERE id=" + idPresentation);
+        myDataBase.close();
+    }
+
+    public boolean isPresentationInPersonal(Long idPresentation) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal_presentation WHERE id="+idPresentation,null);
+        see.moveToFirst();
+        Log.i("presentation/boolean: ",Long.toString(idPresentation)+", "+Integer.toString(see.getCount()));
+        return see.getCount() > 0;
+    }
+
+    public Long getNthPresentation(Long idSection, int presentationPosition) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT presentation.id FROM presentation, section WHERE presentation.id_section=section.id AND section.id="+idSection+" LIMIT "+presentationPosition+",1",null);
+        see.moveToFirst();
+        return see.getLong(0);
+    }
+
+    public void removePresentationsFromPersonalBySection(Long sectionId) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE id_section="+sectionId,null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            if (isPresentationInPersonal(see.getLong(0))){
+                removePresentationFromPersonal(see.getLong(0));
+            }
+            see.moveToNext();
+        }
+    }
+
+    public boolean isSectionCollision(Long section1, Long section2) throws SQLException, ParseException {
+        Date section1To,section2From;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Cursor see = myDataBase.rawQuery("SELECT time_from,time_to FROM personal WHERE id="+section1+" OR id="+section2+" ORDER BY time_from", null);
+        see.moveToFirst();
+        section1To = dateFormat.parse(see.getString(1));
+        see.moveToNext();
+        section2From = dateFormat.parse(see.getString(0));
+        return section2From.before(section1To);
     }
 
     public List<String> getSectionList(Long day) throws SQLException {
@@ -374,7 +436,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Long getNthSectionFromPersonal(int position) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM personal LIMIT "+position+",1",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from LIMIT "+position+",1",null);
         see.moveToFirst();
         close();
         return see.getLong(0);

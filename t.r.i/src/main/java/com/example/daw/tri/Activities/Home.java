@@ -86,7 +86,7 @@ public class Home extends ActionBarActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tryUpdate();
+                new NetCheck().execute();
             }
         });
     }

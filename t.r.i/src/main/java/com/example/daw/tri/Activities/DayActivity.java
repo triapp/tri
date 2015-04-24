@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.Library.ExpandableAdapter;
@@ -22,7 +25,7 @@ public class DayActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_day);
-        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
         Long id = b.getLong("dayId");
         expandView = (ExpandableListView) findViewById(R.id.expandableListView);
@@ -33,6 +36,31 @@ public class DayActivity extends ActionBarActivity {
         }
         expandView.setAdapter(expandAdapter);
 
+        expandView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+               CheckBox checkBox =(CheckBox) v.findViewById(R.id.checkBox);
+               try {
+                    Long section = database.getNthSection(groupPosition);
+                    Long presentation = database.getNthPresentation(section,childPosition);
+                    if (checkBox.isChecked()){
+                        database.removePresentationFromPersonal(presentation);
+                        checkBox.setChecked(!checkBox.isChecked());
+                    }  else {
+                        if (database.isSectionInPersonal(section)) {
+                            database.insertPersonalPresentation(presentation);
+                            checkBox.setChecked(!checkBox.isChecked());
+                        } else {
+                            Toast.makeText(getApplicationContext(),"First add the section into your personal program.",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        });
     }
 
 
