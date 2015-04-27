@@ -152,6 +152,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
+        myDataBase.execSQL("delete from personal");
+        myDataBase.execSQL("delete from personal_presentation");
     }
 
     public void insertDay(int id, String date) {
@@ -211,6 +213,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put("time_from",time_from);
         myDataBase.insert("personal", null, values);
         myDataBase.close();
+    }
+
+    public Long getNthSectionInPersonal(int position) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from LIMIT "+position+",1",null);
+        see.moveToFirst();
+        Long result = see.getLong(0);
+        see.close();
+        return result;
     }
 
     public List<String> getPersonalList() throws SQLException, ParseException {
@@ -417,6 +428,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         see.close();
         myDataBase.close();
+        return result;
+    }
+
+    public Long getNthSection(int position, Long idDay) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id_day="+idDay+" LIMIT "+position+",1",null);
+        see.moveToFirst();
+        myDataBase.close();
+        Long result = see.getLong(0);
+        see.close();
         return result;
     }
 

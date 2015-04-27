@@ -15,7 +15,6 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.daw.tri.Activities.Personal;
 import com.example.daw.tri.R;
@@ -25,24 +24,20 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableAdapter extends BaseExpandableListAdapter {
+public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
     private DatabaseHandler database;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
-    private int kindOfAdapter;
     private CheckBox checkBox;
-    private Long idDay;
 
-    public ExpandableAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData, int kindOfAdapter, Long id) {
+    public PersonalExpandableAdapter(Context context, List<String> listDataHeader,
+                             HashMap<String, List<String>> listChildData) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this.database = new DatabaseHandler(context);
-        this.kindOfAdapter = kindOfAdapter;
-        idDay = id;
     }
 
     @Override
@@ -71,20 +66,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
-        checkBox.setChecked(false);
-        if (kindOfAdapter == 1){
-            checkBox.setVisibility(View.GONE);
-        } else {
-            try {
-                Long section = database.getNthSection(groupPosition, idDay);
-                Long presentation = database.getNthPresentation(section,childPosition);
-                if (database.isPresentationInPersonal(presentation)){
-                    checkBox.setChecked(true);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        checkBox.setVisibility(View.GONE);
         return convertView;
     }
 
@@ -125,68 +107,31 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
-
         try {
-            Long section = database.getNthSection(groupPosition, idDay);
-            if (kindOfAdapter == 0) {
-                time.setText(database.getSectionTime(section));
-            } else {
-                time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
-            }
+            Long section = database.getNthSectionInPersonal(groupPosition);
+            time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (kindOfAdapter == 0){
+
+        headerButton.setText("-");
         headerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    Long id = database.getNthSection(groupPosition, idDay);
-                    if (database.isSectionInPersonal(id)) {
-                        Toast.makeText(_context, "This section is already in your personal program.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        database.insertPersonalSection(id);
-                       /* String alertMessage = database.checkPersonalForCollisions();
-                        if (alertMessage !=""){
-                            AlertDialog.Builder builder = new AlertDialog.Builder(_context);
-                            builder.setMessage(alertMessage)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                        }
-                                    });
-                            AlertDialog alert = builder.create();
-                            alert.show();
-                        }*/
-                        Toast.makeText(_context, "Section was added to your personal program.", Toast.LENGTH_SHORT).show();
-                    }
+                    Long id = database.getNthSectionFromPersonal(groupPosition);
+                    database.removePresentationsFromPersonalBySection(id);
+                    database.removeSectionFromPersonal(id);
                 } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        } else {
-            headerButton.setText("-");
-            headerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        Long id = database.getNthSectionFromPersonal(groupPosition);
-                        database.removePresentationsFromPersonalBySection(id);
-                        database.removeSectionFromPersonal(id);
-                    } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    Intent intent = new Intent(_context, Personal.class);
-                    _context.startActivity(intent);
-                    ((Activity)_context).finish();
+                Intent intent = new Intent(_context, Personal.class);
+                _context.startActivity(intent);
+                ((Activity)_context).finish();
                 }
             });
-        }
         return convertView;
     }
 

@@ -27,10 +27,10 @@ public class DayActivity extends ActionBarActivity {
         setContentView(R.layout.activity_day);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
-        Long id = b.getLong("dayId");
+        final Long idDay = b.getLong("dayId");
         expandView = (ExpandableListView) findViewById(R.id.expandableListView);
         try {
-            expandAdapter = new ExpandableAdapter(this,database.getSectionList(id),database.getSectionPresentationMap(id),0);
+            expandAdapter = new ExpandableAdapter(this,database.getSectionList(idDay),database.getSectionPresentationMap(idDay),0, idDay);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class DayActivity extends ActionBarActivity {
                                         int groupPosition, int childPosition, long id) {
                CheckBox checkBox =(CheckBox) v.findViewById(R.id.checkBox);
                try {
-                    Long section = database.getNthSection(groupPosition);
+                    Long section = database.getNthSection(groupPosition,idDay);
                     Long presentation = database.getNthPresentation(section,childPosition);
                     if (checkBox.isChecked()){
                         database.removePresentationFromPersonal(presentation);

@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.widget.ExpandableListView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
-import com.example.daw.tri.Library.ExpandableAdapter;
+import com.example.daw.tri.Library.PersonalExpandableAdapter;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -16,16 +16,17 @@ import java.text.ParseException;
 public class Personal extends ActionBarActivity {
 
     ExpandableListView expandView;
-    ExpandableAdapter expandAdapter;
+    PersonalExpandableAdapter expandAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
+        Long id = 5L;
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         expandView = (ExpandableListView) findViewById(R.id.expandableListView2);
         try {
-            expandAdapter = new ExpandableAdapter(this,database.getPersonalList(),database.getPersonalPresentationMap(),1);
+            expandAdapter = new PersonalExpandableAdapter(this,database.getPersonalList(),database.getPersonalPresentationMap());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {
