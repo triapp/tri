@@ -152,8 +152,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
-        myDataBase.execSQL("delete from personal");
-        myDataBase.execSQL("delete from personal_presentation");
     }
 
     public void insertDay(int id, String date) {
