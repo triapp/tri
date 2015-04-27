@@ -1,7 +1,5 @@
 package com.example.daw.tri.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,9 +10,6 @@ import android.widget.Button;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
-
-import java.sql.SQLException;
-import java.text.ParseException;
 
 public class Navigation extends ActionBarActivity {
 
@@ -48,6 +43,7 @@ public class Navigation extends ActionBarActivity {
             }
         });
 
+        /*
         try {
             String alertMessage = database.checkPersonalForCollisions();
             if (alertMessage !=""){
@@ -65,7 +61,7 @@ public class Navigation extends ActionBarActivity {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 
