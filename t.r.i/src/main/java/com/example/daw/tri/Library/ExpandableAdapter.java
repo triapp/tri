@@ -4,9 +4,7 @@ package com.example.daw.tri.Library;
  * Created by EN on 20.4.2015.
  */
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.daw.tri.Activities.Personal;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -31,17 +28,15 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     private DatabaseHandler database;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
-    private int kindOfAdapter;
     private CheckBox checkBox;
     private Long idDay;
 
     public ExpandableAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData, int kindOfAdapter, Long id) {
+                                 HashMap<String, List<String>> listChildData, Long id) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this.database = new DatabaseHandler(context);
-        this.kindOfAdapter = kindOfAdapter;
         idDay = id;
     }
 
@@ -72,18 +67,14 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         checkBox.setChecked(false);
-        if (kindOfAdapter == 1){
-            checkBox.setVisibility(View.GONE);
-        } else {
-            try {
-                Long section = database.getNthSection(groupPosition, idDay);
-                Long presentation = database.getNthPresentation(section,childPosition);
-                if (database.isPresentationInPersonal(presentation)){
-                    checkBox.setChecked(true);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+        try {
+            Long section = database.getNthSection(groupPosition, idDay);
+            Long presentation = database.getNthPresentation(section,childPosition);
+            if (database.isPresentationInPersonal(presentation)){
+                checkBox.setChecked(true);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return convertView;
     }
@@ -128,17 +119,11 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
         try {
             Long section = database.getNthSection(groupPosition, idDay);
-            if (kindOfAdapter == 0) {
-                time.setText(database.getSectionTime(section));
-            } else {
-                time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
-            }
+            time.setText(database.getSectionTime(section));
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-        if (kindOfAdapter == 0){
+
         headerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,24 +154,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
                 }
             }
         });
-        } else {
-            headerButton.setText("-");
-            headerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    try {
-                        Long id = database.getNthSectionFromPersonal(groupPosition);
-                        database.removePresentationsFromPersonalBySection(id);
-                        database.removeSectionFromPersonal(id);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    Intent intent = new Intent(_context, Personal.class);
-                    _context.startActivity(intent);
-                    ((Activity)_context).finish();
-                }
-            });
-        }
         return convertView;
     }
 

@@ -30,7 +30,7 @@ public class DayActivity extends ActionBarActivity {
         final Long idDay = b.getLong("dayId");
         expandView = (ExpandableListView) findViewById(R.id.expandableListView);
         try {
-            expandAdapter = new ExpandableAdapter(this,database.getSectionList(idDay),database.getSectionPresentationMap(idDay),0, idDay);
+            expandAdapter = new ExpandableAdapter(this,database.getSectionList(idDay),database.getSectionPresentationMap(idDay), idDay);
         } catch (SQLException e) {
             e.printStackTrace();
         }
