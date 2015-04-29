@@ -30,14 +30,16 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
     private HashMap<String, List<String>> _listDataChild;
     private CheckBox checkBox;
     private Long idDay;
+    private Long idHall;
 
     public ExpandableAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData, Long id) {
+                                 HashMap<String, List<String>> listChildData, Long id, Long hall) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this.database = new DatabaseHandler(context);
         idDay = id;
+        idHall = hall;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         checkBox.setChecked(false);
         try {
-            Long section = database.getNthSection(groupPosition, idDay);
+            Long section = database.getNthSection(groupPosition, idDay, idHall);
             Long presentation = database.getNthPresentation(section,childPosition);
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
@@ -118,7 +120,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView time = (TextView) convertView.findViewById(R.id.time);
 
         try {
-            Long section = database.getNthSection(groupPosition, idDay);
+            Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,7 +130,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 try {
-                    Long id = database.getNthSection(groupPosition, idDay);
+                    Long id = database.getNthSection(groupPosition, idDay, idHall);
                     if (database.isSectionInPersonal(id)) {
                         Toast.makeText(_context, "This section is already in your personal program.", Toast.LENGTH_SHORT).show();
                     } else {

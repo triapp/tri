@@ -11,58 +11,62 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
-import com.example.daw.tri.Objects.Day;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.List;
 
-
-public class ProgramActivity extends ActionBarActivity {
+public class HallActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_program);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        ArrayList<Day> allDays = null;
+        Bundle b = getIntent().getExtras();
+        final Long idDay = b.getLong("dayId");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hall);
+        List<String> hallOnDay = null;
         try {
-            allDays = database.selectDay();
+            hallOnDay = database.getHallListbyDay(idDay);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
+        }
+        final ListView hallView = (ListView) findViewById(R.id.hallListView);
+        final String[] hallsAdapter = new String[hallOnDay.size()];
+        Long[] hallId = new Long[0];
+        try {
+            hallId = database.getArrayIdHall(idDay);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        final ListView dayView = (ListView) findViewById(R.id.listView);
-        final String[] daysAdapter = new String[allDays.size()];
-        final Long[] daysID = new Long[allDays.size()];
         int i = 0;
-        for (Day day : allDays) {
-            daysID[i] = day.getId();
-            daysAdapter[i] = day.toString();
+        for (String hall : hallOnDay) {
+            hallsAdapter[i] = hall;
             i++;
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, daysAdapter);
-        dayView.setAdapter(adapter);
-        dayView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, hallsAdapter);
+        hallView.setAdapter(adapter);
+        final Long[] finalHallId = hallId;
+        hallView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int itemPosition = position;
-                Intent intent = new Intent(ProgramActivity.this, HallActivity.class);
+                Intent intent = new Intent(HallActivity.this, DayActivity.class);
                 Bundle b = new Bundle();
-                b.putLong("dayId",daysID[itemPosition]);
+                b.putLong("hallId", finalHallId[itemPosition]);
+                b.putLong("dayId", idDay);
                 intent.putExtras(b);
                 startActivity(intent);
             }
         });
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_program, menu);
+        getMenuInflater().inflate(R.menu.menu_hall, menu);
         return true;
     }
 

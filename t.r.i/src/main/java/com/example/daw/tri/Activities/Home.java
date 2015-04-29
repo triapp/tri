@@ -27,7 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 
 public class Home extends ActionBarActivity {
@@ -202,8 +201,16 @@ public class Home extends ActionBarActivity {
                         db.insertSection(CurrentSection.getInt("id"),CurrentSection.getInt("id_hall"),CurrentSection.getInt("id_day"),CurrentSection.getString("name"),CurrentSection.getString("chairman"),CurrentSection.getString("time_from"),CurrentSection.getString("time_to"),CurrentSection.getString("type"));
                         done++;
                     } while(done < amount);
+
+                    JSONArray tableHallDay = obj.getJSONArray("day_hall");
+                    amount = tableHallDay.length();
+                    done = 0;
+                    do{
+                        JSONObject CurrentHallDay = tableHallDay.getJSONObject(done);
+                        db.insertHallDay(CurrentHallDay.getInt("id_day"),CurrentHallDay.getInt("id_hall"));
+                        done++;
+                    } while(done < amount);
                 }
-                database.renewPersonal();
                 Intent intent = new Intent(Home.this, Navigation.class);
                 startActivity(intent);
                 finish();
@@ -211,8 +218,6 @@ public class Home extends ActionBarActivity {
             } catch (JSONException e) {
                e.printStackTrace();
             } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
                 e.printStackTrace();
             }
 

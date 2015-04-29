@@ -9,4 +9,5 @@
     <string name="title_activity_menu">Menu</string>
     <string name="title_activity_navigation">Navigation</string>
     <string name="title_activity_personal">Personal</string>
+    <string name="title_activity_hall">HallActivity</string>
 </resources>

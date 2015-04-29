@@ -57,7 +57,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(dbExist){
             //do nothing - database already exist
         }else{
-
             //By calling this method and empty database will be created into the default system path
             //of your application so we are gonna be able to overwrite that database with our database.
             this.getWritableDatabase();
@@ -149,6 +148,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void dropAll(){
         myDataBase.execSQL("delete from day");
+        myDataBase.execSQL("delete from day_hall");
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
@@ -167,6 +167,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public void insertHallDay(int id_day, int id_hall) throws SQLException {
+        ContentValues values = new ContentValues();
+        openDataBase();
+        values.put("id_day", id_day);
+        values.put("id_hall",id_hall);
+        myDataBase.insert("day_hall",null,values);
+        myDataBase.close();
+    }
+
     public ArrayList<Day> selectDay() throws SQLException, ParseException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
@@ -181,6 +190,32 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.close();
         myDataBase.close();
         return listOfDays;
+    }
+
+    public List<String> getHallListbyDay(Long idDay) throws SQLException {
+        List<String> listOfHalls = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT hall.name FROM hall,day_hall WHERE hall.id = day_hall.id_hall AND day_hall.id_day="+idDay,null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            listOfHalls.add(see.getString(0));
+            see.moveToNext();
+        }
+        return listOfHalls;
+    }
+
+    public Long[] getArrayIdHall(Long idDay) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id_hall FROM day_hall WHERE id_day="+idDay,null);
+        see.moveToFirst();
+
+        Long[] result = new Long[see.getCount()];
+        while(!see.isAfterLast()){
+            result[see.getPosition()] = see.getLong(0);
+            see.moveToNext();
+        }
+        see.close();
+        return result;
     }
 
     public ArrayList<Presentation> selectPresentationById(Long id) throws SQLException, ParseException {
@@ -201,14 +236,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertPersonalSection(Long idSection) throws SQLException, ParseException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
+        Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from,section.name FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
         see.moveToFirst();
         ContentValues values = new ContentValues();
         values.put("id", idSection);
+        values.put("name", see.getString(3));
         String time_to = see.getString(0)+" "+ see.getString(1);
         String time_from = see.getString(0)+" "+ see.getString(2);
         values.put("time_to",time_to);
         values.put("time_from",time_from);
+        see.close();
         myDataBase.insert("personal", null, values);
         myDataBase.close();
     }
@@ -254,21 +291,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
     }
 
-    public void renewPersonal() throws SQLException, ParseException {
+    public boolean doesSectionExist(Long id) throws SQLException {
         openDataBase();
-        List<Long> idArray = new ArrayList<>();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM personal",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id="+id+" LIMIT 1",null);
+        boolean result = see.getCount() > 0;
+        return result;
+    }
+
+    public String renewPersonal() throws SQLException, ParseException {
+        String result = "";
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id,name FROM personal",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
-            idArray.add(see.getLong(0));
-            removeSectionFromPersonal(see.getLong(0));
+            if (doesSectionExist(see.getLong(0))){
+            } else {
+                removeSectionFromPersonal(see.getLong(0));
+                result +=see.getString(1) + " was removed from program.";
+            }
             see.moveToNext();
-        }
-        for(Long id : idArray){
-            insertPersonalSection(id);
         }
         see.close();
         myDataBase.close();
+        return result;
     }
 
     public String checkPersonalForCollisions() throws SQLException, ParseException {
@@ -276,7 +321,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String result = "";
         Long section1, section2;
         String section1Name,section2Name;
-        Cursor see = myDataBase.rawQuery("SELECT personal.id, section.name FROM personal,section WHERE section.id = personal.id ORDER BY personal.time_to",null);
+        Cursor see = myDataBase.rawQuery("SELECT personal.id, personal.name FROM personal ORDER BY personal.time_to",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             section1Name = see.getString(1);
@@ -347,7 +392,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         Date section1To,section2From;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Cursor see = myDataBase.rawQuery("SELECT time_from,time_to FROM personal WHERE id="+section1+" OR id="+section2+" ORDER BY time_from", null);
+        Cursor see = myDataBase.rawQuery("SELECT time_from,time_to FROM personal WHERE id="+section1+" OR id="+section2+" ORDER BY time_from LIMIT 2", null);
         see.moveToFirst();
         section1To = dateFormat.parse(see.getString(1));
         see.moveToNext();
@@ -357,10 +402,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return section2From.before(section1To);
     }
 
-    public List<String> getSectionList(Long day) throws SQLException {
+    public List<String> getSectionList(Long day, Long hall) throws SQLException {
         openDataBase();
         List<String> result = new ArrayList<>();
-        Cursor see = myDataBase.rawQuery("SELECT name FROM section WHERE id_day="+day,null);
+        Cursor see = myDataBase.rawQuery("SELECT name FROM section WHERE id_day="+day+" AND id_hall="+hall,null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             result.add(see.getString(0));
@@ -384,11 +429,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return time_from +" - "+ time_to;
     }
 
-    public HashMap<String,List<String>> getSectionPresentationMap(Long day) throws SQLException {
+    public HashMap<String,List<String>> getSectionPresentationMap(Long day, Long hall) throws SQLException {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor pointer;
-        Cursor see  = myDataBase.rawQuery("SELECT id,name FROM section WHERE id_day="+day,null);
+        Cursor see  = myDataBase.rawQuery("SELECT id,name FROM section WHERE id_day="+day+" AND id_hall="+hall,null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             List<String> presentations = new ArrayList<>();
@@ -410,17 +455,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor pointer;
-        Cursor see  = myDataBase.rawQuery("SELECT personal.id,section.name, personal.time_from,personal.time_to FROM section, personal WHERE personal.id=section.id",null);
+        Cursor see  = myDataBase.rawQuery("SELECT personal.id,personal.name, personal.time_from,personal.time_to FROM personal",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             List<String> presentations = new ArrayList<>();
             pointer = myDataBase.rawQuery("SELECT name FROM presentation,personal_presentation WHERE presentation.id=personal_presentation.id AND id_section="+see.getLong(0),null);
             pointer.moveToFirst();
-            while (!pointer.isAfterLast()){
-                presentations.add(pointer.getString(0));
-                pointer.moveToNext();
+            if  (pointer.getCount() == 0){
+                presentations.add("No presentations selected.");
+            } else {
+                while (!pointer.isAfterLast()){
+                    presentations.add(pointer.getString(0));
+                    pointer.moveToNext();
+                }
             }
-            result.put(see.getString(1),presentations);
+            result.put(see.getString(1), presentations);
             see.moveToNext();
             pointer.close();
         }
@@ -429,9 +478,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    public Long getNthSection(int position, Long idDay) throws SQLException {
+    public Long getNthSection(int position, Long idDay, Long hall) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id_day="+idDay+" LIMIT "+position+",1",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id_day="+idDay+" AND id_hall="+hall+" LIMIT "+position+",1",null);
         see.moveToFirst();
         myDataBase.close();
         Long result = see.getLong(0);

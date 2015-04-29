@@ -1,13 +1,9 @@
 package com.example.daw.tri.Activities;
 
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.Objects.Presentation;
@@ -36,28 +32,6 @@ public class PresentationsActivity extends ActionBarActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        final ListView presentationView = (ListView) findViewById(R.id.listView2);
-        final String[] presentationAdapter = new String[allPresentations.size()];
-        final Long[] presentationID = new Long[allPresentations.size()];
-        int i = 0;
-        for (Presentation presentation : allPresentations) {
-            presentationID[i] = presentation.getId();
-            presentationAdapter[i] = presentation.toString();
-            i++;
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, presentationAdapter);
-        presentationView.setAdapter(adapter);
-        int mNotificationId = 001;
-
-        Intent intent = new Intent (this,Home.class);
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        getApplicationContext(),
-                        0,
-                        intent,
-                        PendingIntent.FLAG_CANCEL_CURRENT
-                );
 
     }
 
