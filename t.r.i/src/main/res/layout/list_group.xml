@@ -37,11 +37,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Small Text"
         android:id="@+id/time"
-        android:layout_marginRight="27dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="27dp"
-        android:layout_alignBottom="@+id/button4"
+        android:layout_below="@+id/lblListHeader"
         android:layout_alignRight="@+id/lblListHeader"
-        android:layout_alignEnd="@+id/lblListHeader" />
+        android:layout_alignEnd="@+id/lblListHeader"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp" />
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.daw.tri.Objects.Day;
 import com.example.daw.tri.Objects.Presentation;
@@ -316,6 +317,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    private Long getPersonalNthSection (int position) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal LIMIT "+position+",1",null);
+        see.moveToFirst();
+        Long result = see.getLong(0);
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+
+
     public String checkPersonalForCollisions() throws SQLException, ParseException {
         openDataBase();
         String result = "";
@@ -323,7 +336,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String section1Name,section2Name;
         Cursor see = myDataBase.rawQuery("SELECT personal.id, personal.name FROM personal ORDER BY personal.time_to",null);
         see.moveToFirst();
-        while(!see.isAfterLast()){
+        int total = see.getCount();
+
+        if(total > 0){
+            while(!see.isAfterLast()){
+                section1Name = see.getString(1);
+                section1 = see.getLong(0);
+                for (int i=see.getPosition()+1;i < total;i++){
+                    Log.i("proc: ", Integer.toString(i)+", "+Long.toString(getPersonalNthSection(i)));
+                    if (isSectionCollision(section1,getPersonalNthSection(i))){
+                        result += "Collision" +section1Name+".\n";
+                    };
+                }
+                see.moveToNext();
+            }
+        }
+       /* while(!see.isAfterLast()){
             section1Name = see.getString(1);
             section1 = see.getLong(0);
             see.moveToNext();
@@ -334,7 +362,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     result +="There is a program collision between "+section1Name+" and "+section2Name+"!\n";
                 }
             }
-        }
+        }*/
         see.close();
         myDataBase.close();
         return result;
