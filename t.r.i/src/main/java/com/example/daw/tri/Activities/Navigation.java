@@ -50,8 +50,8 @@ public class Navigation extends ActionBarActivity {
 
 
         try {
-           // String alertMessage = database.checkPersonalForCollisions();
-           String alertMessage = database.renewPersonal();
+            String alertMessage = database.checkPersonalForCollisions();
+            alertMessage += database.renewPersonal();
             if (alertMessage !=""){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(alertMessage)

@@ -319,7 +319,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private Long getPersonalNthSection (int position) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM personal LIMIT "+position+",1",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER by time_from LIMIT "+position+",1",null);
         see.moveToFirst();
         Long result = see.getLong(0);
         see.close();
@@ -334,18 +334,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String result = "";
         Long section1, section2;
         String section1Name,section2Name;
-        Cursor see = myDataBase.rawQuery("SELECT personal.id, personal.name FROM personal ORDER BY personal.time_to",null);
+        Cursor see = myDataBase.rawQuery("SELECT personal.id, personal.name FROM personal ORDER BY personal.time_from",null);
         see.moveToFirst();
         int total = see.getCount();
-
         if(total > 0){
             while(!see.isAfterLast()){
                 section1Name = see.getString(1);
                 section1 = see.getLong(0);
                 for (int i=see.getPosition()+1;i < total;i++){
-                    Log.i("proc: ", Integer.toString(i)+", "+Long.toString(getPersonalNthSection(i)));
+                    Log.i("Comparing: ", Long.toString(section1)+", "+Long.toString(getPersonalNthSection(i))+":"+Boolean.toString(isSectionCollision(section1,getPersonalNthSection(i))));
                     if (isSectionCollision(section1,getPersonalNthSection(i))){
-                        result += "Collision" +section1Name+".\n";
+                        openDataBase();
+                        Cursor pointer = myDataBase.rawQuery("SELECT name FROM personal WHERE id="+getPersonalNthSection(i),null);
+                        pointer.moveToFirst();
+                        result += "Collision between " +section1Name+" and "+pointer.getString(0)+".\n";
+                        pointer.close();
                     };
                 }
                 see.moveToNext();
