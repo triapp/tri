@@ -14,6 +14,7 @@ import com.example.daw.tri.Library.ExpandableAdapter;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class DayActivity extends ActionBarActivity {
@@ -47,18 +48,26 @@ public class DayActivity extends ActionBarActivity {
                     Long presentation = database.getNthPresentation(section,childPosition);
                     if (checkBox.isChecked()){
                         database.removePresentationFromPersonal(presentation);
+                        if(!database.doesHavePersonalSectionPresentations(section)){
+                            database.removeSectionFromPersonal(section);
+                            Toast.makeText(getApplicationContext(),"Section was removed from your program.",Toast.LENGTH_SHORT).show();
+                        }
                         checkBox.setChecked(!checkBox.isChecked());
                     }  else {
                         if (database.isSectionInPersonal(section)) {
                             database.insertPersonalPresentation(presentation);
-                            checkBox.setChecked(!checkBox.isChecked());
                         } else {
-                            Toast.makeText(getApplicationContext(),"First add the section into your personal program.",Toast.LENGTH_SHORT).show();
+                            database.insertPersonalSection(section);
+                            database.insertPersonalPresentation(presentation);
+                            Toast.makeText(getApplicationContext(),"Section was added to your program.",Toast.LENGTH_SHORT).show();
                         }
+                        checkBox.setChecked(!checkBox.isChecked());
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                }
+                } catch (ParseException e) {
+                   e.printStackTrace();
+               }
                 return false;
             }
         });

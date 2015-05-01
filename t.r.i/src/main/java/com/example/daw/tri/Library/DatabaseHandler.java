@@ -327,7 +327,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-
+    public boolean doesHavePersonalSectionPresentations(Long section) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT presentation.id FROM personal_presentation, presentation WHERE presentation.id_section="+section+" AND personal_presentation.id=presentation.id LIMIT 1", null);
+        boolean result = see.getCount() > 0;
+        see.close();
+        myDataBase.close();
+        return result;
+    }
 
     public String checkPersonalForCollisions() throws SQLException, ParseException {
         openDataBase();
@@ -354,18 +361,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 see.moveToNext();
             }
         }
-       /* while(!see.isAfterLast()){
-            section1Name = see.getString(1);
-            section1 = see.getLong(0);
-            see.moveToNext();
-            if(!see.isAfterLast()){
-                section2Name = see.getString(1);
-                section2 = see.getLong(0);
-                if(isSectionCollision(section1,section2)){
-                    result +="There is a program collision between "+section1Name+" and "+section2Name+"!\n";
-                }
-            }
-        }*/
         see.close();
         myDataBase.close();
         return result;
@@ -430,6 +425,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         section2From = dateFormat.parse(see.getString(0));
         see.close();
         myDataBase.close();
+        if (section2From.equals(section1To)){
+            return false;
+        }
         return section2From.before(section1To);
     }
 

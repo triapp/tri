@@ -13,12 +13,10 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,6 +116,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
+        headerButton.setVisibility(View.GONE);
 
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
@@ -125,37 +124,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        headerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Long id = database.getNthSection(groupPosition, idDay, idHall);
-                    if (database.isSectionInPersonal(id)) {
-                        Toast.makeText(_context, "This section is already in your personal program.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        database.insertPersonalSection(id);
-                       /* String alertMessage = database.checkPersonalForCollisions();
-                        if (alertMessage !=""){
-                            AlertDialog.Builder builder = new AlertDialog.Builder(_context);
-                            builder.setMessage(alertMessage)
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                        }
-                                    });
-                            AlertDialog alert = builder.create();
-                            alert.show();
-                        }*/
-                        Toast.makeText(_context, "Section was added to your personal program.", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         return convertView;
     }
 
