@@ -37,9 +37,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="awesome">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="64c25501-28b1-4b4b-80b6-4527a7588997" name="New changelist" comment="" />
@@ -67,21 +66,8 @@
       <file leaf-file-name="Navigation.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Navigation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1326">
+            <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1751">
               <caret line="52" column="50" selection-start-line="52" selection-start-column="50" selection-end-line="52" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_group.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.4074073" vertical-offset="306" max-vertical-offset="867">
-              <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -90,7 +76,7 @@
       <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5153" max-vertical-offset="9894">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5678" max-vertical-offset="10251">
               <caret line="334" column="27" selection-start-line="334" selection-start-column="27" selection-end-line="334" selection-end-column="27" />
               <folding />
             </state>
@@ -100,7 +86,7 @@
       <file leaf-file-name="PresentationsActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="935">
+            <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="1122">
               <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
               <folding />
             </state>
@@ -110,44 +96,62 @@
       <file leaf-file-name="HallActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/HallActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="1292">
+            <state vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="1581">
               <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DayActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DayActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4852459" vertical-offset="430" max-vertical-offset="1462">
-              <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1462">
+              <caret line="57" column="78" selection-start-line="57" selection-start-column="78" selection-end-line="57" selection-end-column="78" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Home.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="4811">
+              <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_home.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5423077" vertical-offset="585" max-vertical-offset="1105">
+              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CompoundButton.class" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-22/android.jar!/android/widget/CompoundButton.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="274" max-vertical-offset="1190">
+            <state vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="1207">
               <caret line="22" column="16" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExpandableAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java">
+      <file leaf-file-name="ProgramActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#4501#4502#0" expanded="true" />
-                <element signature="e#4529#4530#0" expanded="true" />
-                <element signature="e#4621#4622#0" expanded="true" />
-                <element signature="e#4648#4649#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1513">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -155,18 +159,8 @@
       <file leaf-file-name="Personal.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
+            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1139">
               <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PersonalExpandableAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/PersonalExpandableAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1411" max-vertical-offset="2091">
-              <caret line="110" column="59" selection-start-line="110" selection-start-column="59" selection-end-line="110" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -1224,7 +1218,6 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_menu2.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_network.xml" />
         <option value="$PROJECT_DIR$/t.r.i/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/Communicator.java" />
         <option value="$PROJECT_DIR$/t.r.i/build.gradle" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_day.xml" />
@@ -1241,12 +1234,13 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_hall.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/HallActivity.java" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Navigation.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
       </list>
     </option>
   </component>
@@ -1301,7 +1295,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -1316,6 +1309,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2055,7 +2049,11 @@
       <created>1430499707867</created>
       <updated>1430499707867</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="awesome">
+      <created>1430505688163</created>
+      <updated>1430505688163</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2084,18 +2082,17 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29761904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3265306" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4931973" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32482994" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3282313" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41156462" sideWeight="0.44780636" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41156462" sideWeight="0.44780636" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25113463" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -2108,6 +2105,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3265306" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2158,13 +2156,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
           <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
@@ -2187,13 +2185,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
           <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
@@ -2216,13 +2214,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
@@ -2282,31 +2280,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_program.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27945206" vertical-offset="0" max-vertical-offset="365">
           <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/build/intermediates/manifests/full/debug/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7844203" vertical-offset="417" max-vertical-offset="969">
           <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1105">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2318,25 +2305,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_day.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_navigation.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_navigation.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="578">
           <caret line="14" column="33" selection-start-line="14" selection-start-column="33" selection-end-line="14" selection-end-column="33" />
           <folding />
         </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Section.java">
@@ -2381,14 +2368,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_presentations.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.962963" vertical-offset="127" max-vertical-offset="374">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/JSONParser.java">
@@ -2406,14 +2393,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/list_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="663">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Day.java">
@@ -2452,14 +2439,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_hall.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="374">
           <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-21/android/app/ActivityThread.java">
@@ -2469,42 +2456,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="1190">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_personal.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="357">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1666" max-vertical-offset="4811">
-          <caret line="143" column="34" selection-start-line="143" selection-start-column="34" selection-end-line="143" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.4074073" vertical-offset="306" max-vertical-offset="867">
           <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/PersonalExpandableAdapter.java">
@@ -2519,12 +2490,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2142">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4501#4502#0" expanded="true" />
-            <element signature="e#4529#4530#0" expanded="true" />
-            <element signature="e#4621#4622#0" expanded="true" />
-            <element signature="e#4648#4649#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2576,12 +2542,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/ProgramActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4852459" vertical-offset="430" max-vertical-offset="1462">
-          <caret line="51" column="40" selection-start-line="51" selection-start-column="40" selection-end-line="51" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="1462">
+          <caret line="57" column="78" selection-start-line="57" selection-start-column="78" selection-end-line="57" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="4811">
+          <caret line="62" column="3" selection-start-line="62" selection-start-column="3" selection-end-line="62" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5423077" vertical-offset="585" max-vertical-offset="1105">
+          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>

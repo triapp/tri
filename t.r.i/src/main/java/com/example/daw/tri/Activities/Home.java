@@ -60,7 +60,7 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
-
+ //brm
         //CONECTION
         new NetCheck().execute();
     }
