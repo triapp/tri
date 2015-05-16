@@ -237,7 +237,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void insertPersonalSection(Long idSection) throws SQLException, ParseException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from,section.name FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
+        Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from,section.name, id_hall FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
         see.moveToFirst();
         ContentValues values = new ContentValues();
         values.put("id", idSection);
@@ -246,6 +246,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String time_from = see.getString(0)+" "+ see.getString(2);
         values.put("time_to",time_to);
         values.put("time_from",time_from);
+        values.put("id_hall", see.getString(4));
         see.close();
         myDataBase.insert("personal", null, values);
         myDataBase.close();
@@ -312,9 +313,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             see.moveToNext();
         }
+
+        see = myDataBase.rawQuery("SELECT id,id_hall, name FROM personal",null);
+        see.moveToFirst();
+        while (!see.isAfterLast()){
+            Long currentId = see.getLong(0);
+            Cursor see1 = myDataBase.rawQuery("SELECT id_hall, hall.name FROM section, hall WHERE section.id="+currentId+"",null);
+            see1.moveToFirst();
+            if (see1.getLong(0) != see.getLong(1)){
+                result += see.getString(2) + " was moved to "+ see1.getString(1)+".";
+                updateHallInPersonal(currentId, see1.getLong(0));
+            }
+            see1.close();
+            see.moveToNext();
+        }
         see.close();
         myDataBase.close();
         return result;
+    }
+
+    public void updateHallInPersonal(Long id, Long newHall){
+        ContentValues values = new ContentValues();
+        values.put("id_hall",newHall);
+        myDataBase.update("personal",values,"id="+id, null);
     }
 
     private Long getPersonalNthSection (int position) throws SQLException {

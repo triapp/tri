@@ -60,17 +60,9 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
- //brm
-        //CONECTION
+
         new NetCheck().execute();
     }
-
-
-
-
-
-
-
 
     public void isOnline(){
         tryUpdate();
@@ -221,41 +213,11 @@ public class Home extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-        }}
-   // boolean network = false;
-    //Check connection
-
-/*
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected()) {
-            try {
-                URL url = new URL("http://www.google.com");
-                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                urlc.setConnectTimeout(3000);
-                urlc.connect();
-                if (urlc.getResponseCode() == 200) {
-                    return true;
-                }
-            } catch (MalformedURLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
         }
-        return false;
-*/
+    }
     boolean network;
 
 
-
-
-
-/**
- * Async Task to check whether internet connection is working.
- **/
 
 private class NetCheck extends AsyncTask<String,String,Boolean>
 {
