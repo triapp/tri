@@ -61,6 +61,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="awesome">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="64c25501-28b1-4b4b-80b6-4527a7588997" name="New changelist" comment="" />
@@ -97,16 +100,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Home.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="4165">
+              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Speakers.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="698" max-vertical-offset="1513">
-              <caret line="67" column="11" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+              <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
               <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2055#2063#0" expanded="true" />
-                <element signature="e#2387#2828#0" expanded="true" />
-                <element signature="e#2817#2818#0" expanded="true" />
+                <element signature="e#2087#2095#0" expanded="true" />
+                <element signature="e#2419#2915#0" expanded="true" />
+                <element signature="e#2904#2905#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,11 +153,9 @@
       <file leaf-file-name="DatabaseHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4346" max-vertical-offset="11815">
-              <caret line="284" column="51" selection-start-line="284" selection-start-column="51" selection-end-line="284" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.0" vertical-offset="3642" max-vertical-offset="11815">
+              <caret line="242" column="26" selection-start-line="242" selection-start-column="26" selection-end-line="242" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,11 +163,11 @@
       <file leaf-file-name="PresentationsActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12881356" vertical-offset="642" max-vertical-offset="1632">
-              <caret line="56" column="46" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.420339" vertical-offset="97" max-vertical-offset="1598">
+              <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
               <folding>
-                <element signature="e#1910#3707#0" expanded="true" />
-                <element signature="e#3696#3697#0" expanded="true" />
+                <element signature="e#1818#3615#0" expanded="true" />
+                <element signature="e#3604#3605#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,16 +192,6 @@
                 <element signature="e#1444#3314#0" expanded="true" />
                 <element signature="e#3303#3304#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExpandableAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="2074">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1282,8 +1282,8 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_presentations.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/HallActivity.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
       </list>
     </option>
   </component>
@@ -2109,7 +2109,11 @@
       <created>1432302465895</created>
       <updated>1432302465903</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="awesome">
+      <created>1432302995108</created>
+      <updated>1432302995108</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2134,7 +2138,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29761904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2152,7 +2156,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.42857143" sideWeight="0.44780636" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416037" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416037" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5017007" sideWeight="0.55219364" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2433,14 +2437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="940" max-vertical-offset="4165">
-          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/res/drawable/personal4.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2548,16 +2544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4346" max-vertical-offset="11815">
-          <caret line="284" column="51" selection-start-line="284" selection-start-column="51" selection-end-line="284" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/ExpandableAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="2074">
@@ -2584,19 +2570,6 @@
           <folding>
             <element signature="e#1444#3314#0" expanded="true" />
             <element signature="e#3303#3304#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="698" max-vertical-offset="1513">
-          <caret line="67" column="11" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2055#2063#0" expanded="true" />
-            <element signature="e#2387#2828#0" expanded="true" />
-            <element signature="e#2817#2818#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2641,13 +2614,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Speakers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="698" max-vertical-offset="1513">
+          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+          <folding>
+            <element signature="e#2087#2095#0" expanded="true" />
+            <element signature="e#2419#2915#0" expanded="true" />
+            <element signature="e#2904#2905#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3642" max-vertical-offset="11815">
+          <caret line="242" column="26" selection-start-line="242" selection-start-column="26" selection-end-line="242" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1393" max-vertical-offset="4165">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/PresentationsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12881356" vertical-offset="642" max-vertical-offset="1632">
-          <caret line="56" column="46" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.420339" vertical-offset="97" max-vertical-offset="1598">
+          <caret line="29" column="43" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
           <folding>
-            <element signature="e#1910#3707#0" expanded="true" />
-            <element signature="e#3696#3697#0" expanded="true" />
+            <element signature="e#1818#3615#0" expanded="true" />
+            <element signature="e#3604#3605#0" expanded="true" />
           </folding>
         </state>
       </provider>

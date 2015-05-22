@@ -29,8 +29,6 @@ public class PresentationsActivity extends ActionBarActivity {
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
         final String author = b.getString("author");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hall);
         List<String> presentationBySpeaker = null;
         try {
             presentationBySpeaker = database.getPresentationBySpeaker(author);

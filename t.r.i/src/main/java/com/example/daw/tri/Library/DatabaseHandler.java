@@ -239,7 +239,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Long[] getArrayIdPresentationByAuthor(String query) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE author=query",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE author='"+query+"'",null);
         see.moveToFirst();
         Long[] result = new Long[see.getCount()];
         int i =0;

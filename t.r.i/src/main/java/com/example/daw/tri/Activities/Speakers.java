@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
@@ -67,7 +68,7 @@ public class Speakers extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Speakers.this, PresentationsActivity.class);
                 Bundle b = new Bundle();
-                b.putString("author", view.toString());
+                b.putString("author", ((TextView)view.findViewById(android.R.id.text1)).getText().toString());
                 intent.putExtras(b);
                 startActivity(intent);
             }
