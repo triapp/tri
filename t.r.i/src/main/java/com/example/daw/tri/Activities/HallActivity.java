@@ -32,19 +32,13 @@ public class HallActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         final ListView hallView = (ListView) findViewById(R.id.hallListView);
-        final String[] hallsAdapter = new String[hallOnDay.size()];
         Long[] hallId = new Long[0];
         try {
             hallId = database.getArrayIdHall(idDay);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int i = 0;
-        for (String hall : hallOnDay) {
-            hallsAdapter[i] = hall;
-            i++;
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, hallsAdapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, hallOnDay);
         hallView.setAdapter(adapter);
         final Long[] finalHallId = hallId;
         hallView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

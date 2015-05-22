@@ -350,6 +350,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.moveToFirst();
         Long result = see.getLong(0);
         see.close();
+        myDataBase.close();
         return result;
     }
 
@@ -389,6 +390,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id="+id+" LIMIT 1",null);
         boolean result = see.getCount() > 0;
+        see.close();
+        myDataBase.close();
         return result;
     }
 
@@ -405,7 +408,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             see.moveToNext();
         }
-
+        openDataBase();
         see = myDataBase.rawQuery("SELECT id,id_hall, name FROM personal",null);
         see.moveToFirst();
         while (!see.isAfterLast()){
