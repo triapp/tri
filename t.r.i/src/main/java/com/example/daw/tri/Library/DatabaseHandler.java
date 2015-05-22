@@ -273,6 +273,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.moveToFirst();
         while(!see.isAfterLast()){
             result = see.getLong(0);
+            see.moveToNext();
         }
         see.close();
         myDataBase.close();
@@ -286,6 +287,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.moveToFirst();
         while(!see.isAfterLast()){
             result = see.getLong(0);
+            see.moveToNext();
         }
         see.close();
         myDataBase.close();

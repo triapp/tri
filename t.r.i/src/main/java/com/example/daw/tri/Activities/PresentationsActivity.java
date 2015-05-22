@@ -6,12 +6,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.daw.tri.Library.DatabaseHandler;
+import com.example.daw.tri.Library.SpeakerPresentationAdapter;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -42,9 +42,8 @@ public class PresentationsActivity extends ActionBarActivity {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, presentationBySpeaker);
+        SpeakerPresentationAdapter adapter = new SpeakerPresentationAdapter(this,presentationBySpeaker,author);
         presentationView.setAdapter(adapter);
-        final Long[] finalHallId = presentationId;
         presentationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
