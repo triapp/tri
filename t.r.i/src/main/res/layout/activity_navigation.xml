@@ -1,37 +1,136 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#012f63"
     tools:context="com.example.daw.tri.Activities.Navigation">
 
-    <Button
-        android:layout_width="wrap_content"
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Programme"
-        android:id="@+id/button2"
+        android:stretchColumns="1"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:width="150dp"
-        android:height="150dp" />
+        android:id="@+id/tableLayout">
 
-    <Button
+        <TableRow
+            android:background="@color/accent">
+            <!-- Column 1 -->
+            <ImageButton
+                android:id="@+id/generalInfo"
+                android:background="@null"
+                android:src="@drawable/general_info"
+                android:scaleType="centerInside"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1"/>
+
+            <!-- Column 2 -->
+            <ImageButton
+                android:id="@+id/congress"
+                android:background="@null"
+                android:src="@drawable/congress2"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+
+            <!-- Column 3 -->
+            <ImageButton
+                android:id="@+id/scientific"
+                android:background="@null"
+                android:src="@drawable/scientific3"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/accent">
+            <!-- Column 1 -->
+            <ImageButton
+                android:id="@+id/personal"
+                android:background="@null"
+                android:src="@drawable/personal4"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+
+            <!-- Column 2 -->
+            <ImageButton
+                android:id="@+id/speakers"
+                android:background="@null"
+                android:src="@drawable/speakers5"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+
+            <!-- Column 3 -->
+            <ImageButton
+                android:id="@+id/posters"
+                android:background="@null"
+                android:src="@drawable/posters6"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:background="@color/accent">
+            <!-- Column 1 -->
+            <ImageButton
+                android:id="@+id/accompanying"
+                android:background="@null"
+                android:src="@drawable/accompanying7"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+
+            <!-- Column 2 -->
+            <ImageButton
+                android:id="@+id/exhibitors"
+                android:background="@null"
+                android:src="@drawable/exhibitors8"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+
+            <!-- Column 3 -->
+            <ImageButton
+                android:id="@+id/cochlear"
+                android:background="@null"
+                android:src="@drawable/cochlear9"
+                android:scaleType="fitCenter"
+                android:layout_width="0dip"
+                android:layout_height="100dip"
+                android:padding="0dip"
+                android:layout_weight="1" />
+        </TableRow>
+    </TableLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exit"
-        android:id="@+id/button3"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/imageView2"
+        android:src="@drawable/homepage"
+        android:layout_above="@+id/tableLayout"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:width="150dp"
-        android:height="150dp" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personal"
-        android:id="@+id/button5"
-        android:layout_above="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

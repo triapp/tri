@@ -8,7 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
@@ -21,10 +21,11 @@ public class Navigation extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_navigation);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        final Button program = (Button) findViewById(R.id.button2);
-        final Button exit = (Button) findViewById(R.id.button3);
+        final ImageButton program = (ImageButton) findViewById(R.id.scientific);
+        final ImageButton exit = (ImageButton) findViewById(R.id.cochlear);
         program.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,7 +34,7 @@ public class Navigation extends ActionBarActivity {
             }
         });
 
-        Button personal =(Button) findViewById(R.id.button5);
+        ImageButton personal =(ImageButton) findViewById(R.id.personal);
         personal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +49,23 @@ public class Navigation extends ActionBarActivity {
             }
         });
 
+        ImageButton generalInfo =(ImageButton) findViewById(R.id.generalInfo);
+        generalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, GeneralInfo.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton speakers =(ImageButton) findViewById(R.id.speakers);
+        speakers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Speakers.class);
+                startActivity(intent);
+            }
+        });
 
         try {
             String alertMessage = database.checkPersonalForCollisions();

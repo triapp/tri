@@ -28,7 +28,7 @@ public class ProgramActivity extends ActionBarActivity {
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         ArrayList<Day> allDays = null;
         try {
-            allDays = database.selectDay();
+            allDays = database.getDays();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {

@@ -4,14 +4,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.daw.tri.Library.DatabaseHandler;
-import com.example.daw.tri.Objects.Presentation;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class PresentationsActivity extends ActionBarActivity {
     Long id;
@@ -21,17 +26,58 @@ public class PresentationsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentations);
-        database = new DatabaseHandler(getApplicationContext());
-        ArrayList<Presentation> allPresentations = null;
+        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
-        id = b.getLong("id");
+        final String author = b.getString("author");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hall);
+        List<String> presentationBySpeaker = null;
         try {
-            allPresentations = database.selectPresentationById(id);
+            presentationBySpeaker = database.getPresentationBySpeaker(author);
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
+        }
+        final ListView presentationView = (ListView) findViewById(R.id.presentationView);
+        Long[] presentationId = new Long[0];
+        try {
+            presentationId = database.getArrayIdPresentationByAuthor(author);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, presentationBySpeaker);
+        presentationView.setAdapter(adapter);
+        final Long[] finalHallId = presentationId;
+        presentationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CheckBox checkBox =(CheckBox) view.findViewById(R.id.checkBox);
+                try {
+                    Long section = database.getSectionIdByPresentationPosition(author,position);
+                    Long presentation = database.getPresentationIdByPresentationPosition(author,position);
+                    if (checkBox.isChecked()){
+                        database.removePresentationFromPersonal(presentation);
+                        if(!database.doesHavePersonalSectionPresentations(section)){
+                            database.removeSectionFromPersonal(section);
+                            Toast.makeText(getApplicationContext(), "Section was removed from your program.", Toast.LENGTH_SHORT).show();
+                        }
+                        checkBox.setChecked(!checkBox.isChecked());
+                    }  else {
+                        if (database.isSectionInPersonal(section)) {
+                            database.insertPersonalPresentation(presentation);
+                        } else {
+                            database.insertPersonalSection(section);
+                            database.insertPersonalPresentation(presentation);
+                            Toast.makeText(getApplicationContext(),"Section was added to your program.",Toast.LENGTH_SHORT).show();
+                        }
+                        checkBox.setChecked(!checkBox.isChecked());
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 

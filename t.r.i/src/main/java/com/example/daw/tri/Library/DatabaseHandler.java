@@ -177,7 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
     }
 
-    public ArrayList<Day> selectDay() throws SQLException, ParseException {
+    public ArrayList<Day> getDays() throws SQLException, ParseException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT * FROM day ",null);
         ArrayList<Day> listOfDays = new ArrayList<Day>();
@@ -193,6 +193,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfDays;
     }
 
+
+
     public List<String> getHallListbyDay(Long idDay) throws SQLException {
         List<String> listOfHalls = new ArrayList<>();
         openDataBase();
@@ -202,8 +204,95 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             listOfHalls.add(see.getString(0));
             see.moveToNext();
         }
+        see.close();
+        myDataBase.close();
         return listOfHalls;
     }
+
+    public List<String> getSpeakers() throws SQLException {
+        List<String> listOfSpeakers = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation GROUP BY author",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            listOfSpeakers.add(see.getString(0));
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return listOfSpeakers;
+    }
+
+    public List<String> getSpeakersSearch(String query) throws SQLException {
+        List<String> listOfSpeakers = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE author LIKE '%"+query+"%' GROUP BY author",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            listOfSpeakers.add(see.getString(0));
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return listOfSpeakers;
+    }
+
+    public Long[] getArrayIdPresentationByAuthor(String query) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE author=query",null);
+        see.moveToFirst();
+        Long[] result = new Long[see.getCount()];
+        int i =0;
+        while(!see.isAfterLast()){
+            result[i] = see.getLong(0);
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+    public List<String> getPresentationBySpeaker(String query) throws SQLException {
+        List<String> listOfPresentations = new ArrayList<>();
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT name FROM presentation WHERE author LIKE '%"+query+"%'",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            listOfPresentations.add(see.getString(0));
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return listOfPresentations;
+    }
+
+    public Long getSectionIdByPresentationPosition(String author, int position) throws SQLException {
+        Long result = null;
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id_section FROM presentation WHERE author LIKE '%"+author+"%' LIMIT "+position+",1",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            result = see.getLong(0);
+        }
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+    public Long getPresentationIdByPresentationPosition(String author, int position) throws SQLException {
+        Long result = null;
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE author LIKE '%"+author+"%' LIMIT "+position+",1",null);
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            result = see.getLong(0);
+        }
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+
 
     public Long[] getArrayIdHall(Long idDay) throws SQLException {
         openDataBase();
@@ -216,6 +305,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             see.moveToNext();
         }
         see.close();
+        myDataBase.close();
         return result;
     }
 
@@ -615,4 +705,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
+
+
 }

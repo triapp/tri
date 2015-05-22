@@ -51,7 +51,7 @@ public class HallActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int itemPosition = position;
-                Intent intent = new Intent(HallActivity.this, DayActivity.class);
+                Intent intent = new Intent(HallActivity.this, Sections.class);
                 Bundle b = new Bundle();
                 b.putLong("hallId", finalHallId[itemPosition]);
                 b.putLong("dayId", idDay);
@@ -59,6 +59,8 @@ public class HallActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
 
     }
 

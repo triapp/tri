@@ -10,4 +10,6 @@
     <string name="title_activity_navigation">Navigation</string>
     <string name="title_activity_personal">Personal</string>
     <string name="title_activity_hall">HallActivity</string>
+    <string name="title_activity_general_info">GeneralInfo</string>
+    <string name="title_activity_speakers">Speakers</string>
 </resources>

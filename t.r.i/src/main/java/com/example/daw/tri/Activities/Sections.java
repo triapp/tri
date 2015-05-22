@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 
-public class DayActivity extends ActionBarActivity {
+public class Sections extends ActionBarActivity {
 
     ExpandableAdapter expandAdapter;
     ExpandableListView expandView;
@@ -25,7 +25,7 @@ public class DayActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_day);
+        setContentView(R.layout.activity_sections);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
         final Long idDay = b.getLong("dayId");
@@ -77,7 +77,7 @@ public class DayActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_day, menu);
+        getMenuInflater().inflate(R.menu.menu_sections, menu);
         return true;
     }
 
