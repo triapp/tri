@@ -8,17 +8,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
+        android:background="#ffffff"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/tableLayout">
 
-        <TableRow
-            android:background="@color/accent">
+        <TableRow>
             <!-- Column 1 -->
             <ImageButton
                 android:id="@+id/generalInfo"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/general_info"
                 android:scaleType="centerInside"
                 android:layout_width="0dip"
@@ -29,95 +29,105 @@
             <!-- Column 2 -->
             <ImageButton
                 android:id="@+id/congress"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/congress2"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
                 android:padding="0dip"
+                android:layout_marginLeft="3dip"
                 android:layout_weight="1" />
 
             <!-- Column 3 -->
             <ImageButton
                 android:id="@+id/scientific"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/scientific3"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
                 android:padding="0dip"
+                android:layout_marginLeft="3dip"
                 android:layout_weight="1" />
         </TableRow>
 
-        <TableRow
-            android:background="@color/accent">
+        <TableRow>
             <!-- Column 1 -->
             <ImageButton
                 android:id="@+id/personal"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/personal4"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
+                android:layout_marginTop="3dip"
                 android:padding="0dip"
                 android:layout_weight="1" />
 
             <!-- Column 2 -->
             <ImageButton
                 android:id="@+id/speakers"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/speakers5"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginTop="3dip"
                 android:padding="0dip"
                 android:layout_weight="1" />
 
             <!-- Column 3 -->
             <ImageButton
                 android:id="@+id/posters"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/posters6"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginTop="3dip"
                 android:padding="0dip"
                 android:layout_weight="1" />
         </TableRow>
 
-        <TableRow
-            android:background="@color/accent">
+        <TableRow>
             <!-- Column 1 -->
             <ImageButton
                 android:id="@+id/accompanying"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/accompanying7"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
+                android:layout_marginTop="3dip"
                 android:padding="0dip"
                 android:layout_weight="1" />
 
             <!-- Column 2 -->
             <ImageButton
                 android:id="@+id/exhibitors"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/exhibitors8"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginTop="3dip"
                 android:padding="0dip"
                 android:layout_weight="1" />
 
             <!-- Column 3 -->
             <ImageButton
                 android:id="@+id/cochlear"
-                android:background="@null"
+                android:background="@color/accent"
                 android:src="@drawable/cochlear9"
                 android:scaleType="fitCenter"
                 android:layout_width="0dip"
                 android:layout_height="100dip"
                 android:padding="0dip"
+                android:layout_marginLeft="3dip"
+                android:layout_marginTop="3dip"
                 android:layout_weight="1" />
         </TableRow>
     </TableLayout>
