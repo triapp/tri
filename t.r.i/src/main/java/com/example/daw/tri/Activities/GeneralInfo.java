@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 
 import com.example.daw.tri.R;
 
@@ -13,6 +14,9 @@ public class GeneralInfo extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_info);
+
+        WebView general = (WebView) findViewById(R.id.webView);
+        general.loadUrl("file:///android_asset/general/stranka-s-css.html");
     }
 
 

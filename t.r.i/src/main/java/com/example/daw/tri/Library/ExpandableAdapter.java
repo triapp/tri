@@ -73,6 +73,9 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
+
+           // TextView authorLabel = (TextView) convertView.findViewById(R.id.author);
+           // authorLabel.setText(database.getAuthorByPresentationId(presentation));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -116,11 +119,14 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
+        TextView hall = (TextView) convertView.findViewById(R.id.hall);
+        hall.setVisibility(View.GONE);
         headerButton.setVisibility(View.GONE);
 
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

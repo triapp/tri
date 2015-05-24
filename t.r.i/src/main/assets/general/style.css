@@ -1,0 +1,49 @@
+/*
+Následující seznam představuje vždy selektor a seznam jeho CSS vlastností.
+Můžeme využít libovolných vlastností, které daný selektor podporuje.
+  Např. vlastnost font-size (velikost písma) je pro selektor hr (čára) nesmyslný.
+*/
+
+
+body, html {                   /* SELEKTOR - prvek stránky, kterému přidělujeme vlastnosti CSS */
+	background:#d8eefe;          /* Pozadí stránky bude barva kódu #d8eefe */
+	text-align:center;           /* Zarovnání textu. Můžeme použít left center right */
+	margin:0;                    /* Vnější okraje */
+	font-family:tahoma;          /* Typ Písma */
+}
+
+h1 {                           /* SELEKTOR - nadpis první úrovně */
+    color:red;             /* Barva textu */
+    margin:25px 0 15px 0;      /* Okraje v pořadí: horní pravý dolní levý */
+    font-size:22px;            /* Velikost písma v pixelech */
+}
+
+h2 {                           /* SELEKTOR - nadpis druhé úrovně */
+    color:#175900;
+    margin:10px 0 15px 0;
+    font-size:16px;
+}
+
+h3 {                           
+    color:green;
+    margin:10px 0 15px 0;
+    font-size:40px;
+}
+
+hr {                           /* SELEKTOR - čára */
+    width:60%;                 /* Šířka elementu. Jednotky můžeme volit různé. Relativní % nebo Absolutní px */
+}
+
+p  {                           /* SELEKTOR - odstavec */
+    background:#d0fbc1;
+    text-align:center;
+    color:#000;
+    border:1px solid #000;     /* Rámeček šířka typ barva */
+    margin:10px 100px 10px 100px;
+    padding:10px;              /* Vnitřní okraj */
+    font-size:13px;
+}
+
+a  {                           /* SELEKTOR - hypertextový odkaz */
+    color:#ff3600
+}

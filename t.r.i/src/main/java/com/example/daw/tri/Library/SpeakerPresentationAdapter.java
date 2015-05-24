@@ -17,20 +17,19 @@ import com.example.daw.tri.R;
 import java.sql.SQLException;
 import java.util.List;
 
-/********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
 public class SpeakerPresentationAdapter extends ArrayAdapter<String> {
     String author;
     DatabaseHandler database;
     public SpeakerPresentationAdapter(Context context, List<String> users, String author) {
         super(context, 0, users);
         database = new DatabaseHandler(context);
+        this.author = author;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if an existing view is being reused, otherwise inflate the view
-        String presentation = getItem(position);
 
+        String presentation = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);

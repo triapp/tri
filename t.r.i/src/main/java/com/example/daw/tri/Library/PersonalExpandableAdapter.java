@@ -103,13 +103,22 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-        lblListHeader.setTypeface(null, Typeface.BOLD);
-        lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
+        TextView hall = (TextView) convertView.findViewById(R.id.hall);
+        lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setText(headerTitle);
+        if (headerTitle == "Your personal program is empty."){
+            headerButton.setVisibility(View.GONE);
+            time.setVisibility(View.GONE);
+            hall.setVisibility(View.GONE);
+            return convertView;
+        }
+
         try {
             Long section = database.getNthSectionInPersonal(groupPosition);
             time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
+            hall.setText(database.getSectionHall(section));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {

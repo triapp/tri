@@ -22,7 +22,6 @@ public class Personal extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
-        Long id = 5L;
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         expandView = (ExpandableListView) findViewById(R.id.expandableListView2);
         try {

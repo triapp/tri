@@ -360,6 +360,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor see,pointer;
         see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from", null);
         see.moveToFirst();
+        if  (see.getCount() == 0){
+            result.add("Your personal program is empty.");
+        }
         while (!see.isAfterLast()){
             pointer = myDataBase.rawQuery("SELECT name FROM section WHERE id="+see.getLong(0),null);
             pointer.moveToFirst();
@@ -455,8 +458,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public String checkPersonalForCollisions() throws SQLException, ParseException {
         openDataBase();
         String result = "";
-        Long section1, section2;
-        String section1Name,section2Name;
+        Long section1;
+        String section1Name;
         Cursor see = myDataBase.rawQuery("SELECT personal.id, personal.name FROM personal ORDER BY personal.time_from",null);
         see.moveToFirst();
         int total = see.getCount();
@@ -574,6 +577,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return time_from +" - "+ time_to;
     }
 
+    public String getSectionHall(Long idSection) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT hall.name FROM section,hall WHERE section.id="+idSection+" AND section.id_hall=hall.id",null);
+        see.moveToFirst();
+        String hall = see.getString(0);
+        see.close();
+        myDataBase.close();
+        return hall;
+    }
+
     public HashMap<String,List<String>> getSectionPresentationMap(Long day, Long hall) throws SQLException {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
@@ -602,17 +615,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor pointer;
         Cursor see  = myDataBase.rawQuery("SELECT personal.id,personal.name, personal.time_from,personal.time_to FROM personal",null);
         see.moveToFirst();
+        if (see.getCount() == 0){
+            result.put("Your personal program is empty.",new ArrayList<String>());
+        }
         while(!see.isAfterLast()){
             List<String> presentations = new ArrayList<>();
             pointer = myDataBase.rawQuery("SELECT name FROM presentation,personal_presentation WHERE presentation.id=personal_presentation.id AND id_section="+see.getLong(0),null);
             pointer.moveToFirst();
-            if  (pointer.getCount() == 0){
-                presentations.add("No presentations selected.");
-            } else {
-                while (!pointer.isAfterLast()){
-                    presentations.add(pointer.getString(0));
-                    pointer.moveToNext();
-                }
+            while (!pointer.isAfterLast()){
+                presentations.add(pointer.getString(0));
+                pointer.moveToNext();
             }
             result.put(see.getString(1), presentations);
             see.moveToNext();
@@ -662,6 +674,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
         dateFormat = new SimpleDateFormat("dd.MM.");
         return dateFormat.format(day);
+    }
+
+    public String getAuthorByPresentationId(Long idPresentation) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE id="+idPresentation,null);
+        see.moveToFirst();
+        String result = see.getString(0);
+        see.close();
+        myDataBase.close();
+        return result;
     }
 
     public void insertHall(int id, String name){
