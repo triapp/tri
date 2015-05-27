@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.R;
@@ -23,6 +24,8 @@ public class HallActivity extends ActionBarActivity {
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
         final Long idDay = b.getLong("dayId");
+        final String date = b.getString("date");
+        setTitle(date);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hall);
         List<String> hallOnDay = null;
@@ -49,6 +52,9 @@ public class HallActivity extends ActionBarActivity {
                 Bundle b = new Bundle();
                 b.putLong("hallId", finalHallId[itemPosition]);
                 b.putLong("dayId", idDay);
+                String title = date.substring(0,6);
+                title += " "+ ((TextView)view.findViewById(android.R.id.text1)).getText().toString();
+                b.putString("title", title);
                 intent.putExtras(b);
                 startActivity(intent);
             }

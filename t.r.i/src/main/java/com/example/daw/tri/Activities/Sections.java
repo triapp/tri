@@ -24,12 +24,13 @@ public class Sections extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sections);
-        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         Bundle b = getIntent().getExtras();
         final Long idDay = b.getLong("dayId");
         final Long idHall = b.getLong("hallId");
+        setTitle(b.getString("title"));
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sections);
+        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         expandView = (ExpandableListView) findViewById(R.id.expandableListView);
         try {
             expandAdapter = new ExpandableAdapter(this,database.getSectionList(idDay, idHall),database.getSectionPresentationMap(idDay,idHall), idDay,idHall);

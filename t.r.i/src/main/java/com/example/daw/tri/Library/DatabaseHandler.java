@@ -591,7 +591,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor pointer;
-        Cursor see  = myDataBase.rawQuery("SELECT id,name FROM section WHERE id_day="+day+" AND id_hall="+hall,null);
+        Cursor see  = myDataBase.rawQuery("SELECT id,name FROM section WHERE id_day="+day+" AND id_hall="+hall+" ORDER BY time_from",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             List<String> presentations = new ArrayList<>();
@@ -613,7 +613,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor pointer;
-        Cursor see  = myDataBase.rawQuery("SELECT personal.id,personal.name, personal.time_from,personal.time_to FROM personal",null);
+        Cursor see  = myDataBase.rawQuery("SELECT personal.id,personal.name, personal.time_from,personal.time_to FROM personal ORDER BY time_from",null);
         see.moveToFirst();
         if (see.getCount() == 0){
             result.put("Your personal program is empty.",new ArrayList<String>());
@@ -637,17 +637,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Long getNthSection(int position, Long idDay, Long hall) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id_day="+idDay+" AND id_hall="+hall+" LIMIT "+position+",1",null);
-        see.moveToFirst();
-        myDataBase.close();
-        Long result = see.getLong(0);
-        see.close();
-        return result;
-    }
-
-    public Long getNthSection(int position) throws SQLException {
-        openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM section LIMIT "+position+",1",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM section WHERE id_day="+idDay+" AND id_hall="+hall+" ORDER BY time_from LIMIT "+position+",1",null);
         see.moveToFirst();
         myDataBase.close();
         Long result = see.getLong(0);

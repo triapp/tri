@@ -23,6 +23,7 @@ public class ProgramActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Scientific programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
@@ -36,10 +37,12 @@ public class ProgramActivity extends ActionBarActivity {
         }
         final ListView dayView = (ListView) findViewById(R.id.listView);
         final String[] daysAdapter = new String[allDays.size()];
+        final String [] daysArray = new String[allDays.size()];
         final Long[] daysID = new Long[allDays.size()];
         int i = 0;
         for (Day day : allDays) {
             daysID[i] = day.getId();
+            daysArray[i] = day.getDate();
             daysAdapter[i] = day.toString();
             i++;
         }
@@ -51,6 +54,7 @@ public class ProgramActivity extends ActionBarActivity {
                 int itemPosition = position;
                 Intent intent = new Intent(ProgramActivity.this, HallActivity.class);
                 Bundle b = new Bundle();
+                b.putString("date",daysArray[itemPosition]);
                 b.putLong("dayId",daysID[itemPosition]);
                 intent.putExtras(b);
                 startActivity(intent);

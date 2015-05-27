@@ -21,9 +21,14 @@ public class Day {
         return id;
     }
 
+    public String getDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(day);
+    }
+
     @Override
     public String toString(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd EEE MMM yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         return "Show sections on "+dateFormat.format(day);
     }
 }
