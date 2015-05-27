@@ -19,16 +19,15 @@ import java.text.ParseException;
 import java.util.List;
 
 public class PresentationsActivity extends ActionBarActivity {
-    Long id;
-    DatabaseHandler database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle b = getIntent().getExtras();
+        final String author = b.getString("author");
+        setTitle(author);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentations);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
-        Bundle b = getIntent().getExtras();
-        final String author = b.getString("author");
         List<String> presentationBySpeaker = null;
         try {
             presentationBySpeaker = database.getPresentationBySpeaker(author);
@@ -36,12 +35,6 @@ public class PresentationsActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         final ListView presentationView = (ListView) findViewById(R.id.presentationView);
-        Long[] presentationId = new Long[0];
-        try {
-            presentationId = database.getArrayIdPresentationByAuthor(author);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         SpeakerPresentationAdapter adapter = new SpeakerPresentationAdapter(this,presentationBySpeaker,author);
         presentationView.setAdapter(adapter);
         presentationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,10 +45,10 @@ public class PresentationsActivity extends ActionBarActivity {
                     Long section = database.getSectionIdByPresentationPosition(author,position);
                     Long presentation = database.getPresentationIdByPresentationPosition(author,position);
                     if (checkBox.isChecked()){
+                        Toast.makeText(getApplicationContext(), "Presentation was removed from your personal programme.", Toast.LENGTH_SHORT).show();
                         database.removePresentationFromPersonal(presentation);
                         if(!database.doesHavePersonalSectionPresentations(section)){
                             database.removeSectionFromPersonal(section);
-                            Toast.makeText(getApplicationContext(), "Section was removed from your program.", Toast.LENGTH_SHORT).show();
                         }
                         checkBox.setChecked(!checkBox.isChecked());
                     }  else {
@@ -64,8 +57,8 @@ public class PresentationsActivity extends ActionBarActivity {
                         } else {
                             database.insertPersonalSection(section);
                             database.insertPersonalPresentation(presentation);
-                            Toast.makeText(getApplicationContext(),"Section was added to your program.",Toast.LENGTH_SHORT).show();
                         }
+                        Toast.makeText(getApplicationContext(),"Presentation was added to your personal programme.",Toast.LENGTH_SHORT).show();
                         checkBox.setChecked(!checkBox.isChecked());
                     }
                 } catch (SQLException e) {

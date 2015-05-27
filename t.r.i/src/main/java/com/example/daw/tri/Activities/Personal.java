@@ -20,6 +20,7 @@ public class Personal extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Personal programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());
