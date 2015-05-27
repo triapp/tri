@@ -66,7 +66,16 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
-        checkBox.setVisibility(View.GONE);
+        try {
+            Long section = database.getNthSectionFromPersonal(groupPosition);
+            Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
+            if (database.isPresentationInPersonal(presentation)){
+                checkBox.setChecked(true);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return convertView;
     }
 

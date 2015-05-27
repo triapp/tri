@@ -502,6 +502,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public Long getNthPresentationFromPersonal(Long idSection, int presentationPosition) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT presentation.id FROM presentation, personal,personal_presentation WHERE presentation.id_section=personal.id AND presentation.id=personal_presentation.id AND personal.id="+idSection+" LIMIT "+presentationPosition+",1",null);
+        see.moveToFirst();
+        myDataBase.close();
+        Long result = see.getLong(0);
+        see.close();
+        return result;
+    }
+
     public void removePresentationsFromPersonalBySection(Long sectionId) throws SQLException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE id_section="+sectionId,null);

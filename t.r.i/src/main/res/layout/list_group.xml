@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="10dip"
         android:text="Small Text"
         android:id="@+id/time"
         android:layout_below="@+id/lblListHeader"
@@ -46,13 +46,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textSize="10dip"
         android:text="Small Text"
         android:id="@+id/hall"
-        android:layout_marginRight="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_below="@+id/lblListHeader"
-        android:layout_toLeftOf="@+id/time"
-        android:layout_toStartOf="@+id/time" />
+        android:layout_alignTop="@+id/time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -1,10 +1,14 @@
 package com.example.daw.tri.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.example.daw.tri.Library.DatabaseHandler;
 import com.example.daw.tri.Library.PersonalExpandableAdapter;
@@ -23,7 +27,7 @@ public class Personal extends ActionBarActivity {
         setTitle("Personal programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
-        DatabaseHandler database = new DatabaseHandler(getApplicationContext());
+        final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         expandView = (ExpandableListView) findViewById(R.id.expandableListView2);
         try {
             expandAdapter = new PersonalExpandableAdapter(this,database.getPersonalList(),database.getPersonalPresentationMap());
@@ -33,6 +37,43 @@ public class Personal extends ActionBarActivity {
             e.printStackTrace();
         }
         expandView.setAdapter(expandAdapter);
+
+        expandView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                CheckBox checkBox =(CheckBox) v.findViewById(R.id.checkBox);
+                try {
+                    Long section = database.getNthSectionFromPersonal(groupPosition);
+                    Long presentation = database.getNthPresentationFromPersonal(section, childPosition);
+                    if (checkBox.isChecked()){
+                        Toast.makeText(getApplicationContext(), "Presentation was removed from your personal programme.", Toast.LENGTH_SHORT).show();
+                        database.removePresentationFromPersonal(presentation);
+                        if(!database.doesHavePersonalSectionPresentations(section)){
+                            database.removeSectionFromPersonal(section);
+                            Intent intent = new Intent(getApplicationContext(), Personal.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        checkBox.setChecked(!checkBox.isChecked());
+                    }  else {
+                        if (database.isSectionInPersonal(section)) {
+                            database.insertPersonalPresentation(presentation);
+                        } else {
+                            database.insertPersonalSection(section);
+                            database.insertPersonalPresentation(presentation);
+                        }
+                        Toast.makeText(getApplicationContext(),"Presentation was added to your personal programme.",Toast.LENGTH_SHORT).show();
+                        checkBox.setChecked(!checkBox.isChecked());
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        });
 
     }
 
