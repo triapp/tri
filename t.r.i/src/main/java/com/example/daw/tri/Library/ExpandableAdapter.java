@@ -126,7 +126,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

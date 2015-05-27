@@ -50,6 +50,13 @@ public class Home extends ActionBarActivity {
        networkError.setVisibility(View.GONE);
        nextActivity.setVisibility(View.GONE);
        update.setVisibility(View.GONE);
+        nextActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, Navigation.class);
+                startActivity(intent);
+            }
+        });
        database = new DatabaseHandler(this);
        try {
            database.createDataBase();
@@ -60,33 +67,17 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
-
         new NetCheck().execute();
     }
 
     public void isOnline(){
         tryUpdate();
-        nextActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Navigation.class);
-                startActivity(intent);
-            }
-        });
-
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new NetCheck().execute();
-            }
-        });
     }
     public void tryUpdate(){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         networkError.setVisibility(View.GONE);
         nextActivity.setVisibility(View.GONE);
         update.setVisibility(View.GONE);
-
        if (network==true) {
            database.dropAll();
            new downloadTables().execute();
@@ -94,18 +85,10 @@ public class Home extends ActionBarActivity {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             TextView message = (TextView) findViewById(R.id.message);
             message.setText("You are not connected to the Internet network");
-
             networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
         }
-        nextActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Home.this, Navigation.class);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -133,19 +116,18 @@ public class Home extends ActionBarActivity {
     }
 
     private class downloadTables extends AsyncTask<String, String, JSONArray> {
-        private ProgressDialog pDialog;
-        private TextView status;
+     //   private TextView status;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            status =(TextView) findViewById(R.id.textView);
-            status.setText("Contacting server...");
+           // status =(TextView) findViewById(R.id.textView);
+           // status.setText("Contacting server...");
         }
 
         @Override
         protected JSONArray doInBackground(String... args) {
-            status.setText("Getting data...");
+           // status.setText("Getting data...");
             Communicator talkie = new Communicator();
             JSONArray json = talkie.getTables();
             return json;
@@ -153,7 +135,7 @@ public class Home extends ActionBarActivity {
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
-                status.setText("Inserting data...");
+             //   status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
