@@ -62,12 +62,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5d3edfb-9fdb-4d71-8810-f51fc577d9ec" name="Default" comment="awesome">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/DatabaseHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/PersonalExpandableAdapter.java" afterPath="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/PersonalExpandableAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_group.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_item.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/menu/menu_home.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/menu/menu_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="64c25501-28b1-4b4b-80b6-4527a7588997" name="New changelist" comment="" />
@@ -109,8 +104,10 @@
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="354" max-vertical-offset="1513">
-              <caret line="52" column="48" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
-              <folding />
+              <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,8 +168,8 @@
       <file leaf-file-name="Home.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="3961">
-              <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
+            <state vertical-scroll-proportion="-3.5357144" vertical-offset="258" max-vertical-offset="3961">
+              <caret line="52" column="10" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -184,8 +181,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30128205" vertical-offset="246" max-vertical-offset="1105">
-              <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.5448718" vertical-offset="0" max-vertical-offset="1105">
+              <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -1243,7 +1240,6 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Objects/Personal.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/DayActivity.java" />
-        <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/Communicator.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Library/MyService.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/AndroidManifest.xml" />
@@ -1276,6 +1272,7 @@
         <option value="$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/list_item.xml" />
         <option value="$PROJECT_DIR$/t.r.i/src/main/res/menu/menu_home.xml" />
+        <option value="$PROJECT_DIR$/t.r.i/src/main/res/layout/activity_home.xml" />
       </list>
     </option>
   </component>
@@ -2152,7 +2149,11 @@
       <created>1432748870045</created>
       <updated>1432748870045</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="awesome">
+      <created>1432751979823</created>
+      <updated>1432751979824</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2613,8 +2614,10 @@
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Personal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="354" max-vertical-offset="1513">
-          <caret line="52" column="48" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
-          <folding />
+          <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2674,8 +2677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/t.r.i/src/main/java/com/example/daw/tri/Activities/Home.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="3961">
-          <caret line="50" column="43" selection-start-line="50" selection-start-column="43" selection-end-line="50" selection-end-column="43" />
+        <state vertical-scroll-proportion="-3.5357144" vertical-offset="258" max-vertical-offset="3961">
+          <caret line="52" column="10" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -2685,8 +2688,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30128205" vertical-offset="246" max-vertical-offset="1105">
-          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.5448718" vertical-offset="0" max-vertical-offset="1105">
+          <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
           <folding />
         </state>
       </provider>
