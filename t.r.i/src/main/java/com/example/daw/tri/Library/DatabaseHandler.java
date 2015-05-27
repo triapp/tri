@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.daw.tri.Objects.Day;
-import com.example.daw.tri.Objects.Presentation;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -311,22 +310,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-    public ArrayList<Presentation> selectPresentationById(Long id) throws SQLException, ParseException {
-        openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT * FROM presentation WHERE id_section="+id,null);
-        ArrayList<Presentation> listOfPresentations = new ArrayList<>();
-        Presentation tmp;
-        see.moveToFirst();
-        while (!see.isAfterLast()) {
-            tmp = new Presentation(see.getLong(0), see.getString(2),see.getString(3));
-            listOfPresentations.add(tmp);
-            see.moveToNext();
-        }
-        see.close();
-        myDataBase.close();
-        return listOfPresentations;
-    }
-
     public void insertPersonalSection(Long idSection) throws SQLException, ParseException {
         openDataBase();
         Cursor see = myDataBase.rawQuery("SELECT day,time_to, time_from,section.name, id_hall FROM section,day WHERE section.id="+idSection+" AND section.id_day=day.id",null);
@@ -433,7 +416,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void updateHallInPersonal(Long id, Long newHall){
         ContentValues values = new ContentValues();
         values.put("id_hall",newHall);
-        myDataBase.update("personal",values,"id="+id, null);
+        myDataBase.update("personal", values, "id=" + id, null);
     }
 
     private Long getPersonalNthSection (int position) throws SQLException {
@@ -489,7 +472,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         ContentValues values = new ContentValues();
         values.put("id", idPresentaiton);
-        myDataBase.insert("personal_presentation",null,values);
+        myDataBase.insert("personal_presentation", null, values);
         myDataBase.close();
     }
 
@@ -601,7 +584,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 presentations.add(pointer.getPosition()+1+". "+pointer.getString(0));
                 pointer.moveToNext();
             }
-            result.put(see.getString(1),presentations);
+            result.put(see.getString(1), presentations);
             see.moveToNext();
         }
         see.close();
