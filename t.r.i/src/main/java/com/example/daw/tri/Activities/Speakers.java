@@ -92,7 +92,13 @@ public class Speakers extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.goBack) {
+            finish();
+            return true;
+        } else if (id == R.id.showMenu) {
+            Intent intent = new Intent(Speakers.this, Navigation.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 

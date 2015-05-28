@@ -22,6 +22,7 @@ public class Personal extends ActionBarActivity {
     ExpandableListView expandView;
     PersonalExpandableAdapter expandAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTitle("Personal programme");
@@ -75,6 +76,18 @@ public class Personal extends ActionBarActivity {
             }
         });
 
+
+        expandView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int lastGroupClicked = -1;
+            @Override
+            public void onGroupExpand(int i) {
+                if (lastGroupClicked !=-1 && i  != lastGroupClicked){
+                    expandView.collapseGroup(lastGroupClicked);
+                }
+                lastGroupClicked = i;
+            }
+        });
+
     }
 
 
@@ -93,7 +106,13 @@ public class Personal extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.goBack) {
+            finish();
+            return true;
+        } else if (id == R.id.showMenu) {
+            Intent intent = new Intent(Personal.this, Navigation.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 

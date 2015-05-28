@@ -1,5 +1,6 @@
 package com.example.daw.tri.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -35,7 +36,13 @@ public class GeneralInfo extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.goBack) {
+            finish();
+            return true;
+        } else if (id == R.id.showMenu) {
+            Intent intent = new Intent(GeneralInfo.this, Navigation.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 

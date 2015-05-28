@@ -37,6 +37,7 @@ public class SpeakerPresentationAdapter extends ArrayAdapter<String> {
         try {
             Long presentationId = database.getPresentationIdByPresentationPosition(author,position);
             TextView presentationLabel = (TextView) convertView.findViewById(R.id.lblListItem);
+            TextView info = (TextView) convertView.findViewById(R.id.speakerOrInfo);
             presentationLabel.setText(presentation);
             CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkBox);
             checkbox.setChecked(false);

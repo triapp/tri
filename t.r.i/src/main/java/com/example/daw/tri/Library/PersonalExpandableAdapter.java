@@ -64,11 +64,13 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
+        TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         try {
             Long section = database.getNthSectionFromPersonal(groupPosition);
             Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
+            speaker.setText(database.getPresentationSpeakerByPresentationId(presentation));
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
@@ -115,6 +117,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
         TextView hall = (TextView) convertView.findViewById(R.id.hall);
+        TextView chairman = (TextView) convertView.findViewById(R.id.chairman);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
         if (headerTitle == "Your personal program is empty."){
@@ -128,6 +131,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
             Long section = database.getNthSectionInPersonal(groupPosition);
             time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
             hall.setText(database.getSectionHall(section));
+            chairman.setText(database.getSectionChairmanBySectionId(section));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {

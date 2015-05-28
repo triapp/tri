@@ -14,10 +14,9 @@
         android:paddingBottom="5dp"
         android:gravity="center_vertical"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/checkBox"
-        android:layout_toStartOf="@+id/checkBox"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true" />
+        android:layout_toStartOf="@+id/checkBox" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -30,5 +29,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/lblListItem" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:textSize="10dip"
+        android:text="Small Text"
+        android:id="@+id/speakerOrInfo"
+        android:layout_below="@+id/lblListItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -18,6 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="35dip"
         android:background="#ffffff"
+        android:drawableLeft="@drawable/search"
         android:id="@+id/searchView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

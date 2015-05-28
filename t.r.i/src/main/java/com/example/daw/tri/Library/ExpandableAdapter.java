@@ -64,12 +64,13 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
+        TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
-        checkBox.setChecked(false);
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             Long presentation = database.getNthPresentation(section,childPosition);
+            speaker.setText(database.getPresentationSpeakerByPresentationId(presentation));
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
@@ -120,12 +121,14 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
         TextView hall = (TextView) convertView.findViewById(R.id.hall);
+        TextView chairman = (TextView) convertView.findViewById(R.id.chairman);
         hall.setVisibility(View.GONE);
         headerButton.setVisibility(View.GONE);
 
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
+            chairman.setText(database.getSectionChairmanBySectionId(section));
         } catch (SQLException e) {
             e.printStackTrace();
         }

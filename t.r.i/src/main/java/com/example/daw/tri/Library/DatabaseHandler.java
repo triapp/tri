@@ -413,6 +413,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public String getSectionChairmanBySectionId(Long id) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT chairman FROM section WHERE id="+id+" LIMIT 1",null);
+        see.moveToFirst();
+        String result = see.getString(0);
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+    public String getPresentationSpeakerByPresentationId(Long id) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE id="+id+" LIMIT 1",null);
+        see.moveToFirst();
+        String result = see.getString(0);
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
     public void updateHallInPersonal(Long id, Long newHall){
         ContentValues values = new ContentValues();
         values.put("id_hall",newHall);
@@ -657,16 +677,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
         dateFormat = new SimpleDateFormat("dd.MM.");
         return dateFormat.format(day);
-    }
-
-    public String getAuthorByPresentationId(Long idPresentation) throws SQLException {
-        openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE id="+idPresentation,null);
-        see.moveToFirst();
-        String result = see.getString(0);
-        see.close();
-        myDataBase.close();
-        return result;
     }
 
     public void insertHall(int id, String name){
