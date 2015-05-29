@@ -23,6 +23,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/speakerListView"
-        android:layout_alignEnd="@+id/speakerListView" />
+        android:layout_alignEnd="@+id/speakerListView"
+        android:singleLine="true"/>
 
 </RelativeLayout>

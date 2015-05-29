@@ -7,6 +7,7 @@ package com.example.daw.tri.Library;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +121,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
         TextView chairman = (TextView) convertView.findViewById(R.id.chairman);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+        lblListHeader.setTextColor(Color.parseColor("#828282"));
         if (headerTitle == "Your personal program is empty."){
             headerButton.setVisibility(View.GONE);
             time.setVisibility(View.GONE);

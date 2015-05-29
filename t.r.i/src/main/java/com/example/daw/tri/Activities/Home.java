@@ -36,9 +36,10 @@ public class Home extends ActionBarActivity {
     DatabaseHandler database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle(" ORL - HNS 2015");
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_home);
-       networkError = (TextView) findViewById(R.id.textView);
+       networkError = (TextView) findViewById(R.id.Connect);
        nextActivity = (Button) findViewById(R.id.button);
        update = (Button) findViewById(R.id.button1);
         update.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +85,9 @@ public class Home extends ActionBarActivity {
            new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-            TextView message = (TextView) findViewById(R.id.message);
-            message.setText("You are not connected to the Internet network");
+            TextView Connect = (TextView) findViewById(R.id.Connect);
+            Connect.setText("You are not connected to the Internet network");
+           Connect.setVisibility(View.VISIBLE);
             networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
             update.setVisibility(View.VISIBLE);
@@ -109,9 +111,7 @@ public class Home extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -122,7 +122,7 @@ public class Home extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           status =(TextView) findViewById(R.id.textView);
+           status =(TextView) findViewById(R.id.Connect);
            status.setText("Getting data...");
         }
 

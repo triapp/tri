@@ -15,4 +15,7 @@
     <string name="title_activity_general_info">GeneralInfo</string>
     <string name="title_activity_speakers">Speakers</string>
     <string name="title_activity_congress_venue">CongressVenue</string>
+    <string name="title_activity_accompanying">Accompanying</string>
+    <string name="title_activity_exhibitors">Exhibitors</string>
+    <string name="title_activity_cohlear">Cohlear</string>
 </resources>

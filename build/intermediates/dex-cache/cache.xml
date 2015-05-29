@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-ed3d2beba2f102947306a8f31318ede0fb23ead8.jar" />
-    </item>
-    <item
-        jar="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jar="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\pre-dexed\debug\classes-9b2924edec078aab99c7c626e81d74b79eabd8cc.jar" />
+        <dex dex="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\pre-dexed\debug\classes-64282ae01ff24687ea1df204e3881d3b00961509.jar" />
     </item>
     <item
-        jar="E:\Users\David\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-4f35d1146452581148db4ae13bbd04b56d7fa6e5.jar" />
-    </item>
-    <item
-        jar="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jar="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Users\David\AndroidStudioProjects\tri_final\t.r.i\build\intermediates\pre-dexed\debug\classes-57b01b8ed4f14db95997fdc52dae6380d179f1f9.jar" />
+        <dex dex="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\pre-dexed\debug\classes-67883e2cbbd5fd8031f32b8b827bb038c34af777.jar" />
+    </item>
+    <item
+        jar="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-28fb0d16bec47f516cd3dfa8440e4af98df63f79.jar" />
+    </item>
+    <item
+        jar="D:\Users\Daw\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="D:\Android\TRI\tri_app_final\t.r.i\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-c6fe92fe963f8928428179e1b15cda296fa499a0.jar" />
     </item>
 
 </items>

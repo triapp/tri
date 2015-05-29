@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/t.r.i/t.r.i..iml" filepath="$PROJECT_DIR$/t.r.i/t.r.i..iml" />
+      <module fileurl="file://$PROJECT_DIR$/tri_app_final.iml" filepath="$PROJECT_DIR$/tri_app_final.iml" />
       <module fileurl="file://$PROJECT_DIR$/tri_final.iml" filepath="$PROJECT_DIR$/tri_final.iml" />
     </modules>
   </component>

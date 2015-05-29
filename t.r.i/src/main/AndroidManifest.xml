@@ -58,6 +58,18 @@
             android:name=".Activities.CongressVenue"
             android:label="@string/title_activity_congress_venue" >
         </activity>
+        <activity
+            android:name=".Activities.Accompanying"
+            android:label="@string/title_activity_accompanying" >
+        </activity>
+        <activity
+            android:name=".Activities.Exhibitors"
+            android:label="@string/title_activity_exhibitors" >
+        </activity>
+        <activity
+            android:name=".Activities.Cohlear"
+            android:label="@string/title_activity_cohlear" >
+        </activity>
     </application>
 
 </manifest>

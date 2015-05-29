@@ -5,6 +5,7 @@ package com.example.daw.tri.Library;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class PresentationAdapter extends ArrayAdapter<String> {
             String sectionHall = database.getSectionHall(sectionId);
             TextView presentationLabel = (TextView) convertView.findViewById(R.id.lblListItem);
             TextView info = (TextView) convertView.findViewById(R.id.speakerOrInfo);
+            presentationLabel.setTextColor(Color.parseColor("#828282"));
             presentationLabel.setText(presentation);
             info.setText(sectionHall+" "+sectionDate);
             CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkBox);

@@ -3,16 +3,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Home">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Updating database. Please wait...."
-        android:id="@+id/message"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="250dp" />
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Home"
+    android:background="#012f63">
 
     <Button
         android:layout_width="wrap_content"
@@ -32,6 +24,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="92dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect"
+        android:id="@+id/Connect"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+         />
+
     <RelativeLayout
         android:id="@+id/loadingPanel"
         android:layout_width="match_parent"
@@ -41,19 +42,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Updating database. Please wait...."
+            android:id="@+id/message"
+            android:layout_below="@+id/progressBar"
+            android:layout_centerHorizontal="true" />
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-        <TextView android:text="Bruuum" android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="61dp" />
+            android:id="@+id/progressBar"
+            android:progressDrawable="@color/accent"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

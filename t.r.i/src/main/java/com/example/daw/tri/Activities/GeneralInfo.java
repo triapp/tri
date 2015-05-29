@@ -13,6 +13,7 @@ public class GeneralInfo extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("General information");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_info);
 

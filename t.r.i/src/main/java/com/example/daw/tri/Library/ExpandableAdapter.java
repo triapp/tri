@@ -5,6 +5,7 @@ package com.example.daw.tri.Library;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+        checkBox.setChecked(false);
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             Long presentation = database.getNthPresentation(section,childPosition);
@@ -117,6 +119,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
+        lblListHeader.setTextColor(Color.parseColor("#CCCCCC"));
         lblListHeader.setText(headerTitle);
         Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
@@ -128,7 +131,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
-            chairman.setText(database.getSectionChairmanBySectionId(section));
+            chairman.setText("Chairman: " + database.getSectionChairmanBySectionId(section));
         } catch (SQLException e) {
             e.printStackTrace();
         }

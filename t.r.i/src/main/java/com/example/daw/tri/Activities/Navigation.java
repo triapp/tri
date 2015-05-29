@@ -25,7 +25,7 @@ public class Navigation extends ActionBarActivity {
         setContentView(R.layout.activity_navigation);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
         final ImageButton program = (ImageButton) findViewById(R.id.scientific);
-        final ImageButton exit = (ImageButton) findViewById(R.id.cochlear);
+
         program.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,7 +33,7 @@ public class Navigation extends ActionBarActivity {
                 startActivity(openProgram);
             }
         });
-
+        // Buttony__________________________________________________________________________________
         ImageButton personal =(ImageButton) findViewById(R.id.personal);
         personal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +42,7 @@ public class Navigation extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
 
         ImageButton generalInfo =(ImageButton) findViewById(R.id.generalInfo);
         generalInfo.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +70,35 @@ public class Navigation extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        ImageButton accompanying =(ImageButton) findViewById(R.id.accompanying1);
+        accompanying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Accompanying.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton exhibitors =(ImageButton) findViewById(R.id.exhibitors);
+        exhibitors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Exhibitors.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton cochlear =(ImageButton) findViewById(R.id.cochlear);
+        cochlear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Cohlear.class);
+                startActivity(intent);
+            }
+        });
+
+        //Funkce____________________________________________________________________________________
 
         try {
             String alertMessage = database.checkPersonalForCollisions();

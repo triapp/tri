@@ -52,7 +52,7 @@ public class Sections extends ActionBarActivity {
                         database.removePresentationFromPersonal(presentation);
                         if(!database.doesHavePersonalSectionPresentations(section)){
                             database.removeSectionFromPersonal(section);
-                            Toast.makeText(getApplicationContext(),"Section was removed from your program.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Presentation was removed from your personal programme.",Toast.LENGTH_SHORT).show();
                         }
                         checkBox.setChecked(!checkBox.isChecked());
                     }  else {
@@ -61,7 +61,7 @@ public class Sections extends ActionBarActivity {
                         } else {
                             database.insertPersonalSection(section);
                             database.insertPersonalPresentation(presentation);
-                            Toast.makeText(getApplicationContext(),"Section was added to your program.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Presentation was added to your personal programme.",Toast.LENGTH_SHORT).show();
                         }
                         checkBox.setChecked(!checkBox.isChecked());
                     }
