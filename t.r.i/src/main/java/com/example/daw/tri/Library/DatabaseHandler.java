@@ -192,6 +192,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listOfDays;
     }
 
+    public Long getSectionIdByPresentationId(Long id) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT section.id FROM section, presentation WHERE presentation.id_section=section.id AND presentation.id="+id+" LIMIT 1",null);
+        see.moveToFirst();
+        Long result = see.getLong(0);
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
 
 
     public List<String> getHallListbyDay(Long idDay) throws SQLException {
@@ -675,7 +685,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Date day = dateFormat.parse(see.getString(0));
         see.close();
         myDataBase.close();
-        dateFormat = new SimpleDateFormat("dd.MM.");
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         return dateFormat.format(day);
     }
 

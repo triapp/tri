@@ -73,6 +73,7 @@ public class Home extends ActionBarActivity {
     public void isOnline(){
         tryUpdate();
     }
+
     public void tryUpdate(){
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         networkError.setVisibility(View.GONE);
@@ -116,26 +117,22 @@ public class Home extends ActionBarActivity {
     }
 
     private class downloadTables extends AsyncTask<String, String, JSONArray> {
-     //   private TextView status;
+        private TextView status;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // status =(TextView) findViewById(R.id.textView);
-           // status.setText("Contacting server...");
+           status =(TextView) findViewById(R.id.textView);
+           status.setText("Getting data...");
         }
 
         @Override
         protected JSONArray doInBackground(String... args) {
-           // status.setText("Getting data...");
+
             Communicator talkie = new Communicator();
             JSONArray json = talkie.getTables();
-            return json;
-        }
-        @Override
-        protected void onPostExecute(JSONArray json) {
             try {
-             //   status.setText("Inserting data...");
+                //   status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
@@ -190,12 +187,19 @@ public class Home extends ActionBarActivity {
                 finish();
 
             } catch (JSONException e) {
-               e.printStackTrace();
+                e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            return json;
         }
+
+
+        @Override
+        protected void onPostExecute(JSONArray json) {
+            status.setText("Launching application..");
+        }
+
     }
     boolean network;
 

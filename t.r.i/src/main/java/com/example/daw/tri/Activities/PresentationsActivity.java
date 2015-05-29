@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.daw.tri.Library.DatabaseHandler;
-import com.example.daw.tri.Library.SpeakerPresentationAdapter;
+import com.example.daw.tri.Library.PresentationAdapter;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ public class PresentationsActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         final ListView presentationView = (ListView) findViewById(R.id.presentationView);
-        SpeakerPresentationAdapter adapter = new SpeakerPresentationAdapter(this,presentationBySpeaker,author);
+        PresentationAdapter adapter = new PresentationAdapter(this,presentationBySpeaker,author);
         presentationView.setAdapter(adapter);
         presentationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

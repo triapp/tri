@@ -76,6 +76,7 @@ public class Personal extends ActionBarActivity {
             }
         });
 
+        boolean wasRemoved;
 
         expandView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int lastGroupClicked = -1;
@@ -87,6 +88,8 @@ public class Personal extends ActionBarActivity {
                 lastGroupClicked = i;
             }
         });
+
+
 
     }
 

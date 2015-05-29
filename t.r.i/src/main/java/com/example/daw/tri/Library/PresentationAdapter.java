@@ -15,12 +15,13 @@ import android.widget.TextView;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
-public class SpeakerPresentationAdapter extends ArrayAdapter<String> {
+public class PresentationAdapter extends ArrayAdapter<String> {
     String author;
     DatabaseHandler database;
-    public SpeakerPresentationAdapter(Context context, List<String> users, String author) {
+    public PresentationAdapter(Context context, List<String> users, String author) {
         super(context, 0, users);
         database = new DatabaseHandler(context);
         this.author = author;
@@ -36,9 +37,13 @@ public class SpeakerPresentationAdapter extends ArrayAdapter<String> {
         }
         try {
             Long presentationId = database.getPresentationIdByPresentationPosition(author,position);
+            Long sectionId = database.getSectionIdByPresentationId(presentationId);
+            String sectionDate = database.getDateBySectionId(sectionId);
+            String sectionHall = database.getSectionHall(sectionId);
             TextView presentationLabel = (TextView) convertView.findViewById(R.id.lblListItem);
             TextView info = (TextView) convertView.findViewById(R.id.speakerOrInfo);
             presentationLabel.setText(presentation);
+            info.setText(sectionHall+" "+sectionDate);
             CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkBox);
             checkbox.setChecked(false);
             if (database.isPresentationInPersonal(presentationId)){
@@ -46,7 +51,9 @@ public class SpeakerPresentationAdapter extends ArrayAdapter<String> {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
+            } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return convertView;
     }
 }
