@@ -58,6 +58,15 @@ public class Navigation extends ActionBarActivity {
             }
         });
 
+        ImageButton congress_venue =(ImageButton) findViewById(R.id.congress);
+        congress_venue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, CongressVenue.class);
+                startActivity(intent);
+            }
+        });
+
         ImageButton speakers =(ImageButton) findViewById(R.id.speakers);
         speakers.setOnClickListener(new View.OnClickListener() {
             @Override

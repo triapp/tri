@@ -9,22 +9,22 @@ import android.webkit.WebView;
 
 import com.example.daw.tri.R;
 
-public class GeneralInfo extends ActionBarActivity {
+public class CongressVenue extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_general_info);
+        setContentView(R.layout.activity_congress_venue);
 
-        WebView general = (WebView) findViewById(R.id.webView);
-        general.loadUrl("file:///android_asset/general/01_general_information.html");
+        WebView congress = (WebView) findViewById(R.id.webView);
+        congress.loadUrl("file:///android_asset/congress/02.html");
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_general_info, menu);
+        getMenuInflater().inflate(R.menu.menu_congress_venue, menu);
         return true;
     }
 
@@ -40,7 +40,7 @@ public class GeneralInfo extends ActionBarActivity {
             finish();
             return true;
         } else if (id == R.id.showMenu) {
-            Intent intent = new Intent(GeneralInfo.this, Navigation.class);
+            Intent intent = new Intent(CongressVenue.this, Navigation.class);
             startActivity(intent);
             finish();
             return true;
