@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -66,13 +65,15 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
         TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
+        speaker.setTextColor(Color.parseColor("#99CCFF"));
+        txtListChild.setTextColor(Color.parseColor("#66CCFF"));
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         checkBox.setChecked(false);
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             Long presentation = database.getNthPresentation(section,childPosition);
-            speaker.setText(database.getPresentationSpeakerByPresentationId(presentation));
+            speaker.setText("Speaker: " + database.getPresentationSpeakerByPresentationId(presentation));
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
@@ -121,12 +122,11 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setTextColor(Color.parseColor("#CCCCCC"));
         lblListHeader.setText(headerTitle);
-        Button headerButton = (Button) convertView.findViewById(R.id.button4);
         TextView time = (TextView) convertView.findViewById(R.id.time);
         TextView hall = (TextView) convertView.findViewById(R.id.hall);
         TextView chairman = (TextView) convertView.findViewById(R.id.chairman);
         hall.setVisibility(View.GONE);
-        headerButton.setVisibility(View.GONE);
+
 
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);

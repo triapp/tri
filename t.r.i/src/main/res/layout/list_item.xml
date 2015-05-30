@@ -39,6 +39,7 @@
         android:id="@+id/speakerOrInfo"
         android:layout_below="@+id/lblListItem"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="italic" />
 
 </RelativeLayout>

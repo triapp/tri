@@ -15,31 +15,19 @@
         android:textSize="17dp"
         android:gravity="center_vertical"
         android:textColor="#111111"
-        android:layout_toLeftOf="@+id/button4"
-        android:layout_toStartOf="@+id/button4"
-        android:layout_alignParentTop="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:text="+"
-        android:id="@+id/button4"
-        android:layout_gravity="right"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="10dip"
         android:text="Small Text"
         android:id="@+id/time"
-        android:layout_below="@+id/chairman"
-        android:layout_toLeftOf="@+id/button4"
-        android:layout_toStartOf="@+id/button4" />
+
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -59,8 +47,10 @@
         android:textSize="12dip"
         android:text="Medium Text"
         android:id="@+id/chairman"
+
         android:layout_below="@+id/lblListHeader"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textStyle="italic" />
 
 </RelativeLayout>

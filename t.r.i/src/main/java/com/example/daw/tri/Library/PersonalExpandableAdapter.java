@@ -4,20 +4,16 @@ package com.example.daw.tri.Library;
  * Created by EN on 20.4.2015.
  */
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.daw.tri.Activities.Personal;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -66,12 +62,14 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
         TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
+        speaker.setTextColor(Color.parseColor("#99CCFF"));
+        txtListChild.setTextColor(Color.parseColor("#66CCFF"));
         txtListChild.setText(childText);
         checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         try {
             Long section = database.getNthSectionFromPersonal(groupPosition);
             Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
-            speaker.setText(database.getPresentationSpeakerByPresentationId(presentation));
+            speaker.setText("Speaker: " + database.getPresentationSpeakerByPresentationId(presentation));
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
@@ -115,7 +113,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
 
         TextView lblListHeader = (TextView) convertView
                 .findViewById(R.id.lblListHeader);
-        Button headerButton = (Button) convertView.findViewById(R.id.button4);
+
         TextView time = (TextView) convertView.findViewById(R.id.time);
         TextView hall = (TextView) convertView.findViewById(R.id.hall);
         TextView chairman = (TextView) convertView.findViewById(R.id.chairman);
@@ -123,7 +121,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         lblListHeader.setTextColor(Color.parseColor("#828282"));
         if (headerTitle == "Your personal program is empty."){
-            headerButton.setVisibility(View.GONE);
+
             time.setVisibility(View.GONE);
             hall.setVisibility(View.GONE);
             return convertView;
@@ -140,22 +138,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
             e.printStackTrace();
         }
 
-        headerButton.setText("-");
-        headerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    Long id = database.getNthSectionFromPersonal(groupPosition);
-                    database.removePresentationsFromPersonalBySection(id);
-                    database.removeSectionFromPersonal(id);
-                } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                Intent intent = new Intent(_context, Personal.class);
-                _context.startActivity(intent);
-                ((Activity)_context).finish();
-                }
-            });
+
         return convertView;
     }
 

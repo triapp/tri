@@ -43,7 +43,7 @@ public class PresentationAdapter extends ArrayAdapter<String> {
             String sectionHall = database.getSectionHall(sectionId);
             TextView presentationLabel = (TextView) convertView.findViewById(R.id.lblListItem);
             TextView info = (TextView) convertView.findViewById(R.id.speakerOrInfo);
-            presentationLabel.setTextColor(Color.parseColor("#828282"));
+            presentationLabel.setTextColor(Color.parseColor("#66CCFF"));
             presentationLabel.setText(presentation);
             info.setText(sectionHall+" "+sectionDate);
             CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkBox);

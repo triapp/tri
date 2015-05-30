@@ -70,6 +70,10 @@
             android:name=".Activities.Cohlear"
             android:label="@string/title_activity_cohlear" >
         </activity>
+        <activity
+            android:name=".Activities.Posters"
+            android:label="@string/title_activity_posters" >
+        </activity>
     </application>
 
 </manifest>
