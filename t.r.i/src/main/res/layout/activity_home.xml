@@ -11,18 +11,19 @@
         android:layout_height="wrap_content"
         android:text="Continue without update"
         android:id="@+id/button"
-        android:layout_alignParentBottom="true"
+
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+
+        android:layout_above="@+id/exitBTN"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update"
-        android:id="@+id/button1"
+        android:text="Exit"
+        android:id="@+id/exitBTN"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="92dp" />
+        android:layout_marginBottom="35dp" />
 
     <TextView
         android:layout_width="wrap_content"

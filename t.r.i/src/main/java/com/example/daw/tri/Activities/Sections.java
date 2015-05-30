@@ -107,6 +107,7 @@ public class Sections extends ActionBarActivity {
             return true;
         } else if (id == R.id.showMenu) {
             Intent intent = new Intent(Sections.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

@@ -121,6 +121,7 @@ public class Personal extends ActionBarActivity {
             return true;
         } else if (id == R.id.showMenu) {
             Intent intent = new Intent(Personal.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

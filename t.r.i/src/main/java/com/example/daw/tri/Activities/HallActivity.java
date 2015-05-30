@@ -85,6 +85,7 @@ public class HallActivity extends ActionBarActivity {
             return true;
         } else if (id == R.id.showMenu) {
             Intent intent = new Intent(HallActivity.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

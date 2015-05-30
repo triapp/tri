@@ -42,6 +42,7 @@ public class Exhibitors extends ActionBarActivity {
             return true;
         } else if (id == R.id.showMenu) {
             Intent intent = new Intent(Exhibitors.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

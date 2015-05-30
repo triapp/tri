@@ -1,5 +1,6 @@
 package com.example.daw.tri.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -86,7 +87,14 @@ public class Posters extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.goBack) {
+            finish();
+            return true;
+        } else if (id == R.id.showMenu) {
+            Intent intent = new Intent(Posters.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
             return true;
         }
 

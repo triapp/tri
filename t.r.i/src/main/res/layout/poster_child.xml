@@ -10,6 +10,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:text="Author"
-        android:id="@+id/posterInfo" />
+        android:id="@+id/posterInfo"
+        android:lineSpacingExtra="4dip"
+        android:textColor="#66CCFF"
+        />
 
 </RelativeLayout>

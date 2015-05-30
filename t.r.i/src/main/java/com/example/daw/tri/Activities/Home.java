@@ -32,7 +32,7 @@ import java.sql.SQLException;
 public class Home extends ActionBarActivity {
     TextView networkError;
     Button nextActivity;
-    Button update;
+
     DatabaseHandler database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +41,24 @@ public class Home extends ActionBarActivity {
        setContentView(R.layout.activity_home);
        networkError = (TextView) findViewById(R.id.Connect);
        nextActivity = (Button) findViewById(R.id.button);
-       update = (Button) findViewById(R.id.button1);
-        update.setOnClickListener(new View.OnClickListener() {
+
+      Button exit = (Button) findViewById(R.id.exitBTN);
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new NetCheck().execute();
+                finish();
             }
         });
+
        networkError.setVisibility(View.GONE);
        nextActivity.setVisibility(View.GONE);
-       update.setVisibility(View.GONE);
+
         nextActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, Navigation.class);
                 startActivity(intent);
+                finish();
             }
         });
        database = new DatabaseHandler(this);
@@ -79,7 +82,7 @@ public class Home extends ActionBarActivity {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         networkError.setVisibility(View.GONE);
         nextActivity.setVisibility(View.GONE);
-        update.setVisibility(View.GONE);
+
        if (network==true) {
            database.dropAll();
            new downloadTables().execute();
@@ -90,7 +93,7 @@ public class Home extends ActionBarActivity {
            Connect.setVisibility(View.VISIBLE);
             networkError.setVisibility(View.VISIBLE);
             nextActivity.setVisibility(View.VISIBLE);
-            update.setVisibility(View.VISIBLE);
+
         }
 
     }

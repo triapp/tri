@@ -8,10 +8,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:text="Name of poster"
-        android:textColor="#111111"
+        android:textColor="#ffffffff"
         android:id="@+id/posterName"
-        android:layout_weight="0.03" />
+        android:layout_weight="0.03"
+        />
 </RelativeLayout>
