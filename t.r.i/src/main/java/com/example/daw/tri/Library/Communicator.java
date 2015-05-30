@@ -20,11 +20,4 @@ public class Communicator {
         JSONArray json = jsonParser.getJSONFromUrl(URL, params);
         return json;
     }
-
-    public JSONArray getMessage(){
-        List params = new ArrayList();
-        params.add(new BasicNameValuePair("tag", "getMessage"));
-        JSONArray json = jsonParser.getJSONFromUrl(URL, params);
-        return json;
-    }
 }

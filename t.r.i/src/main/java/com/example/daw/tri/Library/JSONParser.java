@@ -54,7 +54,6 @@ public class JSONParser {
             String output = sb.toString();
             output = output.substring(0);
             json = output;
-            //Log.e("JSON", json);
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }

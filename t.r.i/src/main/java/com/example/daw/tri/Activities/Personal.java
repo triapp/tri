@@ -25,6 +25,8 @@ public class Personal extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        int expanded = bundle.getInt("expanded");
         setTitle("Personal programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
@@ -38,6 +40,10 @@ public class Personal extends ActionBarActivity {
             e.printStackTrace();
         }
         expandView.setAdapter(expandAdapter);
+
+        if (expanded != -1){
+            expandView.expandGroup(expanded);
+        }
 
         expandView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -80,6 +86,7 @@ public class Personal extends ActionBarActivity {
 
         expandView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int lastGroupClicked = -1;
+
             @Override
             public void onGroupExpand(int i) {
                 if (lastGroupClicked !=-1 && i  != lastGroupClicked){

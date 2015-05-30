@@ -4,16 +4,21 @@ package com.example.daw.tri.Library;
  * Created by EN on 20.4.2015.
  */
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.daw.tri.Activities.Personal;
 import com.example.daw.tri.R;
 
 import java.sql.SQLException;
@@ -27,7 +32,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
     private DatabaseHandler database;
     private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
-    private CheckBox checkBox;
+    private Button delete;
 
     public PersonalExpandableAdapter(Context context, List<String> listDataHeader,
                              HashMap<String, List<String>> listChildData) {
@@ -49,33 +54,61 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
+    public View getChildView(final int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_item, null);
+            convertView = infalInflater.inflate(R.layout.personal_child, null);
         }
 
         TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
-        TextView speaker = (TextView) convertView.findViewById(R.id.speakerOrInfo);
+                .findViewById(R.id.nameOfPersonalPresentation);
+        TextView speaker = (TextView) convertView.findViewById(R.id.personalPresentationInfo);
         speaker.setTextColor(Color.parseColor("#99CCFF"));
         txtListChild.setTextColor(Color.parseColor("#66CCFF"));
         txtListChild.setText(childText);
-        checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+        delete = (Button) convertView.findViewById(R.id.delete);
         try {
-            Long section = database.getNthSectionFromPersonal(groupPosition);
-            Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
+            final Long section = database.getNthSectionFromPersonal(groupPosition);
+            final Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
             speaker.setText("Speaker: " + database.getPresentationSpeakerByPresentationId(presentation));
-            if (database.isPresentationInPersonal(presentation)){
-                checkBox.setChecked(true);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(_context, "Presentation was removed from your personal programme.", Toast.LENGTH_SHORT).show();
+                try {
+                    final Long section = database.getNthSectionFromPersonal(groupPosition);
+                    final Long presentation = database.getNthPresentationFromPersonal(section,childPosition);
+                    database.removePresentationFromPersonal(presentation);
+                    if(!database.doesHavePersonalSectionPresentations(section)){
+                        database.removeSectionFromPersonal(section);
+                        Intent intent = new Intent(_context, Personal.class);
+                        Bundle b = new Bundle();
+                        b.putInt("expanded",-1);
+                        intent.putExtras(b);
+                        _context.startActivity(intent);
+                        ((Activity)_context).finish();
+                    } else {
+                        Intent intent = new Intent(_context, Personal.class);
+                        Bundle b = new Bundle();
+                        b.putInt("expanded",database.getPositionInPersonalBySectionId(section));
+                        intent.putExtras(b);
+                        _context.startActivity(intent);
+                        ((Activity)_context).finish();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }});
 
         return convertView;
     }
@@ -121,7 +154,7 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         lblListHeader.setTextColor(Color.parseColor("#828282"));
         if (headerTitle == "Your personal program is empty."){
-
+            chairman.setVisibility(View.GONE);
             time.setVisibility(View.GONE);
             hall.setVisibility(View.GONE);
             return convertView;

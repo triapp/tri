@@ -77,9 +77,6 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
             if (database.isPresentationInPersonal(presentation)){
                 checkBox.setChecked(true);
             }
-
-           // TextView authorLabel = (TextView) convertView.findViewById(R.id.author);
-           // authorLabel.setText(database.getAuthorByPresentationId(presentation));
         } catch (SQLException e) {
             e.printStackTrace();
         }

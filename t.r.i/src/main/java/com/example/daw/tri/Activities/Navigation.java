@@ -39,6 +39,9 @@ public class Navigation extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Navigation.this, Personal.class);
+                Bundle b = new Bundle();
+                b.putInt("expanded", -1);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
@@ -94,6 +97,15 @@ public class Navigation extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Navigation.this, Cohlear.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton posters =(ImageButton) findViewById(R.id.posters);
+        posters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Navigation.this, Posters.class);
                 startActivity(intent);
             }
         });

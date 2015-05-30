@@ -736,5 +736,67 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
+    public List<String> getPosterList(String query) throws SQLException {
+        List<String> result = new ArrayList<>();
+        openDataBase();
+        Cursor see;
+        if(query == " " || query == ""){
+            see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery",null);
+        } else {
+            see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery WHERE Nazev LIKE '%"+query+"%'",null);
+        }
+        see.moveToFirst();
+        while (!see.isAfterLast()){
+            result.add(see.getString(0));
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return result;
+    }
 
+    public HashMap<String,List<String>> getPosterSectionPosterMap(String query) throws SQLException {
+        openDataBase();
+        HashMap<String,List<String>> result = new HashMap<>();
+        Cursor see;
+        if(query == " " || query == ""){
+            see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery",null);
+        } else {
+            see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery WHERE Nazev LIKE '%"+query+"%'",null);
+        }
+        see.moveToFirst();
+        while(!see.isAfterLast()){
+            List<String> posterInfo = new ArrayList<>();
+            Cursor pointer = myDataBase.rawQuery("SELECT Nazev FROM POK_Sekce WHERE ID="+see.getLong(0),null);
+            pointer.moveToFirst();
+            while (!pointer.isAfterLast()){
+                posterInfo.add("Author: "+see.getString(2)+"("+see.getString(3)+")\n"+"Section: "+pointer.getString(0));
+                pointer.moveToNext();
+            }
+            pointer.close();
+            result.put(see.getString(1), posterInfo);
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return result;
+    }
+
+    public int getPositionInPersonalBySectionId(Long sectionId) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from",null);
+        see.moveToFirst();
+        while(see.isAfterLast()){
+            if(see.getLong(0) == sectionId){
+                int result = see.getPosition();
+                see.close();
+                myDataBase.close();
+                return result;
+            }
+            see.moveToNext();
+        }
+        see.close();
+        myDataBase.close();
+        return 0;
+    }
 }
