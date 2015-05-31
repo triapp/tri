@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.daw.tri" >
+    package="com.orl.chigger.tri" >
 
     <!-- Allow to connect with internet and to know the current network state -->
     <uses-permission android:name="android.permission.INTERNET" />

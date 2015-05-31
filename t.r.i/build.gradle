@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.daw.tri"
+        applicationId "com.orl.chigger.tri"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
