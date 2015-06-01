@@ -7,6 +7,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 
@@ -44,7 +46,7 @@ public class Posters extends ActionBarActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 try {
                     List<String> listOfPosters = database.getPosterList(search.getText().toString());
-                    PosterExpandableAdapter posterAdapter = new PosterExpandableAdapter(getApplicationContext(),listOfPosters,database.getPosterSectionPosterMap(search.getText().toString()));
+                    PosterExpandableAdapter posterAdapter = new PosterExpandableAdapter(getApplicationContext(), listOfPosters, database.getPosterSectionPosterMap(search.getText().toString()));
                     postersView.setAdapter(posterAdapter);
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -56,8 +58,17 @@ public class Posters extends ActionBarActivity {
             public void afterTextChanged(Editable editable) {
 
             }
+
         });
 
+        search.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
         postersView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int lastGroupClicked = -1;
 

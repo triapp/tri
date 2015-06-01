@@ -6,11 +6,12 @@
 
     <ExpandableListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/expandableListView"
         android:divider="#f6a925"
         android:dividerHeight="4px"
         android:childDivider="#f6a925"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        />
 </RelativeLayout>

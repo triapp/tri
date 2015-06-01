@@ -34,18 +34,23 @@ public class PresentationAdapter extends ArrayAdapter<String> {
         String presentation = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_speakers, parent, false);
         }
         try {
             Long presentationId = database.getPresentationIdByPresentationPosition(author,position);
             Long sectionId = database.getSectionIdByPresentationId(presentationId);
+            String sectionName = database.getSectionName(sectionId);
             String sectionDate = database.getDateBySectionId(sectionId);
             String sectionHall = database.getSectionHall(sectionId);
+            String sectionTime = database.getSectionTime(sectionId);
             TextView presentationLabel = (TextView) convertView.findViewById(R.id.lblListItem);
             TextView info = (TextView) convertView.findViewById(R.id.speakerOrInfo);
+            TextView date = (TextView) convertView.findViewById(R.id.dateTimeHall);
             presentationLabel.setTextColor(Color.parseColor("#66CCFF"));
             presentationLabel.setText(presentation);
-            info.setText(sectionHall+" "+sectionDate);
+            //Day - Time - Hall
+            date.setText(sectionDate + " " +sectionTime + " " +sectionHall);
+            info.setText("Section: " + sectionName);
             CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkBox);
             checkbox.setChecked(false);
             if (database.isPresentationInPersonal(presentationId)){

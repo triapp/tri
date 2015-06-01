@@ -162,9 +162,9 @@ public class PersonalExpandableAdapter extends BaseExpandableListAdapter {
 
         try {
             Long section = database.getNthSectionInPersonal(groupPosition);
-            time.setText(database.getDateBySectionId(section)+" "+database.getSectionTime(section));
-            hall.setText(database.getSectionHall(section));
-            chairman.setText(database.getSectionChairmanBySectionId(section));
+            time.setText(database.getDateBySectionId(section)+"  "+database.getSectionTime(section) + " " + database.getSectionHall(section));
+            hall.setVisibility(View.GONE);
+            chairman.setText("Chairman: " + database.getSectionChairmanBySectionId(section));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ParseException e) {

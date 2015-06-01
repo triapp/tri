@@ -128,7 +128,15 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         try {
             Long section = database.getNthSection(groupPosition, idDay, idHall);
             time.setText(database.getSectionTime(section));
-            chairman.setText("Chairman: " + database.getSectionChairmanBySectionId(section));
+            if (database.isSectionBreak(section)){
+                chairman.setVisibility(View.GONE);
+                lblListHeader.setTextColor(Color.parseColor("#f6a925"));
+            }
+            else {
+                lblListHeader.setTextColor(Color.parseColor("#CCCCCC"));
+                chairman.setText("Chairman: " + database.getSectionChairmanBySectionId(section));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

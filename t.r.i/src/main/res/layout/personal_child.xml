@@ -40,10 +40,10 @@
         android:text="Del"
         android:id="@+id/delete"
         android:layout_above="@+id/speakerOrInfo"
-        android:layout_alignParentTop="true"
         android:layout_alignBottom="@+id/lblListItem"
         android:layout_toRightOf="@+id/lblListItem"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

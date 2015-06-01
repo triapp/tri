@@ -12,7 +12,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/searchView" />
+        android:layout_below="@+id/searchView"
+
+        />
 
     <EditText
         android:layout_width="fill_parent"

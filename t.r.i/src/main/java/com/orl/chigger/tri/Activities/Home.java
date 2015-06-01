@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class Home extends ActionBarActivity {
@@ -71,20 +72,33 @@ public class Home extends ActionBarActivity {
            database.openDataBase();
        }catch(SQLException sqle){
        }
-        new NetCheck().execute();
+
+        try {
+            if (database.checkLastUpdate()){
+            new NetCheck().execute();
+            }  else {
+                Intent intent = new Intent(Home.this, Navigation.class);
+                startActivity(intent);
+                finish();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void isOnline(){
+    public void isOnline() throws SQLException, ParseException {
         tryUpdate();
     }
 
-    public void tryUpdate(){
+    public void tryUpdate() throws SQLException, ParseException {
         findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
         networkError.setVisibility(View.GONE);
         nextActivity.setVisibility(View.GONE);
 
        if (network==true) {
-           database.dropAll();
            new downloadTables().execute();
         } else {
             findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -119,7 +133,7 @@ public class Home extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class downloadTables extends AsyncTask<String, String, JSONArray> {
+    private class downloadTables extends AsyncTask<String, String, Boolean> {
         private TextView status;
 
         @Override
@@ -130,13 +144,14 @@ public class Home extends ActionBarActivity {
         }
 
         @Override
-        protected JSONArray doInBackground(String... args) {
+        protected Boolean doInBackground(String... args) {
 
             Communicator talkie = new Communicator();
             JSONArray json = talkie.getTables();
+
             try {
-                //   status.setText("Inserting data...");
                 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+                db.dropAll();
                 for (int i = 0 ; i < json.length(); i++) {
                     JSONObject obj = json.getJSONObject(i);
 
@@ -186,6 +201,9 @@ public class Home extends ActionBarActivity {
                     } while(done < amount);
                 }
                 Intent intent = new Intent(Home.this, Navigation.class);
+
+                database.setDateTime();
+
                 startActivity(intent);
                 finish();
 
@@ -194,15 +212,10 @@ public class Home extends ActionBarActivity {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            return json;
+            return true;
         }
-
-
         @Override
-        protected void onPostExecute(JSONArray json) {
-            status.setText("Launching application..");
-        }
-
+        protected void onPostExecute(Boolean insert) { }
     }
     boolean network;
 
@@ -215,7 +228,7 @@ private class NetCheck extends AsyncTask<String,String,Boolean>
     @Override
     protected void onPreExecute(){
         super.onPreExecute();
-        nDialog = new ProgressDialog(Home.this);
+        nDialog = new ProgressDialog(Home.this, R.style.Theme_MyDialog);
         nDialog.setTitle("Checking Internet connection");
         nDialog.setMessage("Checking...");
         nDialog.setIndeterminate(false);
@@ -227,9 +240,6 @@ private class NetCheck extends AsyncTask<String,String,Boolean>
      **/
     @Override
     protected Boolean doInBackground(String... args){
-
-
-
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         if (netInfo != null && netInfo.isConnected()) {
@@ -258,12 +268,24 @@ private class NetCheck extends AsyncTask<String,String,Boolean>
         if(th == true){
             nDialog.dismiss();
             network = true;
-            isOnline();
+            try {
+                isOnline();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         else{
             nDialog.dismiss();
             network = false;
-            isOnline();
+            try {
+                isOnline();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

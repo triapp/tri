@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +70,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } catch (IOException e) {
                 throw new Error("Error copying database");
 
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
 
@@ -97,7 +100,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * system folder, from where it can be accessed and handled.
      * This is done by transfering bytestream.
      * */
-    private void copyDataBase() throws IOException {
+    private void copyDataBase() throws IOException, SQLException {
 
         //Open your local db as the input stream
         InputStream myInput = myContext.getAssets().open(DB_NAME);
@@ -147,12 +150,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public void dropAll(){
+    public void dropAll() throws SQLException {
+        openDataBase();
         myDataBase.execSQL("delete from day");
         myDataBase.execSQL("delete from day_hall");
         myDataBase.execSQL("delete from section");
         myDataBase.execSQL("delete from presentation");
         myDataBase.execSQL("delete from hall");
+        myDataBase.close();
     }
 
     public void insertDay(int id, String date) {
@@ -203,8 +208,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return result;
     }
 
-
-
     public List<String> getHallListbyDay(Long idDay) throws SQLException {
         List<String> listOfHalls = new ArrayList<>();
         openDataBase();
@@ -245,21 +248,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.close();
         myDataBase.close();
         return listOfSpeakers;
-    }
-
-    public Long[] getArrayIdPresentationByAuthor(String query) throws SQLException {
-        openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE author='"+query+"'",null);
-        see.moveToFirst();
-        Long[] result = new Long[see.getCount()];
-        int i =0;
-        while(!see.isAfterLast()){
-            result[i] = see.getLong(0);
-            see.moveToNext();
-        }
-        see.close();
-        myDataBase.close();
-        return result;
     }
 
     public List<String> getPresentationBySpeaker(String query) throws SQLException {
@@ -303,8 +291,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.close();
         return result;
     }
-
-
 
     public Long[] getArrayIdHall(Long idDay) throws SQLException {
         openDataBase();
@@ -487,7 +473,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         openDataBase();
                         Cursor pointer = myDataBase.rawQuery("SELECT name FROM personal WHERE id="+getPersonalNthSection(i),null);
                         pointer.moveToFirst();
-                        result += "Collision between " +section1Name+" and "+pointer.getString(0)+".\n";
+                        result += "Collision between (" +section1Name+") and ("+pointer.getString(0)+").\n\n";
                         pointer.close();
                     };
                 }
@@ -541,20 +527,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Long result = see.getLong(0);
         see.close();
         return result;
-    }
-
-    public void removePresentationsFromPersonalBySection(Long sectionId) throws SQLException {
-        openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM presentation WHERE id_section="+sectionId,null);
-        see.moveToFirst();
-        while(!see.isAfterLast()){
-            if (isPresentationInPersonal(see.getLong(0))){
-                removePresentationFromPersonal(see.getLong(0));
-            }
-            see.moveToNext();
-        }
-        see.close();
-        myDataBase.close();
     }
 
     public boolean isSectionCollision(Long section1, Long section2) throws SQLException, ParseException {
@@ -744,7 +716,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(query == " " || query == ""){
             see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery",null);
         } else {
-            see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery WHERE Nazev LIKE '%"+query+"%'",null);
+            see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery WHERE Nazev LIKE '%"+query+"%' OR Autor LIKE '%"+query+"%'",null);
         }
         see.moveToFirst();
         while (!see.isAfterLast()){
@@ -763,7 +735,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(query == " " || query == ""){
             see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery",null);
         } else {
-            see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery WHERE Nazev LIKE '%"+query+"%'",null);
+            see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery WHERE Nazev LIKE '%"+query+"%' OR Autor LIKE '%"+query+"%'",null);
         }
         see.moveToFirst();
         while(!see.isAfterLast()){
@@ -785,10 +757,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public int getPositionInPersonalBySectionId(Long sectionId) throws SQLException {
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from",null);
+        Cursor see = myDataBase.rawQuery("SELECT id FROM personal ORDER BY time_from", null);
         see.moveToFirst();
-        while(see.isAfterLast()){
-            if(see.getLong(0) == sectionId){
+        while(!see.isAfterLast()){
+            Boolean compare = (see.getLong(0) == sectionId);
+            if(compare){
                 int result = see.getPosition();
                 see.close();
                 myDataBase.close();
@@ -799,5 +772,78 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.close();
         myDataBase.close();
         return 0;
+    }
+
+    public boolean isSectionBreak(Long sectionId) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT type FROM section WHERE id="+sectionId+" LIMIT 1",null);
+        see.moveToFirst();
+        if (see.getString(0).equals("b")) {
+            myDataBase.close();
+            see.close();
+            return true;
+        }
+        else {
+            myDataBase.close();
+            see.close();
+            return false;
+        }
+    }
+
+    public String getSectionName(Long idSection) throws SQLException {
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT name FROM section WHERE section.id="+idSection+"",null);
+        see.moveToFirst();
+        String name = see.getString(0);
+        see.close();
+        myDataBase.close();
+        return name;
+    }
+
+    public void checkUpdateCreate() throws SQLException {
+        openDataBase();
+        myDataBase.execSQL("CREATE TABLE IF NOT EXISTS `update` (`year` INT, `month` INT, `day` INT, `hour` INT);");
+        Cursor see = myDataBase.rawQuery("SELECT * FROM `update`;",null);
+        Boolean result = see.getCount() > 0;
+        Log.e("BOol",result.toString());
+        if (!result) {
+            myDataBase.execSQL("INSERT INTO `update` (`year`, `month`, `day`, `hour`) VALUES (1995, 5, 15, 14);");
+
+        }
+        see.close();
+        myDataBase.close();
+    }
+    public Boolean checkLastUpdate() throws SQLException, ParseException {
+        checkUpdateCreate();
+        Calendar Today = Calendar.getInstance();
+        Integer year,month,day,hour;
+        openDataBase();
+        Cursor see = myDataBase.rawQuery("SELECT year, month, day, hour FROM `update`", null);
+        see.moveToFirst();
+        year = see.getInt(0);
+        month = see.getInt(1);
+        day = see.getInt(2);
+        hour = see.getInt(3);
+        see.close();
+        myDataBase.close();
+        Boolean test = hour > (Today.HOUR_OF_DAY + 3) || month > Today.MONTH || day > Today.DAY_OF_MONTH || year > Today.YEAR;
+        Log.e("BOol",test.toString());
+        if(hour > (Today.HOUR_OF_DAY + 3) || month > Today.MONTH || day > Today.DAY_OF_MONTH || year > Today.YEAR) {
+        return true;
+           }
+        else {
+          return false;}
+    }
+    public void setDateTime() throws SQLException {
+        openDataBase();
+        Calendar Today = Calendar.getInstance();
+        Integer year,month,day,hour;
+        year = Today.YEAR;
+        month = Today.MONTH;
+        day = Today.DAY_OF_MONTH;
+        hour = Today.HOUR_OF_DAY;
+        myDataBase.execSQL("UPDATE `update` SET year ="+year+" ,month="+month+" ,day="+day+" ,hour="+hour+";");
+        myDataBase.close();
+
     }
 }

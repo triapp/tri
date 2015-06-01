@@ -5,17 +5,18 @@
     tools:context="com.orl.chigger.tri.Activities.Posters">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="35dip"
         android:drawableLeft="@drawable/search"
         android:id="@+id/searchBar"
         android:background="#FFFFFF"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:singleLine="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:focusable="false"
+        />
 
     <ExpandableListView
         android:layout_width="wrap_content"
