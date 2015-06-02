@@ -11,5 +11,9 @@
         android:layout_alignParentTop="true"
         android:divider="#f6a925"
         android:dividerHeight="4px"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:footerDividersEnabled="false"
+        android:focusableInTouchMode="true"
+        android:headerDividersEnabled="true"
+        android:transitionGroup="false" />
 </RelativeLayout>

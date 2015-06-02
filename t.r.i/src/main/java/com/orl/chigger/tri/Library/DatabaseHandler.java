@@ -239,7 +239,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<String> getSpeakersSearch(String query) throws SQLException {
         List<String> listOfSpeakers = new ArrayList<>();
         openDataBase();
+
         Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE author LIKE '%"+query+"%' GROUP BY author",null);
+        if (query.equals(" Search") || query.equals(" ")  ){
+            see = myDataBase.rawQuery("SELECT author FROM presentation GROUP BY author",null);
+        }
         see.moveToFirst();
         while(!see.isAfterLast()){
             listOfSpeakers.add(see.getString(0));
@@ -713,7 +717,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<String> result = new ArrayList<>();
         openDataBase();
         Cursor see;
-        if(query == " " || query == ""){
+        if(query.equals(" ") || query.equals("") || query.equals(" Search")){
             see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery",null);
         } else {
             see = myDataBase.rawQuery("SELECT Nazev FROM POK_Postery WHERE Nazev LIKE '%"+query+"%' OR Autor LIKE '%"+query+"%'",null);
@@ -732,7 +736,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         HashMap<String,List<String>> result = new HashMap<>();
         Cursor see;
-        if(query == " " || query == ""){
+        if(query.equals(" ") || query.equals("") || query.equals(" Search")){
             see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery",null);
         } else {
             see = myDataBase.rawQuery("SELECT IDSekce, Nazev, Autor, Firma FROM POK_Postery WHERE Nazev LIKE '%"+query+"%' OR Autor LIKE '%"+query+"%'",null);
@@ -805,7 +809,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         myDataBase.execSQL("CREATE TABLE IF NOT EXISTS `update` (`year` INT, `month` INT, `day` INT, `hour` INT);");
         Cursor see = myDataBase.rawQuery("SELECT * FROM `update`;",null);
         Boolean result = see.getCount() > 0;
-        Log.e("BOol",result.toString());
+
         if (!result) {
             myDataBase.execSQL("INSERT INTO `update` (`year`, `month`, `day`, `hour`) VALUES (1995, 5, 15, 14);");
 
@@ -826,9 +830,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         hour = see.getInt(3);
         see.close();
         myDataBase.close();
-        Boolean test = hour > (Today.HOUR_OF_DAY + 3) || month > Today.MONTH || day > Today.DAY_OF_MONTH || year > Today.YEAR;
-        Log.e("BOol",test.toString());
-        if(hour > (Today.HOUR_OF_DAY + 3) || month > Today.MONTH || day > Today.DAY_OF_MONTH || year > Today.YEAR) {
+        Boolean podminka = hour+3 < (Today.get(Today.HOUR_OF_DAY)) || month < (Today.get(Today.MONTH)) || day < Today.get(Today.DAY_OF_MONTH) || year < Today.get(Today.YEAR);
+        if(podminka) {
         return true;
            }
         else {
@@ -838,10 +841,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         openDataBase();
         Calendar Today = Calendar.getInstance();
         Integer year,month,day,hour;
-        year = Today.YEAR;
-        month = Today.MONTH;
-        day = Today.DAY_OF_MONTH;
-        hour = Today.HOUR_OF_DAY;
+        year = Today.get(Today.YEAR);
+        month = Today.get(Today.MONTH);
+        day = Today.get(Today.DAY_OF_MONTH);
+        hour = Today.get(Today.HOUR_OF_DAY);
         myDataBase.execSQL("UPDATE `update` SET year ="+year+" ,month="+month+" ,day="+day+" ,hour="+hour+";");
         myDataBase.close();
 

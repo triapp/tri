@@ -23,7 +23,7 @@ public class ProgramActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("Scientific programme");
+        setTitle("Scientific Programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
         DatabaseHandler database = new DatabaseHandler(getApplicationContext());

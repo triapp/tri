@@ -16,6 +16,10 @@
         android:singleLine="true"
         android:layout_alignParentEnd="true"
         android:focusable="false"
+        android:text=" Search"
+        android:inputType="textNoSuggestions"
+        android:textColor="#323f3f3f"
+
         />
 
     <ExpandableListView

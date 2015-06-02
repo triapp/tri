@@ -1,6 +1,7 @@
 package com.orl.chigger.tri.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -64,6 +65,11 @@ public class Posters extends ActionBarActivity {
         search.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                search.setTextColor(Color.parseColor("#000000"));
+               if (search.getText().toString().equals( " Search")){
+                   search.setText("");
+
+               }
                 v.setFocusable(true);
                 v.setFocusableInTouchMode(true);
                 return false;

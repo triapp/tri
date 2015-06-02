@@ -1,12 +1,14 @@
 package com.orl.chigger.tri.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,6 +75,21 @@ public class Speakers extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        search.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                search.setTextColor(Color.parseColor("#000000"));
+                if (search.getText().toString().equals( " Search")){
+                    search.setText("");
+
+                }
+                v.setFocusable(true);
+                v.setFocusableInTouchMode(true);
+                return false;
+            }
+        });
+
     }
 
 

@@ -27,7 +27,7 @@ public class Personal extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
         int expanded = bundle.getInt("expanded");
-        setTitle("Personal programme");
+        setTitle("Personal Programme");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         final DatabaseHandler database = new DatabaseHandler(getApplicationContext());
