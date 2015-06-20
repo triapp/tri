@@ -78,11 +78,9 @@ public class ProgramActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.goBack) {
-            finish();
-            return true;
-        } else if (id == R.id.showMenu) {
+        if (id == R.id.showMenu) {
             Intent intent = new Intent(ProgramActivity.this, Navigation.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
             return true;

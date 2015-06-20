@@ -193,7 +193,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             listOfDays.add(tmp);
             see.moveToNext();
         }
+
         see.close();
+
         myDataBase.close();
         return listOfDays;
     }
@@ -240,7 +242,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<String> listOfSpeakers = new ArrayList<>();
         openDataBase();
 
-        Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE author LIKE '%"+query+"%' GROUP BY author",null);
+       Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE author LIKE '%"+query+"%' GROUP BY author",null);
+        //Cursor see = myDataBase.rawQuery("SELECT author FROM presentation WHERE author = '%"+query+"%' GROUP BY author",null);
         if (query.equals(" Search") || query.equals(" ")  ){
             see = myDataBase.rawQuery("SELECT author FROM presentation GROUP BY author",null);
         }
@@ -257,7 +260,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<String> getPresentationBySpeaker(String query) throws SQLException {
         List<String> listOfPresentations = new ArrayList<>();
         openDataBase();
-        Cursor see = myDataBase.rawQuery("SELECT name FROM presentation WHERE author LIKE '%"+query+"%'",null);
+       // Cursor see = myDataBase.rawQuery("SELECT name FROM presentation WHERE author LIKE '%"+query+"%'",null);
+
+        Cursor see = myDataBase.rawQuery("SELECT name FROM presentation WHERE author = '"+query+"'",null);
         see.moveToFirst();
         while(!see.isAfterLast()){
             listOfPresentations.add(see.getString(0));
@@ -831,6 +836,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         see.close();
         myDataBase.close();
         Boolean podminka = hour+3 < (Today.get(Today.HOUR_OF_DAY)) || month < (Today.get(Today.MONTH)) || day < Today.get(Today.DAY_OF_MONTH) || year < Today.get(Today.YEAR);
+       /*** Doèasné pozastavení updatu ***/
+        podminka = false;
         if(podminka) {
         return true;
            }

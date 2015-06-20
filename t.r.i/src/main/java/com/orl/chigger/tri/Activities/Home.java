@@ -146,6 +146,7 @@ public class Home extends ActionBarActivity {
         @Override
         protected Boolean doInBackground(String... args) {
 
+
             Communicator talkie = new Communicator();
             JSONArray json = talkie.getTables();
 
